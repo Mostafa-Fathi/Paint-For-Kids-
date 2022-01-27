@@ -116,7 +116,8 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if(FigCount < MaxFigCount )
-		FigList[FigCount++] = pFig;	
+		FigList[FigCount++] = pFig;
+	string x = "test "; 
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
