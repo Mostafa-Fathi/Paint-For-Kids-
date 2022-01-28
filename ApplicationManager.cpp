@@ -4,7 +4,7 @@
 
 //hello world
 //hello world again
-
+//mostafa comment 
 //Constructor
 ApplicationManager::ApplicationManager()
 {
