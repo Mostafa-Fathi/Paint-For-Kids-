@@ -1,5 +1,8 @@
 #include "ApplicationManager.h"
 #include "Actions\ActionAddSquare.h"
+#include "Actions\ActionAddEllipse.h"
+#include "Actions\ActionAddPolygon.h"
+#include "Actions\ActionSelect.h"
 #include "Actions\ResizeAction.h"
 
 
@@ -52,42 +55,32 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	{
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
-			
 			break;
 
 		case DRAW_ELPS:
-			///create AddLineAction here
+			newAct = new ActionAddEllipse(this);
 			break;
+
+		case DRAW_HEX:
+			newAct = new ActionAddPolygon(this);
+			break;
+
+		case DRAWING_AREA:
+			newAct = new ActionSelect(this);
+			break;
+
 		case RESIZE:
 			newAct = new ResizeAction(this, FigList[0]);
 			break;
+
 		case SEND_BACK:
 			break;
+
 		case BRNG_FRNT:
 			break;
-		
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		case EXIT:
 			///create ExitAction here
-			
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
