@@ -10,7 +10,7 @@
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-	// test git hub 
+	
 	//Create Input and output
 	pGUI = new GUI;	
 	
