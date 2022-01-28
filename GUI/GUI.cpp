@@ -307,7 +307,89 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 	pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
 
 }
+//Draw ellipse  
+void GUI::DrawEllipse(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = RectGfxInfo.DrawClr;
 
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (RectGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(RectGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+	pWind->DrawEllipse(P1.x, P1.y, P2.x, P2.y, style);
+}
+
+//Draw polygon
+void GUI::DrawPolygon(Point P1, int length, GfxInfo RectGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = RectGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, RectGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (RectGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(RectGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+
+	//int xs[] = { 50, 100, 150, 150, 100, 50 };
+	//int ys[] = { 100, 50, 100, 150, 200, 150 };
+
+	int xs[6];
+	int ys[6];
+
+	int nOfSides = 6;
+
+	Point center;
+	center.x = P1.x + length / 2;
+	center.y = P1.y + length / 2;
+
+	int radius = length / 2;
+	/////////////////////////////////
+	/// calculate the points
+	float const PI = 3.14159265;
+	const int nsides = 6;
+
+	float angle = 0.0f;
+	float incr = 2.0 * PI / nsides;
+
+
+	int newX = radius * cos(angle) + center.x;
+	int newY = radius * sin(angle) + center.y;
+
+	for (int i = 0; i < nsides; i++)
+	{
+		int oldX = newX;
+		int oldY = newY;
+		angle += incr;
+		newX = radius * cos(angle) + center.x;
+		newY = radius * sin(angle) + center.y;
+		xs[i] = oldX;
+		ys[i] = oldY;
+	}
+	pWind->DrawPolygon(xs, ys, nOfSides, style);
+
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 GUI::~GUI()

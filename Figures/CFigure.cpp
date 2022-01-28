@@ -7,16 +7,30 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 }
 
 void CFigure::SetSelected(bool s)
-{	Selected = s; }
+{
+	Selected = s;
+}
 
 bool CFigure::IsSelected() const
-{	return Selected; }
+{
+	return Selected;
+}
 
 void CFigure::ChngDrawClr(color Dclr)
-{	FigGfxInfo.DrawClr = Dclr; }
-
+{
+	FigGfxInfo.DrawClr = Dclr;
+}
+color CFigure::GetDrawColor() {
+	return FigGfxInfo.DrawClr;
+}
 void CFigure::ChngFillClr(color Fclr)
-{	
+{
 	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr; 
+	FigGfxInfo.FillClr = Fclr;
+}
+color CFigure::GetPreviousDrawColor() {
+	return FigGfxInfo.PrevDrawClr;
+}
+void CFigure::SetPreviousDrawColor(color Pclr) {
+	FigGfxInfo.PrevDrawClr = Pclr;
 }

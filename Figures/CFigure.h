@@ -21,9 +21,28 @@ public:
 
 	virtual void DrawMe(GUI*) const  = 0 ;		//Draw the figure
 	
-	void ChngDrawClr(color Dclr);	//changes the figure's drawing color
-	void ChngFillClr(color Fclr);	//changes the figure's filling color
+	//changes the figure's drawing color
+	void ChngDrawClr(color Dclr);	
+	
+	//gets the current drawing color
+	color GetDrawColor();
 
+	//changes the figure's filling color
+	void ChngFillClr(color Fclr);	
+
+	//gets the previous drawing color of the figure
+	color GetPreviousDrawColor();
+
+	//sets the previous drawing color of the figure
+	void SetPreviousDrawColor(color Pclr);
+
+	//checks if a specific point is in the area of the figure
+	virtual bool HasPoint(int, int) const = 0;
+
+	//getting string contains all figure details
+	virtual string GetDetails() const = 0;
+
+	//Resize the figure
 	virtual void Resize(float) = 0;
 
 	
