@@ -61,5 +61,10 @@ string CPolygon::GetDetails() const {
 }
 void CPolygon::Resize(float factor)
 {
-	//resize code here
+	
+	length = length * factor;
+	TopLeftCorner.x = (TopLeftCorner.x + Center.x) * factor;
+	TopLeftCorner.y = (TopLeftCorner.y + Center.y) * factor;
+
+	
 }

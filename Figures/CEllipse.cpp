@@ -33,4 +33,12 @@ string CEllipse::GetDetails() const {
 void CEllipse::Resize(float factor)
 {
 	//resize code here
+	int sgin = 1;
+	if (factor < 1) { sgin = -1; }
+	int vRadius = (BottomRightCorner.y- TopLeftCorner.y) / 2 * factor;
+	int hRadius = (BottomRightCorner.x- TopLeftCorner.x) / 2 * factor;
+	TopLeftCorner.x = Center.x - hRadius;
+	TopLeftCorner.y = Center.y - vRadius;
+	BottomRightCorner.x = Center.x + hRadius;
+	BottomRightCorner.y = Center.y + vRadius;
 }
