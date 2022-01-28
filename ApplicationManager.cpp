@@ -4,6 +4,7 @@
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
 #include "Actions\ResizeAction.h"
+#include "Actions/ActionSendToBack.h"
 
 
 //Constructor
@@ -17,6 +18,15 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
+}
+int ApplicationManager::getFigCount() {
+	return FigCount;
+}
+int ApplicationManager::getFigMaxCount() {
+	return MaxFigCount;
+}
+CFigure** ApplicationManager::getFigList() {
+	return FigList;
 }
 
 
@@ -51,7 +61,8 @@ void ApplicationManager::Run()
 Action* ApplicationManager::CreateAction(ActionType ActType) 
 {
 	Action* newAct = NULL;
-	CFigure* selectedFigure = GetSelectedFigure();
+	int selectedIndex;
+	CFigure* selectedFigure = GetSelectedFigure(selectedIndex);
 
 	
 	//According to Action Type, create the corresponding action object
@@ -78,6 +89,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case SEND_BACK:
+			newAct = new ActionSendToBack(this , selectedFigure, selectedIndex);
 			break;
 
 		case BRNG_FRNT:
@@ -130,13 +142,16 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	return NULL;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetSelectedFigure() const
+CFigure* ApplicationManager::GetSelectedFigure(int & index ) 
 {
+
 	//If a figure is found return a pointer to it.
 	//if there is no selected figure return NULL
 
 	for (int i = (FigCount - 1); i >= 0; i--) {
-		if (FigList[i]->IsSelected()) return FigList[i];
+		if (FigList[i]->IsSelected()) { 
+			index = i;
+			return FigList[i]; }
 	}
 
 	return NULL;

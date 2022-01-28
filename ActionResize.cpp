@@ -6,9 +6,7 @@ ActionResize::ActionResize(ApplicationManager* pApp, CFigure* selected) :Action(
 	Selected = selected;
 }
 
-void ActionResize::ReadActionParameters()
-{
-}
+
 
 void ActionResize::Execute()
 {
@@ -25,23 +23,19 @@ void ActionResize::Execute()
 		{
 			
 			Selected->Resize(.5);
-			pOut->ClearDrawArea();
 
 		}
 		else if (pAct == QUARTER)
 		{
 			Selected->Resize(.25);
-			pOut->ClearDrawArea();
 		}
 		else if (pAct == DOUBLED)
 		{
 			Selected->Resize(2);
-			pOut->ClearDrawArea();
 		}
 		else if (pAct == QUADRUPLE)
 		{
 			Selected->Resize(4);
-			pOut->ClearDrawArea();
 		}
 		else if (pAct == BACK)
 		{
@@ -49,6 +43,8 @@ void ActionResize::Execute()
 
 			return;
 		}
+		pOut->ClearDrawArea();
+
 	}
 	else
 	pOut->PrintMessage("Firstly, Select a fig");

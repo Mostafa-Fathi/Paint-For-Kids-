@@ -11,8 +11,6 @@ class ActionResize :
 public:
 	ActionResize(ApplicationManager* pApp, CFigure*);
 
-	//Reads ellipse parameters
-	virtual void ReadActionParameters();
 
 	//Add ellipse to the ApplicationManager
 	virtual void Execute();

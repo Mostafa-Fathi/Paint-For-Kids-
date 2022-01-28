@@ -39,10 +39,13 @@ public:
 	//Search for a figure given a point inside the figure
 	CFigure* GetFigure(int x, int y) const;
 	//Search for the selected figure
-	CFigure* GetSelectedFigure() const;
+	CFigure* GetSelectedFigure(int & index);
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
+	int getFigCount();
+	int getFigMaxCount();
+	CFigure** getFigList();
 };
 
 #endif
