@@ -1,7 +1,7 @@
 
-#include "Figures/CFigure.h"
-#include "Actions/Action.h"
-#include "ApplicationManager.h"
+#include "../Figures/CFigure.h"
+#include "Action.h"
+#include "../ApplicationManager.h"
 
 
 class ActionResize :

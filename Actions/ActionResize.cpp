@@ -12,7 +12,7 @@ void ActionResize::Execute()
 {
 	GUI* pOut = pManager->GetGUI();
 
-	
+
 	int x, y;
 	if (Selected != NULL)
 	{
@@ -21,7 +21,7 @@ void ActionResize::Execute()
 		ActionType pAct = pOut->MapInputToActionType(x, y);
 		if (pAct == HALF)
 		{
-			
+
 			Selected->Resize(.5);
 
 		}
@@ -47,7 +47,7 @@ void ActionResize::Execute()
 
 	}
 	else
-	pOut->PrintMessage("Firstly, Select a fig");
+		pOut->PrintMessage("Firstly, Select a fig");
 
 	pOut->CreateDrawToolBar();
 
