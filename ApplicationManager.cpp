@@ -2,6 +2,8 @@
 #include "Actions\ActionAddSquare.h"
 #include "Actions\ResizeAction.h"
 
+//hello world
+
 
 //Constructor
 ApplicationManager::ApplicationManager()
