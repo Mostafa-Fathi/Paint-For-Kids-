@@ -32,6 +32,12 @@ string CSquare::GetDetails() const {
 	return details;
 }
 void CSquare::Resize(float factor)
-{
+{	
+	Point center;
+	center.x = (2*TopLeftCorner.x + length) / 2;
+	center.y= (2*TopLeftCorner.y + length) / 2;
 	length = length * factor;
+	TopLeftCorner.x = center.x - (length / 2);
+	TopLeftCorner.y = center.y - (length / 2);
+
 }
