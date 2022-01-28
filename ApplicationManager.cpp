@@ -22,11 +22,13 @@ ApplicationManager::ApplicationManager()
 
 void ApplicationManager::Run()
 {
+	int x, y;
 	ActionType ActType;
 	do
 	{	
 		//1- Read user action
-		ActType = pGUI->MapInputToActionType();
+		ActType = pGUI->MapInputToActionType(x, y);
+		X = x; Y = y;
 
 		//2- Create the corresponding Action
 		Action *pAct = CreateAction(ActType);
@@ -108,9 +110,9 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //Add a figure to the list of figures
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
-	if(FigCount < MaxFigCount )
+	if (FigCount < MaxFigCount)
 		FigList[FigCount++] = pFig;
-	string x = "test "; 
+	pFig->ID = FigCount;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure *ApplicationManager::GetFigure(int x, int y) const
@@ -119,7 +121,21 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//if this point (x,y) does not belong to any figure return NULL
 
 
-	///Add your code here to search for a figure given a point x,y	
+	for (int i = (FigCount - 1); i >= 0; i--) {
+		if (FigList[i]->HasPoint(x, y)) return FigList[i];
+	}
+
+	return NULL;
+}
+////////////////////////////////////////////////////////////////////////////////////
+CFigure* ApplicationManager::GetSelectedFigure() const
+{
+	//If a figure is found return a pointer to it.
+	//if there is no selected figure return NULL
+
+	for (int i = (FigCount - 1); i >= 0; i--) {
+		if (FigList[i]->IsSelected()) return FigList[i];
+	}
 
 	return NULL;
 }
