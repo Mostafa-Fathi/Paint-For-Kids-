@@ -4,12 +4,12 @@
 #include "ApplicationManager.h"
 
 
-class ResizeAction :
+class ActionResize :
 	public Action
 {
 	CFigure* Selected;
 public:
-	ResizeAction(ApplicationManager* pApp, CFigure*);
+	ActionResize(ApplicationManager* pApp, CFigure*);
 
 	//Reads ellipse parameters
 	virtual void ReadActionParameters();

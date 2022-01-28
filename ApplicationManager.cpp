@@ -51,6 +51,8 @@ void ApplicationManager::Run()
 Action* ApplicationManager::CreateAction(ActionType ActType) 
 {
 	Action* newAct = NULL;
+	CFigure* selectedFigure = GetSelectedFigure();
+
 	
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -72,7 +74,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case RESIZE:
-			newAct = new ResizeAction(this, FigList[0]);
+			newAct = new ActionResize(this, selectedFigure);
 			break;
 
 		case SEND_BACK:

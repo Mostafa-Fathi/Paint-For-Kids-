@@ -1,16 +1,16 @@
-#include "ResizeAction.h"
+#include "ActionResize.h"
 
-ResizeAction::ResizeAction(ApplicationManager* pApp, CFigure* selected) :Action(pApp)
+ActionResize::ActionResize(ApplicationManager* pApp, CFigure* selected) :Action(pApp)
 {
 
 	Selected = selected;
 }
 
-void ResizeAction::ReadActionParameters()
+void ActionResize::ReadActionParameters()
 {
 }
 
-void ResizeAction::Execute()
+void ActionResize::Execute()
 {
 	GUI* pOut = pManager->GetGUI();
 
