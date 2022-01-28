@@ -15,12 +15,12 @@ void ResizeAction::Execute()
 	GUI* pOut = pManager->GetGUI();
 
 	
-	
+	int x, y;
 	if (Selected != NULL)
 	{
 		pOut->CreateSizeBar();
 
-		ActionType pAct = pOut->MapInputToActionType();
+		ActionType pAct = pOut->MapInputToActionType(x, y);
 		if (pAct == HALF)
 		{
 			
