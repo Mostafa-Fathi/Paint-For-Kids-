@@ -43,7 +43,7 @@ void ActionResize::Execute()
 
 			return;
 		}
-	//	pOut->ClearDrawArea();
+		pOut->ClearDrawArea();
 
 	}
 	else
