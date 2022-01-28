@@ -59,3 +59,7 @@ string CPolygon::GetDetails() const {
 
 	return details;
 }
+void CPolygon::Resize(float factor)
+{
+	//resize code here
+}

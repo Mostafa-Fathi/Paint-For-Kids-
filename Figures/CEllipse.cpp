@@ -30,3 +30,7 @@ string CEllipse::GetDetails() const {
 		+ " | area=" + to_string(3.14159265 * radiusX*radiusY);
 	return details;
 }
+void CEllipse::Resize(float factor)
+{
+	//resize code here
+}
