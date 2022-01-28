@@ -3,7 +3,7 @@
 #include "Actions\ResizeAction.h"
 
 //hello world
-
+//hello world again
 
 //Constructor
 ApplicationManager::ApplicationManager()
