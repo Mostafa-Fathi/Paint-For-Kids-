@@ -11,7 +11,6 @@ ActionSendToBack::ActionSendToBack(ApplicationManager* pApp, CFigure* selected ,
 void ActionSendToBack::Execute()
 {
 	GUI* pOut =  pManager->GetGUI();
-	
 	CFigure** FigList = pManager->getFigList();
 	std::cout <<"\nindex is :" << Index;
 	CFigure *temp;
