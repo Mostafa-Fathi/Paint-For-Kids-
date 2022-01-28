@@ -2,9 +2,7 @@
 #include "Actions\ActionAddSquare.h"
 #include "Actions\ResizeAction.h"
 
-//hello world
-//hello world again
-//mostafa comment 
+
 //Constructor
 ApplicationManager::ApplicationManager()
 {
@@ -23,7 +21,7 @@ void ApplicationManager::Run()
 {
 	ActionType ActType;
 	do
-	{		
+	{	
 		//1- Read user action
 		ActType = pGUI->MapInputToActionType();
 
