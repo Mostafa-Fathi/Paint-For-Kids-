@@ -163,6 +163,9 @@
     <ClCompile Include="Actions\ActionSendToBack.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionBringFront.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -267,6 +270,9 @@
     </ClInclude>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Actions\ActionSendToBack.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionBringFront.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

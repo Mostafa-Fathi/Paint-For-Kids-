@@ -5,6 +5,7 @@
 #include "Actions\ActionSelect.h"
 #include "Actions\ResizeAction.h"
 #include "Actions/ActionSendToBack.h"
+#include "Actions/ActionBringFront.h"
 
 
 //Constructor
@@ -93,7 +94,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionSendToBack(this , selectedFigure, selectedIndex);
 			break;
 
-		case BRNG_FRNT:
+		case BRING_FRONT:
+			newAct = new ActionBringFront(this, selectedFigure, selectedIndex);
 			break;
 
 		case EXIT:

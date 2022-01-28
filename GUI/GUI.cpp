@@ -97,7 +97,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_EXIT: return EXIT;	
 			case ITM_RESIZE: return RESIZE;
 			case ITM_SEND_TO_BACK: return SEND_BACK;
-			case ITM_BRING_TO_FORWARED: return BRNG_FRNT;
+			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
 
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
