@@ -50,73 +50,48 @@ void CSquare::Resize(float factor)
 
 }
 
-void CSquare::Load(ifstream& fin)
+void CSquare::Load(ifstream & fin)
 {
 	string line;
 	while (getline(fin, line))
-	{
+	{ 
 		int j = 0;
-		char type;
-		int id, topX, topY, length;
-		color Color;
-		color fill;
-		color figureColor;
+		color Color, figureColor, fill;
 		bool is_fill = false;
 		char* cLine = const_cast<char*>(line.c_str());
-		//cout << c;
-		char* token = strtok(cLine, "\t");
 		string sqrData[7];
-		// edit ------------------remeber------------------
+
+		char* token = strtok(cLine, "\t");
 		while (token != NULL)
 		{
-			j++;
-			if (j == 2)
-			{
-				id = atoi(token);
-			}
-			if (j == 3)
-			{
-				topX = atoi(token);
-			}
-			if (j == 4)
-			{
-				topY = atoi(token);
-			}
-
-			if (j == 5)
-			{
-				length = atoi(token);
-			}
+			sqrData[j] = token;
 			if (j == 6)
-			{
-				Color = figureColor.getCurrentColor(token);
-			}
-			if (j == 7)
 			{
 				if (strcmp(token, "NO_FILL") != 0)
 				{
 					is_fill = true;
-					fill = figureColor.getCurrentColor(token);
+					fill = figureColor.getCurrentColor(sqrData[6]);
 				}
-
 			}
 			token = strtok(NULL, "\t");
+			j++;
 		}
+		
 		GfxInfo SqrGfxInfo;
-		SqrGfxInfo.isFilled = false;
-		SqrGfxInfo.DrawClr = Color;
+		SqrGfxInfo.isFilled = is_fill;
+		SqrGfxInfo.DrawClr = figureColor.getCurrentColor(sqrData[5]);
 		SqrGfxInfo.FillClr = fill;
 		SqrGfxInfo.BorderWdth = 2;
 
 		Point topLeft;
-		topLeft.x = topX;
-		topLeft.y = topY;
+		topLeft.x = stoi(sqrData[2]);
+		topLeft.y = stoi(sqrData[3]);
 
 		this->TopLeftCorner = topLeft;
-		this->ID = id;
+		this->ID = stoi(sqrData[1]);
 		this->Selected = false;
 		this->FigGfxInfo = SqrGfxInfo;
-		this->length = length;
+		this->length = stoi(sqrData[4]);
 	}
 }
 

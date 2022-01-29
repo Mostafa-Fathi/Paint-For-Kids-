@@ -73,25 +73,17 @@ void ActionLoad::Execute()
 				char* chLine = const_cast<char*>(line.c_str());
 				char* token = strtok(chLine, "\t");
 				int k = 0;
+				string windColors[3];
 				while (token != NULL)
 				{
-					k++;
-					color windowColor;
-					if (k == 1)
-					{
-						pGUI->setCrntDrawColor(windowColor.getCurrentColor(token));
-					}
-					if (k == 2)
-					{
-						pGUI->setCrntFillColor(windowColor.getCurrentColor(token));
-					}
-					if (k == 3)
-					{
-						pGUI->setBkGrndColor(windowColor.getCurrentColor(token));
-					}
+					windColors[k] = token;
 					token = strtok(NULL, "\t");
+					k++;
 				}
-
+				color windowColor;
+				pGUI->setCrntDrawColor(windowColor.getCurrentColor(windColors[0]));
+				pGUI->setCrntFillColor(windowColor.getCurrentColor(windColors[1]));
+				pGUI->setBkGrndColor(windowColor.getCurrentColor(windColors[2]));
 			}
 			if (i == 2)
 			{

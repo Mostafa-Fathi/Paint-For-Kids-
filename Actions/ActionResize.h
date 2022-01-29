@@ -9,7 +9,7 @@ class ActionResize :
 {
 	CFigure* Selected;
 public:
-	ActionResize(ApplicationManager* pApp, CFigure*);
+	ActionResize(ApplicationManager* pApp);
 
 
 	//Add ellipse to the ApplicationManager
