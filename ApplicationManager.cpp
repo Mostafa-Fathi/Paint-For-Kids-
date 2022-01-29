@@ -65,11 +65,6 @@ void ApplicationManager::Run()
 Action* ApplicationManager::CreateAction(ActionType ActType) 
 {
 	Action* newAct = NULL;
-	int selectedIndex;
-
-	CFigure* selectedFigure = GetSelectedFigure(selectedIndex);
-	std::cout << "\n"<<selectedFigure;
-
 	
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -91,15 +86,15 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case RESIZE:
-			newAct = new ActionResize(this, selectedFigure);
+			newAct = new ActionResize(this);
 			break;
 
 		case SEND_BACK:
-			newAct = new ActionSendToBack(this , selectedFigure, selectedIndex);
+			newAct = new ActionSendToBack(this);
 			break;
 
 		case BRING_FRONT:
-			newAct = new ActionBringFront(this, selectedFigure, selectedIndex);
+			newAct = new ActionBringFront(this);
 			break;
 
 		case LOAD:
@@ -157,7 +152,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	return NULL;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetSelectedFigure(int & index ) 
+CFigure* ApplicationManager::GetSelectedFigure( ) 
 {
 
 	//If a figure is found return a pointer to it.
@@ -166,7 +161,7 @@ CFigure* ApplicationManager::GetSelectedFigure(int & index )
 
 	for (int i = (FigCount - 1); i >= 0; i--) {
 		if (FigList[i]->IsSelected()) { 
-			index = i;
+			
 			return FigList[i]; }
 	}
 
@@ -179,6 +174,7 @@ CFigure* ApplicationManager::GetSelectedFigure(int & index )
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	pGUI->ClearDrawArea();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }

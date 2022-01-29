@@ -11,7 +11,7 @@ class ActionBringFront :
 	CFigure* Selected;
 	int Index;
 public:
-	ActionBringFront(ApplicationManager* pApp, CFigure*, int index);
+	ActionBringFront(ApplicationManager* pApp);
 
 	//Add ellipse to the ApplicationManager
 	virtual void Execute();

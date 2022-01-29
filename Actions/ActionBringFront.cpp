@@ -1,10 +1,10 @@
 #include "ActionBringFront.h"
 #include "ActionSendToBack.h"
 #include <iostream>
-ActionBringFront::ActionBringFront(ApplicationManager* pApp, CFigure* selected, int index) :Action(pApp)
+ActionBringFront::ActionBringFront(ApplicationManager* pApp) :Action(pApp)
 {
-	Index = index;
-	Selected = selected;
+		Selected = pManager->GetSelectedFigure();
+		Index = Selected->ID-1 ;
 }
 
 
@@ -20,11 +20,13 @@ void ActionBringFront::Execute()
 		for (int i = Index; i < pManager->getFigCount()-1; i++) {
 			cout << "\n fig count is =" << pManager->getFigCount()-1;
 			FigList[i] = FigList[i + 1];
+			FigList[i]->ID = i+1;
 
 			cout << "\n id of fig is :" << FigList[i]->ID;
 		}
+		Selected->ID = pManager->getFigCount();
 		FigList[pManager->getFigCount()-1] = Selected;
-		pOut->ClearDrawArea();
+		
 
 	}
 	else
