@@ -5,6 +5,11 @@ CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo
 	TopLeftCorner = P1;
 	length = len;
 }
+
+CSquare::CSquare()
+{
+
+}
 	
 
 void CSquare::DrawMe(GUI* pGUI) const
@@ -12,6 +17,8 @@ void CSquare::DrawMe(GUI* pGUI) const
 	//Call Output::DrawRect to draw a Square on the screen	
 	pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
 }
+
+
 
 bool CSquare::HasPoint(int x, int y) const {
 	if (x >= TopLeftCorner.x && x <= TopLeftCorner.x + length &&
