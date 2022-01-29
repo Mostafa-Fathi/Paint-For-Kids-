@@ -114,6 +114,7 @@ void CSquare::Load(ifstream& fin)
 
 		this->TopLeftCorner = topLeft;
 		this->ID = id;
+		this->Selected = false;
 		this->FigGfxInfo = SqrGfxInfo;
 		this->length = length;
 	}
