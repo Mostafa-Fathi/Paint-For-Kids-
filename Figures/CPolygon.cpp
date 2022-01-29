@@ -63,8 +63,9 @@ void CPolygon::Resize(float factor)
 {
 	
 	length = length * factor;
-	TopLeftCorner.x = (TopLeftCorner.x + Center.x) * factor;
-	TopLeftCorner.y = (TopLeftCorner.y + Center.y) * factor;
+
+	TopLeftCorner.x = Center.x - (length / 2);
+	TopLeftCorner.y = Center.y - (length / 2);
 
 	
 }

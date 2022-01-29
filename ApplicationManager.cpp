@@ -150,6 +150,7 @@ CFigure* ApplicationManager::GetSelectedFigure(int & index )
 
 	//If a figure is found return a pointer to it.
 	//if there is no selected figure return NULL
+	//retrun index of selected figure by passing index by referance 
 
 	for (int i = (FigCount - 1); i >= 0; i--) {
 		if (FigList[i]->IsSelected()) { 
