@@ -42,3 +42,7 @@ void CEllipse::Resize(float factor)
 	BottomRightCorner.x = Center.x + hRadius;
 	BottomRightCorner.y = Center.y + vRadius;
 }
+
+void CEllipse::Load(ifstream& fin)
+{
+}

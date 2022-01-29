@@ -98,6 +98,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_RESIZE: return RESIZE;
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
+			case ITM_LOAD: return LOAD;
 
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -203,6 +204,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 
@@ -269,7 +271,23 @@ void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+void GUI::setCrntDrawColor(color Draw) const	//get current drwawing color
+{
+	UI.DrawColor = Draw;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::setCrntFillColor(color Fill) const	//get current filling color
+{
+	UI.FillColor = Fill;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::setBkGrndColor(color BKColor) const		//get current pen width
+{
+	UI.BkGrndColor = BKColor;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 color GUI::getCrntDrawColor() const	//get current drwawing color
 {	return UI.DrawColor;	}
 //////////////////////////////////////////////////////////////////////////////////////////

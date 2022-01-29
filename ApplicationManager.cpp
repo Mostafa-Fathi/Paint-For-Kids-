@@ -6,6 +6,7 @@
 #include "Actions\ResizeAction.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
+#include "Actions/ActionLoad.h"
 
 
 //Constructor
@@ -98,6 +99,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionBringFront(this, selectedFigure, selectedIndex);
 			break;
 
+		case LOAD:
+			newAct = new ActionLoad(this);
 		case EXIT:
 			///create ExitAction here
 			break;

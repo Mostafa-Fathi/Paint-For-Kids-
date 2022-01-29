@@ -23,6 +23,35 @@ class color {
     unsigned char ucGreen;
     unsigned char ucBlue;
 
+    // -------------remember add all used colors-----------------
+    color getCurrentColor(char* nColor)
+    {
+        if (strcmp(nColor, "RED") == 0)
+        {
+            return color(255, 0, 0);
+        }
+        else if (strcmp(nColor, "BLUE") == 0)
+        {
+            return color(0, 0, 255);
+        }
+        else if (strcmp(nColor, "BLACK") == 0)
+        {
+            return color(0, 0, 0);
+        }
+        else if (strcmp(nColor, "GREEN") == 0)
+        {
+            return color(0, 255, 0);
+        }
+        else if (strcmp(nColor, "YELLOW") == 0)
+        {
+            return color(255, 255, 0);
+        }
+        else if (strcmp(nColor, "BROWN") == 0)
+        {
+            return color(165, 42, 42);;
+        }
+    }
+
 };
 
 bool operator==(color a, color b);

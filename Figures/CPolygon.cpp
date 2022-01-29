@@ -69,3 +69,7 @@ void CPolygon::Resize(float factor)
 
 	
 }
+
+void CPolygon::Load(ifstream& fin)
+{
+}

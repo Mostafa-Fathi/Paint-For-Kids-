@@ -1,9 +1,15 @@
 #include "CSquare.h"
+#include <fstream>
 
 CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	TopLeftCorner = P1;
 	length = len;
+}
+
+CSquare::CSquare()
+{
+
 }
 	
 
@@ -12,6 +18,8 @@ void CSquare::DrawMe(GUI* pGUI) const
 	//Call Output::DrawRect to draw a Square on the screen	
 	pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
 }
+
+
 
 bool CSquare::HasPoint(int x, int y) const {
 	if (x >= TopLeftCorner.x && x <= TopLeftCorner.x + length &&
@@ -41,3 +49,73 @@ void CSquare::Resize(float factor)
 	TopLeftCorner.y = center.y - (length / 2);
 
 }
+
+void CSquare::Load(ifstream& fin)
+{
+	string line;
+	while (getline(fin, line))
+	{
+		int j = 0;
+		char type;
+		int id, topX, topY, length;
+		color Color;
+		color fill;
+		color figureColor;
+		bool is_fill = false;
+		char* cLine = const_cast<char*>(line.c_str());
+		//cout << c;
+		char* token = strtok(cLine, "\t");
+		string sqrData[7];
+		// edit ------------------remeber------------------
+		while (token != NULL)
+		{
+			j++;
+			if (j == 2)
+			{
+				id = atoi(token);
+			}
+			if (j == 3)
+			{
+				topX = atoi(token);
+			}
+			if (j == 4)
+			{
+				topY = atoi(token);
+			}
+
+			if (j == 5)
+			{
+				length = atoi(token);
+			}
+			if (j == 6)
+			{
+				Color = figureColor.getCurrentColor(token);
+			}
+			if (j == 7)
+			{
+				if (strcmp(token, "NO_FILL") != 0)
+				{
+					is_fill = true;
+					fill = figureColor.getCurrentColor(token);
+				}
+
+			}
+			token = strtok(NULL, "\t");
+		}
+		GfxInfo SqrGfxInfo;
+		SqrGfxInfo.isFilled = false;
+		SqrGfxInfo.DrawClr = Color;
+		SqrGfxInfo.FillClr = fill;
+		SqrGfxInfo.BorderWdth = 2;
+
+		Point topLeft;
+		topLeft.x = topX;
+		topLeft.y = topY;
+
+		this->TopLeftCorner = topLeft;
+		this->ID = id;
+		this->FigGfxInfo = SqrGfxInfo;
+		this->length = length;
+	}
+}
+
