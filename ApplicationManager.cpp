@@ -3,10 +3,10 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
-#include "Actions\ResizeAction.h"
-#include "Actions/ActionSendToBack.h"
-#include "Actions/ActionBringFront.h"
-#include "Actions/ActionLoad.h"
+#include "Actions\ActionResize.h"
+#include "Actions\ActionSendToBack.h"
+#include "Actions\ActionBringFront.h"
+#include "Actions\ActionLoad.h"
 
 
 //Constructor
