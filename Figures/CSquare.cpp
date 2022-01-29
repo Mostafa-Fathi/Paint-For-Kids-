@@ -50,7 +50,7 @@ void CSquare::Resize(float factor)
 
 }
 
-void CSquare::Load(ifstream& fin)
+void CSquare::Load(ifstream & fin)
 {
 	string line;
 	while (getline(fin, line))

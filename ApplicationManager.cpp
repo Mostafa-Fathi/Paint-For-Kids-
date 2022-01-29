@@ -7,6 +7,7 @@
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
 #include "Actions/ActionLoad.h"
+#include <iostream>
 
 
 //Constructor
@@ -65,7 +66,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 {
 	Action* newAct = NULL;
 	int selectedIndex;
+
 	CFigure* selectedFigure = GetSelectedFigure(selectedIndex);
+	std::cout << "\n"<<selectedFigure;
 
 	
 	//According to Action Type, create the corresponding action object
@@ -101,6 +104,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case LOAD:
 			newAct = new ActionLoad(this);
+			cout << "\n here " << FigCount;
+			for (int i = 0; i < FigCount; i++) {
+				cout << "\n addres is " << FigList[i];
+				cout << "\n" << FigList[i]->ID;
+			} 
+			break;
 		case EXIT:
 			///create ExitAction here
 			break;

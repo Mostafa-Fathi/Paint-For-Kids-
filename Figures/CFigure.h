@@ -10,26 +10,26 @@ class CFigure
 protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
-	
+
 	/// Add more parameters if needed.
 
 public:
 	int ID;		//Each figure has an ID
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
-	void SetSelected(bool );	//select/unselect the figure
+	void SetSelected(bool);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 
-	virtual void DrawMe(GUI*) const  = 0 ;		//Draw the figure
-	
+	virtual void DrawMe(GUI*) const = 0;		//Draw the figure
+
 	//changes the figure's drawing color
-	void ChngDrawClr(color Dclr);	
-	
+	void ChngDrawClr(color Dclr);
+
 	//gets the current drawing color
 	color GetDrawColor();
 
 	//changes the figure's filling color
-	void ChngFillClr(color Fclr);	
+	void ChngFillClr(color Fclr);
 
 	//gets the previous drawing color of the figure
 	color GetPreviousDrawColor();
@@ -46,7 +46,7 @@ public:
 	//Resize the figure
 	virtual void Resize(float) = 0;
 
-	
+
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure
 
@@ -60,7 +60,7 @@ public:
 	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 
 	//Load the figure parameters to the file
-	virtual void Load(ifstream &Infile) = 0;	
+	virtual void Load(ifstream& Infile) = 0;
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
 };
