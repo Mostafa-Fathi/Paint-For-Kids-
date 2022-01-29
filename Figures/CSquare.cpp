@@ -54,7 +54,7 @@ void CSquare::Load(ifstream& fin)
 {
 	string line;
 	while (getline(fin, line))
-	{
+	{ 
 		int j = 0;
 		char type;
 		int id, topX, topY, length;
