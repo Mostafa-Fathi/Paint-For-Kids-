@@ -24,8 +24,9 @@ class color {
     unsigned char ucBlue;
 
     // -------------remember add all used colors-----------------
-    color getCurrentColor(char* nColor)
+    color getCurrentColor(string Color)
     {
+        const char* nColor = Color.c_str();
         if (strcmp(nColor, "RED") == 0)
         {
             return color(255, 0, 0);
