@@ -8,8 +8,7 @@
 class ActionBringFront :
 	public Action
 {
-	CFigure* Selected;
-	int Index;
+
 public:
 	ActionBringFront(ApplicationManager* pApp);
 
