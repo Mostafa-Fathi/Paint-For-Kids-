@@ -3,10 +3,11 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
-#include"Actions/ActionResize.h"
-#include "Actions/ActionSendToBack.h"
-#include "Actions/ActionBringFront.h"
-#include "Actions/ActionLoad.h"
+#include "Actions\ActionResize.h"
+#include "Actions\ActionSendToBack.h"
+#include "Actions\ActionBringFront.h"
+#include "Actions\ActionLoad.h"
+#include "ActionExit.h"
 #include <iostream>
 
 
@@ -106,7 +107,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			} 
 			break;
 		case EXIT:
-			///create ExitAction here
+			newAct = new ActionExit(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action

@@ -35,7 +35,7 @@ enum ActionType //The actions supported (you can add more if needed)
 	DOUBLED,
 	QUADRUPLE,
 
-	BACK,
+	BACK
 
 	///TODO: Add more action types (if needed)
 };
