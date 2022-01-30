@@ -81,9 +81,9 @@ void ActionLoad::Execute()
 					k++;
 				}
 				color windowColor;
-				pGUI->setCrntDrawColor(windowColor.getCurrentColor(windColors[0]));
-				pGUI->setCrntFillColor(windowColor.getCurrentColor(windColors[1]));
-				pGUI->setBkGrndColor(windowColor.getCurrentColor(windColors[2]));
+				pGUI->setCrntDrawColor(pManager->ConvertToColor(windColors[0]));
+				pGUI->setCrntFillColor(pManager->ConvertToColor(windColors[1]));
+				pGUI->setBkGrndColor(pManager->ConvertToColor(windColors[2]));
 			}
 			if (i == 2)
 			{

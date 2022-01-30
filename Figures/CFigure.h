@@ -57,12 +57,17 @@ public:
 	//virtual void Resize() = 0;	//Resize the figure
 	//virtual void Move() = 0;		//Move the figure
 
-	//virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
+	virtual void Save(ofstream &OutFile) = 0;	//Save the figure parameters to the file
 
 	//Load the figure parameters to the file
 	virtual void Load(ifstream& Infile) = 0;
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+
+
+	// -- Convert Colors to string and string to colors
+	static string ConvertToString(color _color);   //Convert from Color Type to String Type
+	color ConvertToColor(string color_as_string);
 };
 
 #endif

@@ -50,6 +50,20 @@ void CSquare::Resize(float factor)
 
 }
 
+
+/// Save Square ///////////////////////////////////////
+void CSquare::Save(ofstream& OutFile) {
+	OutFile << "SQR" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
+}
+
+
 void CSquare::Load(ifstream & fin)
 {
 	string line;
@@ -70,7 +84,7 @@ void CSquare::Load(ifstream & fin)
 				if (strcmp(token, "NO_FILL") != 0)
 				{
 					is_fill = true;
-					fill = figureColor.getCurrentColor(sqrData[6]);
+					fill = this->ConvertToColor(sqrData[6]);
 				}
 			}
 			token = strtok(NULL, "\t");
@@ -79,7 +93,7 @@ void CSquare::Load(ifstream & fin)
 		
 		GfxInfo SqrGfxInfo;
 		SqrGfxInfo.isFilled = is_fill;
-		SqrGfxInfo.DrawClr = figureColor.getCurrentColor(sqrData[5]);
+		SqrGfxInfo.DrawClr = this->ConvertToColor(sqrData[5]);
 		SqrGfxInfo.FillClr = fill;
 		SqrGfxInfo.BorderWdth = 2;
 

@@ -1,4 +1,5 @@
 #include "CEllipse.h"
+#include <fstream>
  
 CEllipse::CEllipse(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
@@ -11,17 +12,24 @@ CEllipse::CEllipse(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfx
 }
 
 
+/// Draw Me ///////////////////
 void CEllipse::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawEllipse to draw an Ellipse on the screen	
 	pGUI->DrawEllipse(TopLeftCorner, BottomRightCorner, FigGfxInfo, Selected);
 }
 
+
+
+
 bool CEllipse::HasPoint(int x, int y) const {
 	if (pow(x - Center.x, 2) / pow(radiusX, 2) + pow(y - Center.y, 2) / pow(radiusY, 2) <= 1) return true;
 
 	return false;
 }
+
+
+
 string CEllipse::GetDetails() const {
 	string details = "figure Id=" + to_string(ID)
 		+ " | center point(" + to_string(Center.x) + "," + to_string(Center.y)
@@ -30,6 +38,8 @@ string CEllipse::GetDetails() const {
 		+ " | area=" + to_string(3.14159265 * radiusX*radiusY);
 	return details;
 }
+
+
 void CEllipse::Resize(float factor)
 {
 	//resize code here
@@ -43,6 +53,18 @@ void CEllipse::Resize(float factor)
 	TopLeftCorner.y = Center.y - radiusY;
 	BottomRightCorner.x = Center.x + radiusX;
 	BottomRightCorner.y = Center.y + radiusY;
+}
+
+
+void CEllipse::Save(ofstream& OutFile) {
+	OutFile << "ELPS" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
 }
 
 void CEllipse::Load(ifstream& fin)

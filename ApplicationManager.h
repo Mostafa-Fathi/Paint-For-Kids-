@@ -27,12 +27,16 @@ public:
 
 	~ApplicationManager();
 
+	
+
 	void Run();		//to run the application
 	
 	// -- Action-Related Functions
 	Action* CreateAction(ActionType);
 	void ExecuteAction(Action*&) ; //Execute an action
-	
+	void SaveAll(ofstream& OutFile);
+
+
 	// -- Figures Management Functions
 	//Adds a new figure to the FigList
 	void AddFigure(CFigure* pFig);
@@ -46,6 +50,12 @@ public:
 	int getFigCount();
 	int getFigMaxCount();
 	CFigure** getFigList();
+
+
+
+	// -- Convert Colors to string and string to colors
+	static string ConvertToString(color _color);   //Convert from Color Type to String Type
+	color ConvertToColor(string color_as_string);
 };
 
 #endif
