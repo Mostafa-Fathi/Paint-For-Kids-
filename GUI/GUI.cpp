@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include <iostream>
 
 //constructor make necessary initializations
 GUI::GUI()
@@ -55,17 +56,20 @@ string GUI::GetSrting() const
 {
 	string Label;
 	char Key;
-	while(1)
+	while (1)
 	{
 		pWind->WaitKeyPress(Key);
-		if(Key == 27 )	//ESCAPE key is pressed
+		if (Key == 27)	//ESCAPE key is pressed
+		{
+			PrintMessage("The Save action is cancelled");
 			return "";	//returns nothing as user has cancelled label
-		if(Key == 13 )	//ENTER key is pressed
+		}
+		if (Key == 13 && !Label.empty())	//ENTER key is pressed
 			return Label;
-		if(Key == 8 )	//BackSpace is pressed
-			Label.resize(Label.size() -1 );			
+		if (Key == 8 && Label.size() > 0)	//BackSpace is pressed
+			Label.resize(Label.size() - 1);
 		else
-			Label+= Key;
+			Label += Key;
 		PrintMessage(Label);
 	}
 }
@@ -98,6 +102,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_RESIZE: return RESIZE;
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
+			case ITM_SAVE: return SAVE;
 			case ITM_LOAD: return LOAD;
 
 			
@@ -298,6 +303,9 @@ color GUI::getCrntFillColor() const	//get current filling color
 	
 int GUI::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	}
+
+
+
 
 //======================================================================================//
 //								Figures Drawing Functions								//

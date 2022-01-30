@@ -1,4 +1,5 @@
 #include "CPolygon.h"
+#include <fstream>
 
 CPolygon::CPolygon(Point P1, int len, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
@@ -69,6 +70,22 @@ void CPolygon::Resize(float factor)
 
 	
 }
+
+
+
+/// Save Square ///////////////////////////////////////
+void CPolygon::Save(ofstream& OutFile) {
+	OutFile << "POLY" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
+}
+
+
 
 void CPolygon::Load(ifstream& fin)
 {

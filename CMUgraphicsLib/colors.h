@@ -8,6 +8,7 @@ This file was last modified on 05.16.1999
 
 #include "version.h"
 
+
 class color {
 
   public:
@@ -23,35 +24,8 @@ class color {
     unsigned char ucGreen;
     unsigned char ucBlue;
 
-    // -------------remember add all used colors-----------------
-    color getCurrentColor(string Color)
-    {
-        const char* nColor = Color.c_str();
-        if (strcmp(nColor, "RED") == 0)
-        {
-            return color(255, 0, 0);
-        }
-        else if (strcmp(nColor, "BLUE") == 0)
-        {
-            return color(0, 0, 255);
-        }
-        else if (strcmp(nColor, "BLACK") == 0)
-        {
-            return color(0, 0, 0);
-        }
-        else if (strcmp(nColor, "GREEN") == 0)
-        {
-            return color(0, 255, 0);
-        }
-        else if (strcmp(nColor, "YELLOW") == 0)
-        {
-            return color(255, 255, 0);
-        }
-        else if (strcmp(nColor, "BROWN") == 0)
-        {
-            return color(165, 42, 42);;
-        }
-    }
+    
+    
 
 };
 
