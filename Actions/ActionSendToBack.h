@@ -8,8 +8,6 @@
 class ActionSendToBack :
 	public Action
 {
-	CFigure* Selected;
-	int Index;
 public:
 	ActionSendToBack(ApplicationManager* pApp);
 

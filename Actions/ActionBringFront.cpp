@@ -3,8 +3,7 @@
 #include <iostream>
 ActionBringFront::ActionBringFront(ApplicationManager* pApp) :Action(pApp)
 {
-		Selected = pManager->GetSelectedFigure();
-		Index = Selected->ID-1 ;
+
 }
 
 
@@ -13,10 +12,11 @@ void ActionBringFront::Execute()
 {
 	GUI* pOut = pManager->GetGUI();
 	CFigure** FigList = pManager->getFigList();
-	std::cout << "\nindex is :" << Index;
-	CFigure* temp;
+	CFigure* Selected = pManager->GetSelectedFigure();
 	if (Selected != NULL)
 	{
+		int Index = Selected->ID - 1;
+
 		for (int i = Index; i < pManager->getFigCount()-1; i++) {
 			cout << "\n fig count is =" << pManager->getFigCount()-1;
 			FigList[i] = FigList[i + 1];
@@ -31,8 +31,5 @@ void ActionBringFront::Execute()
 	}
 	else
 		pOut->PrintMessage("Firstly, Select a fig");
-
-	pOut->CreateDrawToolBar();
-
 	return;
 }

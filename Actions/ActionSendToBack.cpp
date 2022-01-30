@@ -1,10 +1,7 @@
 #include "ActionSendToBack.h"
 #include <iostream>
 ActionSendToBack::ActionSendToBack(ApplicationManager* pApp) :Action(pApp)
-{
-	
-		Selected = pManager->GetSelectedFigure();
-		Index = Selected->ID-1;
+{	
 }
 
 
@@ -12,14 +9,13 @@ ActionSendToBack::ActionSendToBack(ApplicationManager* pApp) :Action(pApp)
 void ActionSendToBack::Execute()
 {
 	GUI* pOut =  pManager->GetGUI();
-	CFigure** FigList = pManager->getFigList();
-	std::cout <<"\nindex is :" << Index;
-	CFigure *temp;
-
-
+	CFigure** FigList = pManager->getFigList();	
+	CFigure* Selected = pManager->GetSelectedFigure();
 	
 	if (Selected != NULL)
 	{
+		int Index = Selected->ID - 1;
+
 		for (int i = Index; i >0; i--) {
 			
 			FigList[i] = FigList[i-1];
@@ -33,8 +29,6 @@ void ActionSendToBack::Execute()
 	}
 	else
 		pOut->PrintMessage("Firstly, Select a fig");
-
-	pOut->CreateDrawToolBar();
 
 	return;
 }
