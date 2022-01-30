@@ -129,10 +129,10 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ActionExit.cpp" />
     <ClCompile Include="Actions\ActionAddEllipse.cpp" />
     <ClCompile Include="Actions\ActionAddPolygon.cpp" />
     <ClCompile Include="Actions\ActionBringFront.cpp" />
+    <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
     <ClCompile Include="Actions\ActionResize.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
@@ -184,10 +184,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ActionExit.h" />
     <ClInclude Include="Actions\ActionAddEllipse.h" />
     <ClInclude Include="Actions\ActionAddPolygon.h" />
     <ClInclude Include="Actions\ActionBringFront.h" />
+    <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
     <ClInclude Include="Actions\ActionResize.h" />
     <ClInclude Include="Actions\ActionSave.h" />

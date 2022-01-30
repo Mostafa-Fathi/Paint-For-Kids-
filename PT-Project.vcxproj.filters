@@ -169,14 +169,14 @@
     <ClCompile Include="Actions\ActionLoad.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="ActionExit.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\ActionSave.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="CMUgraphicsLib\colors.cpp">
       <Filter>CMUgraphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionExit.cpp">
+      <Filter>Action Classes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -290,10 +290,10 @@
     <ClInclude Include="Actions\ActionLoad.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="ActionExit.h">
+    <ClInclude Include="Actions\ActionSave.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="Actions\ActionSave.h">
+    <ClInclude Include="Actions\ActionExit.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
   </ItemGroup>

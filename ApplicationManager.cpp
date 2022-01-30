@@ -7,7 +7,8 @@
 #include "Actions\ActionSendToBack.h"
 #include "Actions\ActionBringFront.h"
 #include "Actions\ActionLoad.h"
-#include "ActionExit.h"
+#include "Actions\ActionExit.h"
+#include "Actions\ActionSave.h"
 #include <iostream>
 
 
@@ -166,7 +167,6 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetSelectedFigure( ) 
 {
-
 	//If a figure is found return a pointer to it.
 	//if there is no selected figure return NULL
 	//retrun index of selected figure by passing index by referance 
@@ -176,7 +176,6 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 			
 			return FigList[i]; }
 	}
-
 	return NULL;
 }
 //==================================================================================//

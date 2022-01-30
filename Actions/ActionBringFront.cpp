@@ -11,6 +11,7 @@ void ActionBringFront::Execute()
 {
 	GUI* pOut = pManager->GetGUI();
 	CFigure** FigList = pManager->getFigList();
+
 	//std::cout << "\nindex is :" << Index;
 	//CFigure* temp;
 	if (Selected != NULL)
