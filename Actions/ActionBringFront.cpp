@@ -6,8 +6,6 @@ ActionBringFront::ActionBringFront(ApplicationManager* pApp) :Action(pApp)
 
 }
 
-
-
 void ActionBringFront::Execute()
 {
 	pManager->BringSelectedFigFront();

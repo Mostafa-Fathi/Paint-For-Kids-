@@ -7,8 +7,8 @@ CEllipse::CEllipse(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfx
 	BottomRightCorner = P2;
 	Center.x = (P1.x + P2.x) / 2;
 	Center.y = (P1.y + P2.y) / 2;
-	radiusX = abs(TopLeftCorner.x - Center.x);
-	radiusY = abs(TopLeftCorner.y - Center.y);
+	radiusX = Center.x - TopLeftCorner.x;
+	radiusY = Center.y - TopLeftCorner.y;
 }
 
 CEllipse::CEllipse()
@@ -45,22 +45,31 @@ string CEllipse::GetDetails() const {
 void CEllipse::Resize(float factor)
 {
 	//resize code here
-	int sgin = 1;
-	if (factor < 1) { sgin = -1; }
-	//int vRadius = (BottomRightCorner.y- TopLeftCorner.y) / 2 * factor;
-	//int hRadius = (BottomRightCorner.x- TopLeftCorner.x) / 2 * factor;
-	radiusX *= factor;
-	radiusY *= factor;
-	TopLeftCorner.x = Center.x - radiusX;
-	TopLeftCorner.y = Center.y - radiusY;
-	BottomRightCorner.x = Center.x + radiusX;
-	BottomRightCorner.y = Center.y + radiusY;
+	//if (radiusX > 25 && radiusY > 25) {
+		int sgin = 1;
+		if (factor < 1) { sgin = -1; }
+		//int vRadius = (BottomRightCorner.y- TopLeftCorner.y) / 2 * factor;
+		//int hRadius = (BottomRightCorner.x- TopLeftCorner.x) / 2 * factor;
+		radiusX *= factor;
+		radiusY *= factor;
+		TopLeftCorner.x = Center.x - radiusX;
+		TopLeftCorner.y = Center.y - radiusY;
+		BottomRightCorner.x = Center.x + radiusX;
+		BottomRightCorner.y = Center.y + radiusY;
+	//}
 }
 
 
 void CEllipse::Save(ofstream& OutFile) {
+	color figCol;
+	if (this->IsSelected()) {
+		figCol = this->FigGfxInfo.PrevDrawClr;
+	}
+	else {
+		figCol = this->FigGfxInfo.DrawClr;
+	}
 	OutFile << "ELPS" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
-		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(figCol) << "\t";
 	if (this->FigGfxInfo.isFilled == true) {
 		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
 	}

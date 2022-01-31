@@ -3,12 +3,13 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
-#include"Actions/ActionResize.h"
+#include "Actions/ActionResize.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSave.h"
 #include "Actions/ActionDelete.h"
+#include "Actions/ActionExit.h"
 #include <iostream>
 
 
@@ -104,7 +105,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct= new ActionDelete(this);
 			break;
 		case EXIT:
-			///create ExitAction here
+			newAct = new ActionExit(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
@@ -160,7 +161,6 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetSelectedFigure( ) 
 {
-
 	//If a figure is found return a pointer to it.
 	//if there is no selected figure return NULL
 	//retrun index of selected figure by passing index by referance 
@@ -170,8 +170,14 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 			
 			return FigList[i]; }
 	}
-
 	return NULL;
+}
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::CleanFigureList()
+{	
+	for (int i = 0; i < FigCount; i++) {
+		delete FigList[i];
+	}
 }
 //==================================================================================//
 //							Interface Management Functions							//

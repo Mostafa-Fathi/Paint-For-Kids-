@@ -79,8 +79,15 @@ void CPolygon::Resize(float factor)
 
 /// Save Square ///////////////////////////////////////
 void CPolygon::Save(ofstream& OutFile) {
+	color figCol;
+	if (this->IsSelected()) {
+		figCol = this->FigGfxInfo.PrevDrawClr;
+	}
+	else {
+		figCol = this->FigGfxInfo.DrawClr;
+	}
 	OutFile << "POLY" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
-		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(figCol) << "\t";
 	if (this->FigGfxInfo.isFilled == true) {
 		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
 	}

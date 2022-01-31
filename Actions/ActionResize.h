@@ -4,8 +4,7 @@
 #include "../ApplicationManager.h"
 
 
-class ActionResize :
-	public Action
+class ActionResize : public Action
 {
 	CFigure* Selected;
 public:
