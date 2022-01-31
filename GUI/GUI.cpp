@@ -203,13 +203,14 @@ void GUI::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_SQUR] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Sqr.jpg";
+	MenuItemImages[ITM_SQUR] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Sqr.JPG";
 	MenuItemImages[ITM_ELPS] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Poly.jpg";
 	MenuItemImages[ITM_RESIZE] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\sendToback.jpg";
-	MenuItemImages[ITM_BRING_TO_FORWARED] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\bringtoforward.jpg";
+	MenuItemImages[ITM_BRING_TO_FORWARED] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\bringtoforward.jpg";	
 	MenuItemImages[ITM_LOAD] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Load.jpg";
+	MenuItemImages[ITM_SAVE] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\save.jpg";
 	MenuItemImages[ITM_EXIT] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Exit.jpg";
 	
 

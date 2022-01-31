@@ -178,6 +178,13 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 	}
 	return NULL;
 }
+////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::CleanFigureList()
+{	
+	for (int i = 0; i < FigCount; i++) {
+		delete FigList[i];
+	}
+}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
