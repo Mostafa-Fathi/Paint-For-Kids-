@@ -159,17 +159,6 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
-void ApplicationManager::ClearFigList() 
-{
-	// clear fig list to load a saved file 
-
-
-	for (int i = 0; i < FigCount; i++) {
-		FigList[i] = NULL;
-	}
-	FigCount = 0;
-
-}
 ////////////////////////////////////////////////////////////////////////////////////
 CFigure* ApplicationManager::GetSelectedFigure( ) 
 {

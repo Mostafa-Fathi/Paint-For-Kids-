@@ -42,8 +42,6 @@ public:
 	void AddFigure(CFigure* pFig);
 	//Search for a figure given a point inside the figure
 	CFigure* GetFigure(int x, int y) const;
-	void ClearFigList();
-	CFigure* ClearFigList() const;
 	//Search for the selected figure
 	CFigure* GetSelectedFigure();
 	// -- Interface Management Functions	
