@@ -12,10 +12,13 @@ private:
 
 public:
 	CPolygon(Point, int, GfxInfo FigureGfxInfo);
+	CPolygon();
 	virtual void DrawMe(GUI* pOut) const;
 	virtual bool HasPoint(int x, int y) const;
 	virtual string GetDetails() const;
 	void Resize(float);
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream& fin);
 };
 
 #endif

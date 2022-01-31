@@ -44,10 +44,18 @@ public:
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
 
+	void setCrntDrawColor(color Draw) const;  //set current drwawing color
+	void setCrntFillColor(color Fill) const;  //set current drwawing color
+	void setBkGrndColor(color BK) const;  //set current drwawing color
+
+
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
 
+	// -- Convert Colors to string and string to colors
+	string ConvertToString(color _color);   //Convert from Color Type to String Type
+	color ConvertToColor(string color_as_string);
 
 };
 

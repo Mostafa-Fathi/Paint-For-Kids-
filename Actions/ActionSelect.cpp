@@ -8,7 +8,7 @@ ActionSelect::ActionSelect(ApplicationManager* pApp) :Action(pApp) {}
 void ActionSelect::Execute() {
 
 	GUI* pGUI = pManager->GetGUI();
-	int index;
+	
 
 
 	CFigure* fig = pManager->GetFigure(pManager->X, pManager->Y);
@@ -21,7 +21,7 @@ void ActionSelect::Execute() {
 		}
 		else
 		{
-			CFigure* selectedFigure = pManager->GetSelectedFigure(index);
+			CFigure* selectedFigure = pManager->GetSelectedFigure();
 			if (selectedFigure != NULL) {
 				selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
 				selectedFigure->SetSelected(false);
@@ -33,7 +33,7 @@ void ActionSelect::Execute() {
 		}
 	}
 	else {
-		CFigure* selectedFigure = pManager->GetSelectedFigure(index);
+		CFigure* selectedFigure = pManager->GetSelectedFigure();
 		if (selectedFigure != NULL) {
 			selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
 			selectedFigure->SetSelected(false);

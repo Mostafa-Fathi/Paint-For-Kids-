@@ -142,9 +142,6 @@
     <ClCompile Include="Actions\ActionAddSquare.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
-    <ClCompile Include="ActionResize.cpp">
-      <Filter>Action Classes</Filter>
-    </ClCompile>
     <ClCompile Include="Actions\ActionAddEllipse.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
@@ -164,6 +161,24 @@
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionBringFront.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionResize.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionLoad.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionSave.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="CMUgraphicsLib\colors.cpp">
+      <Filter>CMUgraphicsLib</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionExit.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
+    <ClCompile Include="Actions\ActionDelete.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
     <ClCompile Include="Actions\ActionFillColor.cpp">
@@ -256,9 +271,6 @@
     <ClInclude Include="Actions\ActionAddSquare.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
-    <ClInclude Include="ActionResize.h">
-      <Filter>Action Classes</Filter>
-    </ClInclude>
     <ClInclude Include="Actions\ActionAddEllipse.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
@@ -279,6 +291,21 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionBringFront.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionResize.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionLoad.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionSave.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionExit.h">
+      <Filter>Action Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions\ActionDelete.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionFillColor.h">

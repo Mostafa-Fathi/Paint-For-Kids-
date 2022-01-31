@@ -1,16 +1,17 @@
-#pragma once
-#include "Action.h"
+
 #include "../Figures/CFigure.h"
+#include "Action.h"
 #include "../ApplicationManager.h"
 
 
-
-class ActionSendToBack :
-	public Action
+class ActionResize : public Action
 {
+	CFigure* Selected;
 public:
-	ActionSendToBack(ApplicationManager* pApp);
+	ActionResize(ApplicationManager* pApp);
+
 
 	//Add ellipse to the ApplicationManager
 	virtual void Execute();
 };
+

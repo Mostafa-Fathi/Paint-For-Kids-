@@ -1,8 +1,9 @@
 #include "ActionResize.h"
 
-ActionResize::ActionResize(ApplicationManager* pApp, CFigure* selected) :Action(pApp)
+ActionResize::ActionResize(ApplicationManager* pApp) :Action(pApp)
 {
-	Selected = selected;
+
+	Selected = pManager->GetSelectedFigure();
 }
 
 
@@ -11,7 +12,7 @@ void ActionResize::Execute()
 {
 	GUI* pOut = pManager->GetGUI();
 
-	
+
 	int x, y;
 	if (Selected != NULL)
 	{
@@ -19,9 +20,8 @@ void ActionResize::Execute()
 
 		ActionType pAct = pOut->MapInputToActionType(x, y);
 		if (pAct == HALF)
-		{ 
+		{
 			Selected->Resize(.5);
-
 		}
 		else if (pAct == QUARTER)
 		{
@@ -41,8 +41,6 @@ void ActionResize::Execute()
 
 			return;
 		}
-		pOut->ClearDrawArea();
-
 	}
 	else
 	pOut->PrintMessage("Firstly, Select a fig");

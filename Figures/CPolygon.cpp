@@ -1,4 +1,5 @@
 #include "CPolygon.h"
+#include <fstream>
 
 CPolygon::CPolygon(Point P1, int len, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
@@ -8,6 +9,10 @@ CPolygon::CPolygon(Point P1, int len, GfxInfo FigureGfxInfo) :CFigure(FigureGfxI
 	Center.y = TopLeftCorner.y + length / 2;
 }
 
+CPolygon::CPolygon()
+{
+
+}
 
 void CPolygon::DrawMe(GUI* pGUI) const
 {
@@ -61,5 +66,56 @@ string CPolygon::GetDetails() const {
 }
 void CPolygon::Resize(float factor)
 {
-	//resize code here
+	
+	length = length * factor;
+
+	TopLeftCorner.x = Center.x - (length / 2);
+	TopLeftCorner.y = Center.y - (length / 2);
+
+	
+}
+
+
+
+/// Save Square ///////////////////////////////////////
+void CPolygon::Save(ofstream& OutFile) {
+	color figCol;
+	if (this->IsSelected()) {
+		figCol = this->FigGfxInfo.PrevDrawClr;
+	}
+	else {
+		figCol = this->FigGfxInfo.DrawClr;
+	}
+	OutFile << "POLY" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(figCol) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
+}
+
+
+
+void CPolygon::Load(ifstream& fin)
+{
+	string draw, fill;
+	bool is_fill = false;
+	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
+		>> length >> draw >> fill;
+
+	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	{
+		is_fill = true;
+		FigGfxInfo.FillClr = ConvertToColor(fill);
+	}
+
+	FigGfxInfo.DrawClr = ConvertToColor(draw);
+	FigGfxInfo.isFilled = is_fill;
+	FigGfxInfo.BorderWdth = 3;
+	Selected = false;
+
+	Center.x = TopLeftCorner.x + length / 2;
+	Center.y = TopLeftCorner.y + length / 2;
 }

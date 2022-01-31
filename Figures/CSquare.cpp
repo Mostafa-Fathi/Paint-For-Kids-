@@ -1,9 +1,15 @@
 #include "CSquare.h"
+#include <fstream>
 
 CSquare::CSquare(Point P1, int len, GfxInfo FigureGfxInfo):CFigure(FigureGfxInfo)
 {
 	TopLeftCorner = P1;
 	length = len;
+}
+
+CSquare::CSquare()
+{
+
 }
 	
 
@@ -12,6 +18,7 @@ void CSquare::DrawMe(GUI* pGUI) const
 	//Call Output::DrawRect to draw a Square on the screen	
 	pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
 }
+
 
 bool CSquare::HasPoint(int x, int y) const {
 	if (x >= TopLeftCorner.x && x <= TopLeftCorner.x + length &&
@@ -41,3 +48,45 @@ void CSquare::Resize(float factor)
 	TopLeftCorner.y = center.y - (length / 2);
 
 }
+
+
+/// Save Square ///////////////////////////////////////
+void CSquare::Save(ofstream& OutFile) {
+	color figCol;
+	if (this->IsSelected()) {
+		figCol = this->FigGfxInfo.PrevDrawClr;
+	}
+	else {
+		figCol = this->FigGfxInfo.DrawClr;
+	}
+	OutFile << "SQR" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(figCol) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
+}
+
+
+void CSquare::Load(ifstream & fin)
+{
+	string draw, fill;
+	bool is_fill = false;
+	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
+		>> length >> draw >> fill;
+
+	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	{
+		is_fill = true;
+		FigGfxInfo.FillClr = ConvertToColor(fill);
+	}
+
+	FigGfxInfo.DrawClr = ConvertToColor(draw);
+	FigGfxInfo.isFilled = is_fill;
+	FigGfxInfo.BorderWdth = 3;
+	Selected = false;
+	
+}
+

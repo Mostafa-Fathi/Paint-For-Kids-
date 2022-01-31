@@ -1,4 +1,5 @@
 #include "GUI.h"
+#include <iostream>
 
 //constructor make necessary initializations
 GUI::GUI()
@@ -55,17 +56,20 @@ string GUI::GetSrting() const
 {
 	string Label;
 	char Key;
-	while(1)
+	while (1)
 	{
 		pWind->WaitKeyPress(Key);
-		if(Key == 27 )	//ESCAPE key is pressed
+		if (Key == 27)	//ESCAPE key is pressed
+		{
+			PrintMessage("The Save action is cancelled");
 			return "";	//returns nothing as user has cancelled label
-		if(Key == 13 )	//ENTER key is pressed
+		}
+		if (Key == 13 && !Label.empty())	//ENTER key is pressed
 			return Label;
-		if(Key == 8 )	//BackSpace is pressed
-			Label.resize(Label.size() -1 );			
+		if (Key == 8 && Label.size() > 0)	//BackSpace is pressed
+			Label.resize(Label.size() - 1);
 		else
-			Label+= Key;
+			Label += Key;
 		PrintMessage(Label);
 	}
 }
@@ -100,7 +104,12 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_DRAW_COLOR: return DRAW_COLOR;
 			case ITM_FILL_COLOR: return FILL_COLOR;
 			case ITM_SEND_TO_BACK: return SEND_BACK;
-			case ITM_BRING_TO_FORWARED: return BRING_FRONT; 
+			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
+			case ITM_SAVE: return SAVE;
+			case ITM_DEL:return DEL;
+			case ITM_LOAD: return LOAD;
+
+			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
@@ -132,7 +141,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_HALF: return HALF;
 			case ITM_DOUBLE: return DOUBLED;
 			case ITM_QUADRUPLE: return QUADRUPLE;
-			case ITM_BACK2:return BACK;
+			case ITM_BACK2: return BACK;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -272,6 +281,9 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 
@@ -385,7 +397,23 @@ void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
 }
 //////////////////////////////////////////////////////////////////////////////////////////
+void GUI::setCrntDrawColor(color Draw) const	//get current drwawing color
+{
+	UI.DrawColor = Draw;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 
+void GUI::setCrntFillColor(color Fill) const	//get current filling color
+{
+	UI.FillColor = Fill;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+
+void GUI::setBkGrndColor(color BKColor) const		//get current pen width
+{
+	UI.BkGrndColor = BKColor;
+}
+//////////////////////////////////////////////////////////////////////////////////////////
 color GUI::getCrntDrawColor() const	//get current drwawing color
 {	
 	return UI.DrawColor; 
@@ -401,6 +429,9 @@ int GUI::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	
 
 }
+
+
+
 
 //======================================================================================//
 //								Figures Drawing Functions								//
@@ -426,6 +457,8 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 		style = FRAME;
 
 	pWind->DrawRectangle(P1.x, P1.y, P1.x +length, P1.y+length, style);
+	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
+
 }
 //Draw ellipse  
 void GUI::DrawEllipse(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const

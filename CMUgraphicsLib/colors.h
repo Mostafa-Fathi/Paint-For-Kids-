@@ -2,11 +2,11 @@
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
-
 #ifndef COLORS_H
 #define COLORS_H
 
 #include "version.h"
+
 
 class color {
 
@@ -22,6 +22,8 @@ class color {
     unsigned char ucRed;
     unsigned char ucGreen;
     unsigned char ucBlue;
+
+    // -------------remember add all used colors-----------------
 
 };
 
