@@ -247,3 +247,26 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 	else
 		return BLACK;
 }
+
+void ApplicationManager::LoadTest()
+{
+	if (FigCount > 0)
+	{
+		int returnedValue = MessageBox(NULL, "Do U Want To Save Current Shapes", "Load", MB_ICONQUESTION | MB_OKCANCEL);
+		if (returnedValue == IDOK)
+		{
+			ActionSave ActionS(this, getFigCount());
+			ActionS.Execute();
+		}
+		ClearFigList();
+		pGUI->ClearDrawArea();
+	}
+}
+void ApplicationManager::ClearFigList()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+}

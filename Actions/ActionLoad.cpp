@@ -6,6 +6,7 @@
 #include <commdlg.h>
 #include <iostream>
 #include "ActionAddSquare.h"
+#include "ActionSave.h"
 #include "..\Figures\CSquare.h"
 #include "..\Figures\CPolygon.h"
 #include "..\Figures\CEllipse.h"
@@ -22,43 +23,32 @@ ActionLoad::ActionLoad(ApplicationManager* aApp) : Action(aApp)
 void ActionLoad::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	int figCounts = pManager->getFigCount();
-	if (figCounts > 0)
-	{
-		int returnedValue = MessageBox(NULL, "Do U Want To Save Current Shapes", "Load", MB_ICONQUESTION | MB_OKCANCEL);
-		if (returnedValue == IDOK)
-		{
-			// call saveAll function -----------remeber add it to have many errors :(   ----------------
-			pGUI->PrintMessage("saved");
-		}
-		else if (returnedValue == IDCANCEL)
-		{
-			pGUI->PrintMessage("not saved");
-		}
-		// clean window
-		////// delete here -------------------remeber it ---------------------------
-	}
-
-	//load file
+	pManager->LoadTest();
+	 
+	//load file 
 	OPENFILENAME ofn;
 	char file_name[100];
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = file_name;
-	ofn.lpstrFile[0] = '\0';
+	ofn.lpstrFile[0] = '\0'; 
 	ofn.nMaxFile = 100;
-	//type of files
 	ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0";
+	ofn.Flags = OFN_NOCHANGEDIR;
 
 	if (GetOpenFileName(&ofn))
 	{
 		string draw, fill, bg, figType;
 		int numberOfsapes;
-		pGUI->PrintMessage("load");
-		//display file
 		ifstream file = openFile(ofn.lpstrFile);
-		
+
+		if (file.is_open()== false)
+		{
+			pGUI->PrintMessage("not loaded");
+		}
+		pGUI->PrintMessage("loaded");
+
 		file >> draw >> fill >> bg;
 		pGUI->setCrntDrawColor(pManager->ConvertToColor(draw));
 		pGUI->setCrntFillColor(pManager->ConvertToColor(fill));
@@ -87,13 +77,7 @@ void ActionLoad::Execute()
 			Figure->Load(file);
 			pManager->AddFigure(Figure);
 		}
-
 	}
-	else
-	{
-		pGUI->PrintMessage("not loaded");
-	}
-	
 }
 
 
@@ -101,7 +85,6 @@ ifstream openFile(char* path)
 {
 	ifstream file;
 	string line;
-	int number_of_lines = 0;
 	file.open(path);
 	return file;
 }
