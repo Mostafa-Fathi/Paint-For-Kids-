@@ -11,12 +11,14 @@
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionExit.h"
 #include <iostream>
+#include "Actions/ActionFillColor.h"
+#include "Actions/ActionDrawColor.h"
 
 
+ 
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-	
 	//Create Input and output
 	pGUI = new GUI;	
 	
@@ -88,6 +90,14 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionResize(this);
 			break;
 
+		case DRAW_COLOR:
+			newAct = new ActionDrawColor(this);
+			break;
+
+		case FILL_COLOR:
+			newAct = new ActionFillColor(this); 
+			break;
+
 		case SEND_BACK:
 			newAct = new ActionSendToBack(this);
 			break;
@@ -102,6 +112,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionLoad(this);
 			break;
 		case DEL:
+
 			newAct= new ActionDelete(this);
 			break;
 		case EXIT:
@@ -304,6 +315,7 @@ void ApplicationManager::SendSelectedFigBack() {
 }
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();
+
 	if (Selected != NULL)
 	{
 		int Index = Selected->ID - 1;

@@ -98,8 +98,11 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
 			case ITM_HEX: return DRAW_HEX;
+
 			case ITM_EXIT: return EXIT;	
 			case ITM_RESIZE: return RESIZE;
+			case ITM_DRAW_COLOR: return DRAW_COLOR;
+			case ITM_FILL_COLOR: return FILL_COLOR;
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
 			case ITM_SAVE: return SAVE;
@@ -139,6 +142,70 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_DOUBLE: return DOUBLED;
 			case ITM_QUADRUPLE: return QUADRUPLE;
 			case ITM_BACK2: return BACK;
+
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+
+		//[3] User clicks on the status bar
+		return STATUS;
+	}
+	if (UI.InterfaceMode == MODE_DRAWCOLOR)	//GUI in the DRAW mode
+	{
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+
+			case ITM_DORANGE: return DRAW_ORANGE;
+			case ITM_DRED: return DRAW_RED;
+			case ITM_DBLUE: return DRAW_BLUE;
+			case ITM_DGREEN: return DRAW_GREEN;
+
+			default: return DRAW_RED;//  EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+
+		//[3] User clicks on the status bar
+		return STATUS;
+	}
+	if (UI.InterfaceMode == MODE_FILLCOLOR)	//GUI in the DRAW mode
+	{
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+
+			case ITM_EMPTY: return EMPTYFILL;
+			case ITM_RED: return REDFILL;
+			case ITM_BLUE: return BLUEFILL;
+			case ITM_GREEN: return GREENFILL;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -207,12 +274,16 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpg";
+	MenuItemImages[ITM_FILL_COLOR] = "images\\MenuItems\\fill.JPG";
+	MenuItemImages[ITM_DRAW_COLOR] = "images\\MenuItems\\brush.JPG";
+
+
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
-	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 
@@ -238,12 +309,14 @@ void GUI::CreateSizeBar() const
 	UI.InterfaceMode = MODE_RESIZE;
 
 	string MenuItemImages[SIZE_ITM_COUNT];
+	
 	MenuItemImages[ITM_QUARTER] = "images\\MenuItems\\one-quarter.jpg";
 	MenuItemImages[ITM_HALF] = "images\\MenuItems\\one-half.jpg";
 	MenuItemImages[ITM_DOUBLE] = "images\\MenuItems\\2x.jpg";
 	MenuItemImages[ITM_QUADRUPLE] = "images\\MenuItems\\4x.jpg";
 	MenuItemImages[ITM_BACK2] = "images\\MenuItems\\Menu_Back_2.jpg";
-
+	
+	 
 	///TODO: write code to create Color mode menu
 	for (int i = 0; i < SIZE_ITM_COUNT; i++)
 		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth ,0, UI.MenuItemWidth, UI.ToolBarHeight);
@@ -252,7 +325,52 @@ void GUI::CreateSizeBar() const
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+void GUI::CreateDrawColorBar() const
+{
+	CreateToolBar();
+	CreateStatusBar(); // clear the prev tool bar
+	UI.InterfaceMode = MODE_DRAWCOLOR;
 
+	string MenuItemImages[Draw_Color_ITM_COUNT];
+	 
+	MenuItemImages[ITM_DORANGE] = "images\\MenuItems\\drawOrange.JPG";
+	MenuItemImages[ITM_DRED] = "images\\MenuItems\\drawRed.JPG";
+	MenuItemImages[ITM_DGREEN] = "images\\MenuItems\\drawGreen.JPG";
+	MenuItemImages[ITM_DBLUE] = "images\\MenuItems\\drawBlue.JPG";
+
+
+	///TODO: write code to create Color mode menu
+	for (int i = 0; i < Draw_Color_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+//mb+
+void GUI::CreateFillColorBar() const
+{
+	CreateToolBar();
+	CreateStatusBar(); // clear the prev tool bar
+	UI.InterfaceMode = MODE_FILLCOLOR;
+
+	string MenuFillItemImages[Fill_Color_ITM_COUNT];
+ 
+	MenuFillItemImages[ITM_EMPTY] = "images\\MenuItems\\Empty.jpg";
+	MenuFillItemImages[ITM_RED] = "images\\MenuItems\\Menu_Red.JPG";
+	MenuFillItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.JPG";
+	MenuFillItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
+	 
+
+	///TODO: write code to create Color mode menu
+	for (int i = 0; i < Fill_Color_ITM_COUNT; i++)
+		pWind->DrawImage(MenuFillItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+//mb-
 void GUI::CreatePlayToolBar() const
 {
 	CreateToolBar();
@@ -297,15 +415,20 @@ void GUI::setBkGrndColor(color BKColor) const		//get current pen width
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 color GUI::getCrntDrawColor() const	//get current drwawing color
-{	return UI.DrawColor;	}
+{	
+	return UI.DrawColor; 
+}
 //////////////////////////////////////////////////////////////////////////////////////////
-
 color GUI::getCrntFillColor() const	//get current filling color
-{	return UI.FillColor;	}
+{	return UI.FillColor;	 
+
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 	
 int GUI::getCrntPenWidth() const		//get current pen width
-{	return UI.PenWidth;	}
+{	return UI.PenWidth;	
+
+}
 
 
 
@@ -333,7 +456,6 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 	else	
 		style = FRAME;
 
-	
 	pWind->DrawRectangle(P1.x, P1.y, P1.x +length, P1.y+length, style);
 	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
 

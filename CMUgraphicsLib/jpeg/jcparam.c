@@ -59,7 +59,14 @@ GLOBAL(void)
 jpeg_set_linear_quality (j_compress_ptr cinfo, int scale_factor,
 			 boolean force_baseline)
 /* Set or change the 'quality' (quantization) setting, using default tables
- * and a straight percentage-scaling quality scale.  In most cases it's better
+ * and a straight percentage-scaling quality scale.  In most 
+ 
+ 
+ 
+ 
+ 
+ 
+ s it's better
  * to use jpeg_set_quality (below); this entry point is provided for
  * applications that insist on a linear percentage scaling.
  */
