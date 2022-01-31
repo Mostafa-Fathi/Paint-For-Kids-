@@ -26,6 +26,7 @@ ApplicationManager::ApplicationManager()
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
 }
+
 int ApplicationManager::getFigCount() {
 	return FigCount;
 }
@@ -95,7 +96,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionBringFront(this);
 			break;
 		case SAVE:
-			newAct = new ActionSave(this, FigCount);
+			newAct = new ActionSave(this/*, FigCount*/);
 			break;
 		case LOAD:
 			newAct = new ActionLoad(this);
@@ -171,13 +172,6 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 	}
 	return NULL;
 }
-////////////////////////////////////////////////////////////////////////////////////
-void ApplicationManager::CleanFigureList()
-{	
-	for (int i = 0; i < FigCount; i++) {
-		delete FigList[i];
-	}
-}
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -247,7 +241,7 @@ void ApplicationManager::LoadTest()
 		int returnedValue = MessageBox(NULL, "Do U Want To Save Current Shapes", "Load", MB_ICONQUESTION | MB_OKCANCEL);
 		if (returnedValue == IDOK)
 		{
-			ActionSave ActionS(this, getFigCount());
+			ActionSave ActionS(this/*, getFigCount()*/);
 			ActionS.Execute();
 		}
 		ClearFigList();
@@ -313,7 +307,6 @@ void ApplicationManager::DeleteSelectedFig() {
 	if (Selected != NULL)
 	{
 		int Index = Selected->ID - 1;
-
 		for (int i = Index; i < FigCount - 1; i++) {
 			cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
@@ -323,6 +316,8 @@ void ApplicationManager::DeleteSelectedFig() {
 		}
 		
 		FigCount--;
+		FigList[FigCount] = NULL;
+		
 		delete Selected;
 		pGUI->ClearStatusBar();
 	}

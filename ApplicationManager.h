@@ -44,13 +44,12 @@ public:
 	CFigure* GetFigure(int x, int y) const;
 	//Search for the selected figure
 	CFigure* GetSelectedFigure();
-	void CleanFigureList();
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
 	void UpdateInterface() const;	//Redraws all the drawing window	
 	int getFigCount();
-	int getFigMaxCount();
-	CFigure** getFigList();
+	//int getFigMaxCount();
+	//CFigure** getFigList();
 	virtual void LoadTest();
 	void ClearFigList();
 

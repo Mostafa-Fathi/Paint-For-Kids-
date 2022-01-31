@@ -5,8 +5,8 @@
 #include <fstream>
 
 
-ActionSave::ActionSave(ApplicationManager* pApp,int Figures_Count) :Action(pApp) {
-	FiguresCount = Figures_Count;
+ActionSave::ActionSave(ApplicationManager* pApp/*,int Figures_Count*/) :Action(pApp) {
+	/*FiguresCount = Figures_Count;*/
 	FileName = "";
 }
 
@@ -23,7 +23,7 @@ void ActionSave::Execute() {
 	if (!FileName.empty()) {
 		ofstream OutFile;
 		OutFile.open(FileName + ".txt");
-		OutFile << pManager->ConvertToString(UI.DrawColor) << "\t" << pManager->ConvertToString(UI.FillColor) << "\t" << pManager->ConvertToString(UI.BkGrndColor) << "\n" << FiguresCount << "\n";
+		OutFile << pManager->ConvertToString(UI.DrawColor) << "\t" << pManager->ConvertToString(UI.FillColor) << "\t" << pManager->ConvertToString(UI.BkGrndColor) << "\n" << pManager->getFigCount()/* FiguresCount*/ << "\n";
 		pManager->SaveAll(OutFile);
 		pGUI->PrintMessage("File is saved successfully");
 		OutFile.close();
