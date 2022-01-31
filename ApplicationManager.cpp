@@ -100,6 +100,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			newAct = new ActionLoad(this);
 			break;
 		case DEL:
+
 			newAct= new ActionDelete(this);
 			break;
 		case EXIT:
@@ -304,6 +305,7 @@ void ApplicationManager::SendSelectedFigBack() {
 }
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();
+
 	if (Selected != NULL)
 	{
 		int Index = Selected->ID - 1;
