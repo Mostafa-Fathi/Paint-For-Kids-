@@ -3,12 +3,13 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
-#include"Actions/ActionResize.h"
+#include "Actions/ActionResize.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSave.h"
 #include "Actions/ActionDelete.h"
+#include "Actions/ActionExit.h"
 #include <iostream>
 
 

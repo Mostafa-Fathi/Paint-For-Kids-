@@ -61,8 +61,15 @@ void CEllipse::Resize(float factor)
 
 
 void CEllipse::Save(ofstream& OutFile) {
+	color figCol;
+	if (this->IsSelected()) {
+		figCol = this->FigGfxInfo.PrevDrawClr;
+	}
+	else {
+		figCol = this->FigGfxInfo.DrawClr;
+	}
 	OutFile << "ELPS" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
-		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(figCol) << "\t";
 	if (this->FigGfxInfo.isFilled == true) {
 		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
 	}
