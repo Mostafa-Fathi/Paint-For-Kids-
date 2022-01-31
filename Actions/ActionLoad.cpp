@@ -32,7 +32,7 @@ void ActionLoad::Execute()
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = file_name;
-	ofn.lpstrFile[0] = '\0';
+	ofn.lpstrFile[0] = '\0'; 
 	ofn.nMaxFile = 100;
 	ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0";
 	ofn.Flags = OFN_NOCHANGEDIR;
