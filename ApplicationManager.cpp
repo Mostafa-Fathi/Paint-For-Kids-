@@ -8,6 +8,7 @@
 #include "Actions/ActionBringFront.h"
 #include "Actions/ActionLoad.h"
 #include "Actions/ActionSave.h"
+#include "Actions/ActionDelete.h"
 #include <iostream>
 
 
@@ -27,12 +28,7 @@ ApplicationManager::ApplicationManager()
 int ApplicationManager::getFigCount() {
 	return FigCount;
 }
-int ApplicationManager::getFigMaxCount() {
-	return MaxFigCount;
-}
-CFigure** ApplicationManager::getFigList() {
-	return FigList;
-}
+
 
 
 void ApplicationManager::Run()
@@ -100,11 +96,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case SAVE:
 			newAct = new ActionSave(this, FigCount);
 			break;
-
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
-
+		case DEL:
+			newAct= new ActionDelete(this);
+			break;
 		case EXIT:
 			///create ExitAction here
 			break;
@@ -258,4 +255,72 @@ void ApplicationManager::ClearFigList()
 		FigList[i] = NULL;
 	}
 	FigCount = 0;
+}
+void ApplicationManager::BringSelectedFigFront() {
+	CFigure* Selected = GetSelectedFigure();
+	if (Selected != NULL)
+	{
+		int Index = Selected->ID - 1;
+
+		for (int i = Index; i < FigCount - 1; i++) {
+			cout << "\n fig count is =" << FigCount - 1;
+			FigList[i] = FigList[i + 1];
+			FigList[i]->ID = i + 1;
+
+			cout << "\n id of fig is :" << FigList[i]->ID;
+		}
+		Selected->ID = FigCount;
+		FigList[FigCount - 1] = Selected;
+		pGUI->PrintMessage(Selected->GetDetails());
+
+	}	
+	else
+		pGUI->PrintMessage("Firstly, Select a fig");
+
+}
+void ApplicationManager::SendSelectedFigBack() {
+
+	CFigure* Selected = GetSelectedFigure();
+
+	if (Selected != NULL)
+	{
+		int Index = Selected->ID - 1;
+
+		for (int i = Index; i > 0; i--) {
+
+			FigList[i] = FigList[i - 1];
+			FigList[i]->ID = i + 1;
+
+			cout << "\n id of fig is :" << FigList[i]->ID;
+		}
+		Selected->ID = 1;
+		FigList[0] = Selected;
+		pGUI->PrintMessage(Selected->GetDetails());
+
+	}
+	else
+		pGUI->PrintMessage("Firstly, Select a fig");
+
+}
+void ApplicationManager::DeleteSelectedFig() {
+	CFigure* Selected = GetSelectedFigure();
+	if (Selected != NULL)
+	{
+		int Index = Selected->ID - 1;
+
+		for (int i = Index; i < FigCount - 1; i++) {
+			cout << "\n fig count is =" << FigCount - 1;
+			FigList[i] = FigList[i + 1];
+			FigList[i]->ID = i + 1;
+
+			cout << "\n id of fig is :" << FigList[i]->ID;
+		}
+		
+		FigCount--;
+		delete Selected;
+		pGUI->ClearStatusBar();
+	}
+	else
+		pGUI->PrintMessage("Firstly, Select a fig");
+
 }

@@ -53,6 +53,12 @@ public:
 	virtual void LoadTest();
 	void ClearFigList();
 
+	void BringSelectedFigFront();
+
+	void SendSelectedFigBack();
+
+	void DeleteSelectedFig();
+
 
 	// -- Convert Colors to string and string to colors
 	static string ConvertToString(color _color);   //Convert from Color Type to String Type

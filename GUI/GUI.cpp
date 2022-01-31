@@ -103,6 +103,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
 			case ITM_SAVE: return SAVE;
+			case ITM_DEL:return DEL;
 			case ITM_LOAD: return LOAD;
 
 			
@@ -211,6 +212,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 
