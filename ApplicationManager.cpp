@@ -103,12 +103,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case LOAD:
 			newAct = new ActionLoad(this);
-			cout << "\n here " << FigCount;
-			for (int i = 0; i < FigCount; i++) {
-				cout << "\n addres is " << FigList[i];
-				cout << "\n" << FigList[i]->ID;
-			} 
 			break;
+
 		case EXIT:
 			///create ExitAction here
 			break;
