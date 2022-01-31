@@ -3,12 +3,12 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
-#include "Actions\ActionResize.h"
-#include "Actions\ActionSendToBack.h"
-#include "Actions\ActionBringFront.h"
-#include "Actions\ActionLoad.h"
-#include "Actions\ActionExit.h"
-#include "Actions\ActionSave.h"
+#include"Actions/ActionResize.h"
+#include "Actions/ActionSendToBack.h"
+#include "Actions/ActionBringFront.h"
+#include "Actions/ActionLoad.h"
+#include "Actions/ActionSave.h"
+#include "Actions/ActionDelete.h"
 #include <iostream>
 
 
@@ -28,12 +28,7 @@ ApplicationManager::ApplicationManager()
 int ApplicationManager::getFigCount() {
 	return FigCount;
 }
-int ApplicationManager::getFigMaxCount() {
-	return MaxFigCount;
-}
-CFigure** ApplicationManager::getFigList() {
-	return FigList;
-}
+
 
 
 void ApplicationManager::Run()
@@ -101,14 +96,11 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case SAVE:
 			newAct = new ActionSave(this, FigCount);
 			break;
-
 		case LOAD:
 			newAct = new ActionLoad(this);
-			cout << "\n here " << FigCount;
-			for (int i = 0; i < FigCount; i++) {
-				cout << "\n addres is " << FigList[i];
-				cout << "\n" << FigList[i]->ID;
-			} 
+			break;
+		case DEL:
+			newAct= new ActionDelete(this);
 			break;
 		case EXIT:
 			newAct = new ActionExit(this);
@@ -245,4 +237,95 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 		return TURQUOISE;
 	else
 		return BLACK;
+}
+
+void ApplicationManager::LoadTest()
+{
+	if (FigCount > 0)
+	{
+		int returnedValue = MessageBox(NULL, "Do U Want To Save Current Shapes", "Load", MB_ICONQUESTION | MB_OKCANCEL);
+		if (returnedValue == IDOK)
+		{
+			ActionSave ActionS(this, getFigCount());
+			ActionS.Execute();
+		}
+		ClearFigList();
+		pGUI->ClearDrawArea();
+	}
+}
+void ApplicationManager::ClearFigList()
+{
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i] = NULL;
+	}
+	FigCount = 0;
+}
+void ApplicationManager::BringSelectedFigFront() {
+	CFigure* Selected = GetSelectedFigure();
+	if (Selected != NULL)
+	{
+		int Index = Selected->ID - 1;
+
+		for (int i = Index; i < FigCount - 1; i++) {
+			cout << "\n fig count is =" << FigCount - 1;
+			FigList[i] = FigList[i + 1];
+			FigList[i]->ID = i + 1;
+
+			cout << "\n id of fig is :" << FigList[i]->ID;
+		}
+		Selected->ID = FigCount;
+		FigList[FigCount - 1] = Selected;
+		pGUI->PrintMessage(Selected->GetDetails());
+
+	}	
+	else
+		pGUI->PrintMessage("Firstly, Select a fig");
+
+}
+void ApplicationManager::SendSelectedFigBack() {
+
+	CFigure* Selected = GetSelectedFigure();
+
+	if (Selected != NULL)
+	{
+		int Index = Selected->ID - 1;
+
+		for (int i = Index; i > 0; i--) {
+
+			FigList[i] = FigList[i - 1];
+			FigList[i]->ID = i + 1;
+
+			cout << "\n id of fig is :" << FigList[i]->ID;
+		}
+		Selected->ID = 1;
+		FigList[0] = Selected;
+		pGUI->PrintMessage(Selected->GetDetails());
+
+	}
+	else
+		pGUI->PrintMessage("Firstly, Select a fig");
+
+}
+void ApplicationManager::DeleteSelectedFig() {
+	CFigure* Selected = GetSelectedFigure();
+	if (Selected != NULL)
+	{
+		int Index = Selected->ID - 1;
+
+		for (int i = Index; i < FigCount - 1; i++) {
+			cout << "\n fig count is =" << FigCount - 1;
+			FigList[i] = FigList[i + 1];
+			FigList[i]->ID = i + 1;
+
+			cout << "\n id of fig is :" << FigList[i]->ID;
+		}
+		
+		FigCount--;
+		delete Selected;
+		pGUI->ClearStatusBar();
+	}
+	else
+		pGUI->PrintMessage("Firstly, Select a fig");
+
 }

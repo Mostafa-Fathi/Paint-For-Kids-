@@ -27,6 +27,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_BRING_TO_FORWARED,
 	ITM_SAVE,
 	ITM_LOAD,
+	ITM_DEL,
 	ITM_EXIT,//Exit item
 	DRAW_ITM_COUNT
 
@@ -39,7 +40,6 @@ enum SizeMenuItem // The items of colors
 	ITM_HALF,
 	ITM_DOUBLE,
 	ITM_QUADRUPLE,
-
 	ITM_BACK2,
 
 	SIZE_ITM_COUNT

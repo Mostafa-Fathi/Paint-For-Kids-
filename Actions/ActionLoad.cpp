@@ -6,9 +6,13 @@
 #include <commdlg.h>
 #include <iostream>
 #include "ActionAddSquare.h"
+#include "ActionSave.h"
 #include "..\Figures\CSquare.h"
+#include "..\Figures\CPolygon.h"
+#include "..\Figures\CEllipse.h"
 #include <iostream>
 #include <Windows.h>
+#include <string.h>
 ifstream openFile(char* path);
 
 ActionLoad::ActionLoad(ApplicationManager* aApp) : Action(aApp)
@@ -19,137 +23,61 @@ ActionLoad::ActionLoad(ApplicationManager* aApp) : Action(aApp)
 void ActionLoad::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
-	int figCounts = pManager->getFigCount();
-	if (figCounts > 0)
-	{
-		int returnedValue = MessageBox(NULL, "Do U Want To Save Current Shapes", "Load", MB_ICONQUESTION | MB_OKCANCEL);
-		//	OK--> return one  //
-		//  Cancel --> return two  //
-		if (returnedValue == IDOK)
-		{
-			// call saveAll function -----------remeber add it to have many errors :(   ----------------
-			// call deleteAll function -----------remeber add it to have many errors :(   ----------------
-			pGUI->PrintMessage("saved");
-		}
-		else if (returnedValue == IDCANCEL)
-		{
-			// do nothing
-			// just test         ----------remeber delete it :)------
-			pGUI->PrintMessage("not saved");
-		}
-		//call save here -----------------------------------------
-	}
-
-	// clean window
-	////// delete here -------------------remeber it ---------------------------
-	//load file
+	pManager->LoadTest();
+	 
+	//load file 
 	OPENFILENAME ofn;
 	char file_name[100];
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = file_name;
-	ofn.lpstrFile[0] = '\0';
+	ofn.lpstrFile[0] = '\0'; 
 	ofn.nMaxFile = 100;
-	//type of files
 	ofn.lpstrFilter = "Text Files (*.txt)\0*.txt\0";
+	ofn.Flags = OFN_NOCHANGEDIR;
 
 	if (GetOpenFileName(&ofn))
 	{
-		string line;
+		string draw, fill, bg, figType;
 		int numberOfsapes;
-		pGUI->PrintMessage("load");
-		//display file
 		ifstream file = openFile(ofn.lpstrFile);
-		int i = 0;
-		char type;
-		string shapeData = line;
-		while (getline(file, line))
+
+		if (file.is_open()== false)
 		{
-			i++;
-			shapeData = line;
-			if (i == 1)
-			{
-				char* chLine = const_cast<char*>(line.c_str());
-				char* token = strtok(chLine, "\t");
-				int k = 0;
-				string windColors[3];
-				while (token != NULL)
-				{
-					windColors[k] = token;
-					token = strtok(NULL, "\t");
-					k++;
-				}
-				color windowColor;
-				pGUI->setCrntDrawColor(pManager->ConvertToColor(windColors[0]));
-				pGUI->setCrntFillColor(pManager->ConvertToColor(windColors[1]));
-				pGUI->setBkGrndColor(pManager->ConvertToColor(windColors[2]));
-			}
-			if (i == 2)
-			{
-				numberOfsapes = std::stoi(line);
-				cout << numberOfsapes;
-
-				for (int x = 0; x < numberOfsapes; x++)
-				{
-
-					while (getline(file, line))
-					{
-
-						int j = 0;
-						shapeData = line;
-
-						ofstream shapefile("data.txt");
-
-						char* cLine = const_cast<char*>(line.c_str());
-						//cout << c;
-						char* token = strtok(cLine, "\t");
-						while (token != NULL)
-						{
-							j++;
-							if (j == 1)
-							{
-								if (strcmp(token, "SQR") == 0)
-								{
-									type = 'S';
-									shapefile << shapeData << endl;
-									shapefile.close();
-
-								}
-							}
-							token = strtok(NULL, "\t");
-							break;
-
-						}
-						ifstream read = openFile("data.txt");
-
-						switch (type)
-						{
-						case 'S':
-							CFigure * C = new CSquare();
-							C->Load(read);
-							pManager->AddFigure(C);
-
-							// ---------remember---------//
-							// handle other shapes save here -----------------------------------------
-							// add load in others ---------------------------------------
-							// handle all used color
-						}
-						read.close();
-					}
-
-				}
-
-			}
+			pGUI->PrintMessage("not loaded");
 		}
-		file.close();
+		pGUI->PrintMessage("loaded");
 
-	}// end of line
-	else
-	{
-		pGUI->PrintMessage("not loaded");
+		file >> draw >> fill >> bg;
+		pGUI->setCrntDrawColor(pManager->ConvertToColor(draw));
+		pGUI->setCrntFillColor(pManager->ConvertToColor(fill));
+		pGUI->setBkGrndColor(pManager->ConvertToColor(bg));
+
+		file >> numberOfsapes;
+		CFigure* Figure;
+
+		for (int x = 0; x < numberOfsapes; x++)
+		{
+			file >> figType;
+			const char* figTypeC = figType.c_str();
+			if (strcmp(figTypeC, "SQR") == 0)
+			{
+				Figure = new CSquare;
+			}
+			else if (strcmp(figTypeC, "POLY") == 0)
+			{
+				Figure = new CPolygon;
+			}
+			else if (strcmp(figTypeC, "ELPS") == 0)
+			{
+				Figure = new CEllipse;
+			}
+
+			Figure->Load(file);
+			pManager->AddFigure(Figure);
+		}
 	}
-
 }
 
 
@@ -157,10 +85,6 @@ ifstream openFile(char* path)
 {
 	ifstream file;
 	string line;
-	int number_of_lines = 0;
 	file.open(path);
 	return file;
 }
-
-
-

@@ -51,7 +51,14 @@ public:
 	int getFigCount();
 	int getFigMaxCount();
 	CFigure** getFigList();
+	virtual void LoadTest();
+	void ClearFigList();
 
+	void BringSelectedFigFront();
+
+	void SendSelectedFigBack();
+
+	void DeleteSelectedFig();
 
 
 	// -- Convert Colors to string and string to colors

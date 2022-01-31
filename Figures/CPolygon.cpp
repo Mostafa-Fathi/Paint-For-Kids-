@@ -9,6 +9,10 @@ CPolygon::CPolygon(Point P1, int len, GfxInfo FigureGfxInfo) :CFigure(FigureGfxI
 	Center.y = TopLeftCorner.y + length / 2;
 }
 
+CPolygon::CPolygon()
+{
+
+}
 
 void CPolygon::DrawMe(GUI* pGUI) const
 {
@@ -89,4 +93,22 @@ void CPolygon::Save(ofstream& OutFile) {
 
 void CPolygon::Load(ifstream& fin)
 {
+	string draw, fill;
+	bool is_fill = false;
+	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
+		>> length >> draw >> fill;
+
+	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	{
+		is_fill = true;
+		FigGfxInfo.FillClr = ConvertToColor(fill);
+	}
+
+	FigGfxInfo.DrawClr = ConvertToColor(draw);
+	FigGfxInfo.isFilled = is_fill;
+	FigGfxInfo.BorderWdth = 3;
+	Selected = false;
+
+	Center.x = TopLeftCorner.x + length / 2;
+	Center.y = TopLeftCorner.y + length / 2;
 }

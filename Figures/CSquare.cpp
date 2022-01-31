@@ -20,7 +20,6 @@ void CSquare::DrawMe(GUI* pGUI) const
 }
 
 
-
 bool CSquare::HasPoint(int x, int y) const {
 	if (x >= TopLeftCorner.x && x <= TopLeftCorner.x + length &&
 		y >= TopLeftCorner.y && y <= TopLeftCorner.y + length)
@@ -66,46 +65,21 @@ void CSquare::Save(ofstream& OutFile) {
 
 void CSquare::Load(ifstream & fin)
 {
-	string line;
-	while (getline(fin, line))
-	{ 
-		int j = 0;
-		color Color, figureColor, fill;
-		bool is_fill = false;
-		char* cLine = const_cast<char*>(line.c_str());
-		string sqrData[7];
+	string draw, fill;
+	bool is_fill = false;
+	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
+		>> length >> draw >> fill;
 
-		char* token = strtok(cLine, "\t");
-		while (token != NULL)
-		{
-			sqrData[j] = token;
-			if (j == 6)
-			{
-				if (strcmp(token, "NO_FILL") != 0)
-				{
-					is_fill = true;
-					fill = this->ConvertToColor(sqrData[6]);
-				}
-			}
-			token = strtok(NULL, "\t");
-			j++;
-		}
-		
-		GfxInfo SqrGfxInfo;
-		SqrGfxInfo.isFilled = is_fill;
-		SqrGfxInfo.DrawClr = this->ConvertToColor(sqrData[5]);
-		SqrGfxInfo.FillClr = fill;
-		SqrGfxInfo.BorderWdth = 2;
-
-		Point topLeft;
-		topLeft.x = stoi(sqrData[2]);
-		topLeft.y = stoi(sqrData[3]);
-
-		this->TopLeftCorner = topLeft;
-		this->ID = stoi(sqrData[1]);
-		this->Selected = false;
-		this->FigGfxInfo = SqrGfxInfo;
-		this->length = stoi(sqrData[4]);
+	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	{
+		is_fill = true;
+		FigGfxInfo.FillClr = ConvertToColor(fill);
 	}
+
+	FigGfxInfo.DrawClr = ConvertToColor(draw);
+	FigGfxInfo.isFilled = is_fill;
+	FigGfxInfo.BorderWdth = 3;
+	Selected = false;
+	
 }
 

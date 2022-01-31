@@ -11,8 +11,11 @@ CEllipse::CEllipse(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfx
 	radiusY = Center.y - TopLeftCorner.y;
 }
 
+CEllipse::CEllipse()
+{
 
-/// Draw Me ///////////////////
+}
+
 void CEllipse::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawEllipse to draw an Ellipse on the screen	
@@ -38,7 +41,6 @@ string CEllipse::GetDetails() const {
 		+ " | area=" + to_string(3.14159265 * radiusX*radiusY);
 	return details;
 }
-
 
 void CEllipse::Resize(float factor)
 {
@@ -71,4 +73,24 @@ void CEllipse::Save(ofstream& OutFile) {
 
 void CEllipse::Load(ifstream& fin)
 {
+	string draw, fill;
+	bool is_fill = false;
+	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
+		>> BottomRightCorner.x >> BottomRightCorner.y >> draw >> fill;
+
+	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	{
+		is_fill = true;
+		FigGfxInfo.FillClr = ConvertToColor(fill);
+	}
+
+	FigGfxInfo.DrawClr = ConvertToColor(draw);
+	FigGfxInfo.isFilled = is_fill;
+	FigGfxInfo.BorderWdth = 3;
+	Selected = false;
+
+	Center.x = (TopLeftCorner.x + BottomRightCorner.x) / 2;
+	Center.y = (TopLeftCorner.y + BottomRightCorner.y) / 2;
+	radiusX = abs(TopLeftCorner.x - Center.x);
+	radiusY = abs(TopLeftCorner.y - Center.y);
 }

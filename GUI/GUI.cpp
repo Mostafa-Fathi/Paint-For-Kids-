@@ -103,6 +103,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
 			case ITM_SAVE: return SAVE;
+			case ITM_DEL:return DEL;
 			case ITM_LOAD: return LOAD;
 
 			
@@ -137,7 +138,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_HALF: return HALF;
 			case ITM_DOUBLE: return DOUBLED;
 			case ITM_QUADRUPLE: return QUADRUPLE;
-			case ITM_BACK2:return BACK;
+			case ITM_BACK2: return BACK;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -203,15 +204,16 @@ void GUI::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
-	MenuItemImages[ITM_SQUR] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Sqr.JPG";
-	MenuItemImages[ITM_ELPS] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Elps.jpg";
-	MenuItemImages[ITM_HEX] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Poly.jpg";
-	MenuItemImages[ITM_RESIZE] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Resize.jpg";
-	MenuItemImages[ITM_SEND_TO_BACK] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\sendToback.jpg";
-	MenuItemImages[ITM_BRING_TO_FORWARED] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\bringtoforward.jpg";	
-	MenuItemImages[ITM_LOAD] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Load.jpg";
-	MenuItemImages[ITM_SAVE] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\save.jpg";
-	MenuItemImages[ITM_EXIT] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Exit.jpg";
+	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
+	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpg";
+	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
+	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
+	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
+	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
+	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
+	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete.jpg";
+	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -236,11 +238,11 @@ void GUI::CreateSizeBar() const
 	UI.InterfaceMode = MODE_RESIZE;
 
 	string MenuItemImages[SIZE_ITM_COUNT];
-	MenuItemImages[ITM_QUARTER] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\one-quarter.jpg";
-	MenuItemImages[ITM_HALF] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\one-half.jpg";
-	MenuItemImages[ITM_DOUBLE] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\2x.jpg";
-	MenuItemImages[ITM_QUADRUPLE] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\4x.jpg";
-	MenuItemImages[ITM_BACK2] = "C:\\Users\\abdel\\source\\repos\\Paint-For-Kids-\\images\\MenuItems\\Menu_Back_2.jpg";
+	MenuItemImages[ITM_QUARTER] = "images\\MenuItems\\one-quarter.jpg";
+	MenuItemImages[ITM_HALF] = "images\\MenuItems\\one-half.jpg";
+	MenuItemImages[ITM_DOUBLE] = "images\\MenuItems\\2x.jpg";
+	MenuItemImages[ITM_QUADRUPLE] = "images\\MenuItems\\4x.jpg";
+	MenuItemImages[ITM_BACK2] = "images\\MenuItems\\Menu_Back_2.jpg";
 
 	///TODO: write code to create Color mode menu
 	for (int i = 0; i < SIZE_ITM_COUNT; i++)
