@@ -49,7 +49,21 @@ void CSquare::Resize(float factor)
 
 }
 
-void CSquare::Load(ifstream& fin)
+
+/// Save Square ///////////////////////////////////////
+void CSquare::Save(ofstream& OutFile) {
+	OutFile << "SQR" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
+}
+
+
+void CSquare::Load(ifstream & fin)
 {
 	string draw, fill;
 	bool is_fill = false;

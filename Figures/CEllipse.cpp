@@ -22,11 +22,17 @@ void CEllipse::DrawMe(GUI* pGUI) const
 	pGUI->DrawEllipse(TopLeftCorner, BottomRightCorner, FigGfxInfo, Selected);
 }
 
+
+
+
 bool CEllipse::HasPoint(int x, int y) const {
 	if (pow(x - Center.x, 2) / pow(radiusX, 2) + pow(y - Center.y, 2) / pow(radiusY, 2) <= 1) return true;
 
 	return false;
 }
+
+
+
 string CEllipse::GetDetails() const {
 	string details = "figure Id=" + to_string(ID)
 		+ " | center point(" + to_string(Center.x) + "," + to_string(Center.y)
@@ -41,12 +47,26 @@ void CEllipse::Resize(float factor)
 	//resize code here
 	int sgin = 1;
 	if (factor < 1) { sgin = -1; }
-	int vRadius = (BottomRightCorner.y- TopLeftCorner.y) / 2 * factor;
-	int hRadius = (BottomRightCorner.x- TopLeftCorner.x) / 2 * factor;
-	TopLeftCorner.x = Center.x - hRadius;
-	TopLeftCorner.y = Center.y - vRadius;
-	BottomRightCorner.x = Center.x + hRadius;
-	BottomRightCorner.y = Center.y + vRadius;
+	//int vRadius = (BottomRightCorner.y- TopLeftCorner.y) / 2 * factor;
+	//int hRadius = (BottomRightCorner.x- TopLeftCorner.x) / 2 * factor;
+	radiusX *= factor;
+	radiusY *= factor;
+	TopLeftCorner.x = Center.x - radiusX;
+	TopLeftCorner.y = Center.y - radiusY;
+	BottomRightCorner.x = Center.x + radiusX;
+	BottomRightCorner.y = Center.y + radiusY;
+}
+
+
+void CEllipse::Save(ofstream& OutFile) {
+	OutFile << "ELPS" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
+		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(this->FigGfxInfo.DrawClr) << "\t";
+	if (this->FigGfxInfo.isFilled == true) {
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+	}
+	else {
+		OutFile << "NO_FILL" << "\n";
+	}
 }
 
 void CEllipse::Load(ifstream& fin)

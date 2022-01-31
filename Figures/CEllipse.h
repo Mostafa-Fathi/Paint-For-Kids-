@@ -19,7 +19,8 @@ public:
 	virtual bool HasPoint(int x, int y) const;
 	virtual string GetDetails() const;
 	void Resize(float);
-	virtual void Load(ifstream& fin);
+	virtual void Save(ofstream& OutFile);
+	virtual void Load(ifstream & fin);
 };
 
 #endif

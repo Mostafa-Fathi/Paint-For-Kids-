@@ -8,10 +8,8 @@
 class ActionSendToBack :
 	public Action
 {
-	CFigure* Selected;
-	int Index;
 public:
-	ActionSendToBack(ApplicationManager* pApp, CFigure*,int index);
+	ActionSendToBack(ApplicationManager* pApp);
 
 	//Add ellipse to the ApplicationManager
 	virtual void Execute();

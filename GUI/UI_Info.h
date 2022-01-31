@@ -25,6 +25,7 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_RESIZE,		//resize menu
 	ITM_SEND_TO_BACK,
 	ITM_BRING_TO_FORWARED,
+	ITM_SAVE,
 	ITM_LOAD,
 	ITM_EXIT,//Exit item
 	DRAW_ITM_COUNT

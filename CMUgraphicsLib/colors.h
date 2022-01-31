@@ -8,6 +8,7 @@ This file was last modified on 05.16.1999
 
 #include "version.h"
 
+
 class color {
 
   public:
@@ -50,10 +51,6 @@ class color {
         else if (strcmp(nColor, "BROWN") == 0)
         {
             return color(165, 42, 42);;
-        }
-        else if (strcmp(nColor, "LIGHTPINK") == 0)
-        {
-            return color(255, 182, 193);
         }
     }
 

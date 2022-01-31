@@ -3,10 +3,12 @@
 #include "Actions\ActionAddEllipse.h"
 #include "Actions\ActionAddPolygon.h"
 #include "Actions\ActionSelect.h"
-#include "Actions\ResizeAction.h"
+#include"Actions/ActionResize.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
 #include "Actions/ActionLoad.h"
+#include "Actions/ActionSave.h"
+#include <iostream>
 
 
 //Constructor
@@ -64,9 +66,6 @@ void ApplicationManager::Run()
 Action* ApplicationManager::CreateAction(ActionType ActType) 
 {
 	Action* newAct = NULL;
-	int selectedIndex;
-	CFigure* selectedFigure = GetSelectedFigure(selectedIndex);
-
 	
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
@@ -88,15 +87,18 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case RESIZE:
-			newAct = new ActionResize(this, selectedFigure);
+			newAct = new ActionResize(this);
 			break;
 
 		case SEND_BACK:
-			newAct = new ActionSendToBack(this , selectedFigure, selectedIndex);
+			newAct = new ActionSendToBack(this);
 			break;
 
 		case BRING_FRONT:
-			newAct = new ActionBringFront(this, selectedFigure, selectedIndex);
+			newAct = new ActionBringFront(this);
+			break;
+		case SAVE:
+			newAct = new ActionSave(this, FigCount);
 			break;
 
 		case LOAD:
@@ -125,6 +127,14 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 		pAct = NULL;
 	}
 }
+//////////////////////////////////////////////////////////////////////
+// Save the file
+void ApplicationManager::SaveAll(ofstream& OutFile)
+{
+	for (int i = 0; i < FigCount; i++) {
+		FigList[i]->Save(OutFile);
+	}
+}
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -150,7 +160,7 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	return NULL;
 }
 ////////////////////////////////////////////////////////////////////////////////////
-CFigure* ApplicationManager::GetSelectedFigure(int & index ) 
+CFigure* ApplicationManager::GetSelectedFigure( ) 
 {
 
 	//If a figure is found return a pointer to it.
@@ -159,7 +169,7 @@ CFigure* ApplicationManager::GetSelectedFigure(int & index )
 
 	for (int i = (FigCount - 1); i >= 0; i--) {
 		if (FigList[i]->IsSelected()) { 
-			index = i;
+			
 			return FigList[i]; }
 	}
 
@@ -172,6 +182,7 @@ CFigure* ApplicationManager::GetSelectedFigure(int & index )
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+	pGUI->ClearDrawArea();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
 }
@@ -188,7 +199,21 @@ ApplicationManager::~ApplicationManager()
 	delete pGUI;
 	
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 
+string ApplicationManager::ConvertToString(color _color)
+{
+	
+	if (_color == BLACK) return "BLACK";
+	else if (_color == WHITE) return "WHITE";
+	else if (_color == BLUE) return "BLUE";
+	else if (_color == RED) return "RED";
+	else if (_color == YELLOW) return "YELLOW";
+	else if (_color == GREEN) return "GREEN";
+	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
+	else if (_color == MAGENTA) return "MAGENTA";
+	else if (_color == TURQUOISE) return "TURQUOISE";
+}
 
 color ApplicationManager::ConvertToColor(string color_as_string)
 {
