@@ -32,6 +32,8 @@ public:
 	void ClearStatusBar() const;	//Clears the status bar
 	void ClearDrawArea() const;	//Clears the drawing area
 	void CreateSizeBar() const;
+	void CreateDrawColorBar() const; // toolbar for draw colors 
+	void CreateFillColorBar() const; // toolbar for fill colors 
 	void CreateToolBar() const;
 	
 	// -- Figures Drawing functions

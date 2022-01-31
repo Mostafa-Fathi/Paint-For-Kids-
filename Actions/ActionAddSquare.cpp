@@ -1,12 +1,14 @@
 #include "ActionAddSquare.h"
 #include "..\Figures\CSquare.h"
 
-#include "..\ApplicationManager.h"
-
+#include "..\ApplicationManager.h" 
 #include "..\GUI\GUI.h"
 
 ActionAddSquare::ActionAddSquare(ApplicationManager * pApp):Action(pApp)
-{}
+{
+
+
+}
 
 //Execute the action
 void ActionAddSquare::Execute() 
@@ -15,13 +17,15 @@ void ActionAddSquare::Execute()
 
 	//Get a Pointer to the Interface
 	GUI* pGUI = pManager->GetGUI();
-
-
+	
 	GfxInfo SqrGfxInfo;
-	SqrGfxInfo.isFilled = false;	//default is not filled
-	//get drawing, filling colors and pen width from the interface
-	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor();
+	//SqrGfxInfo.isFilled = false;	//default is not filled
+	SqrGfxInfo.isFilled = UI.ShapeIsFilled;	//default is not filled
+
+	//get drawing, filling colors and pen width from the interface 
+	SqrGfxInfo.DrawClr = pGUI->getCrntDrawColor(); 
 	SqrGfxInfo.FillClr = pGUI->getCrntFillColor();
+
 	SqrGfxInfo.BorderWdth = pGUI->getCrntPenWidth();
 
 

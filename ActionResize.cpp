@@ -2,7 +2,6 @@
 
 ActionResize::ActionResize(ApplicationManager* pApp, CFigure* selected) :Action(pApp)
 {
-
 	Selected = selected;
 }
 
@@ -20,8 +19,7 @@ void ActionResize::Execute()
 
 		ActionType pAct = pOut->MapInputToActionType(x, y);
 		if (pAct == HALF)
-		{
-			
+		{ 
 			Selected->Resize(.5);
 
 		}

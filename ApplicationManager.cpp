@@ -6,12 +6,14 @@
 #include "Actions\ResizeAction.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
+#include "Actions/ActionFillColor.h"
+#include "Actions/ActionDrawColor.h"
 
 
+ 
 //Constructor
 ApplicationManager::ApplicationManager()
 {
-	
 	//Create Input and output
 	pGUI = new GUI;	
 	
@@ -88,6 +90,14 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case RESIZE:
 			newAct = new ActionResize(this, selectedFigure);
+			break;
+
+		case DRAW_COLOR:
+			newAct = new ActionDrawColor(this);
+			break;
+
+		case FILL_COLOR:
+			newAct = new ActionFillColor(this); 
 			break;
 
 		case SEND_BACK:

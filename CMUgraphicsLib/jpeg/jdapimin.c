@@ -7,7 +7,15 @@
  *
  * This file contains application interface code for the decompression half
  * of the JPEG library.  These are the "minimum" API routines that may be
- * needed in either the normal full-decompression case or the
+ * needed in either the normal full-decompression 
+
+
+
+
+
+
+
+ or the
  * transcoding-only case.
  *
  * Most of the routines intended to be called directly by an application

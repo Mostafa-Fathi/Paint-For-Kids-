@@ -12,6 +12,8 @@ enum GUI_MODE	//Graphical user interface mode
 	MODE_DRAW,	//Drawing mode (startup mode)
 	MODE_PLAY,	//Playing mode
 	MODE_RESIZE,
+	MODE_DRAWCOLOR,
+	MODE_FILLCOLOR  
 };
 
 enum DrawMenuItem //The items of the Draw menu (you should add more items)
@@ -22,13 +24,15 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_ELPS,		//Ellipse item in menu
 	ITM_HEX,		//Polygon item in menu
 	//TODO: Add more items names here
+	ITM_DRAW_COLOR,    //draw color icon
+	ITM_FILL_COLOR,   //fill color icon
 	ITM_RESIZE,		//resize menu
 	ITM_SEND_TO_BACK,
 	ITM_BRING_TO_FORWARED,
 	ITM_EXIT,//Exit item
-	DRAW_ITM_COUNT
 
 	//no. of menu items ==> This should be the last line in this enum
+	DRAW_ITM_COUNT
 	
 };
 enum SizeMenuItem // The items of colors
@@ -42,6 +46,27 @@ enum SizeMenuItem // The items of colors
 
 	SIZE_ITM_COUNT
 };
+//draw colors
+enum DrawColorMenuItem // The items of draw colors
+{
+	ITM_DORANGE,
+	ITM_DRED,
+	ITM_DGREEN,
+	ITM_DBLUE,
+
+	Draw_Color_ITM_COUNT
+};
+//mbfillcolor
+enum FillColorMenuItem // The items of fill colors
+{
+	ITM_EMPTY,
+	ITM_RED,
+	ITM_GREEN,
+	ITM_BLUE,
+	 
+	Fill_Color_ITM_COUNT
+};
+
 enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
@@ -68,14 +93,14 @@ struct UI_Info	//User Interface Info.
 		StatusBarHeight,	//Status Bar Height
 		ToolBarHeight,		//Tool Bar Height (distance from top of window to bottom line of toolbar)
 		MenuItemWidth;		//Width of each item in toolbar menu
-	
-
+	 
 	color DrawColor;		//Drawing color
 	color FillColor;		//Filling color
 	color HighlightColor;	//Highlighting color
 	color MsgColor;			//Messages color
 	color BkGrndColor;		//Background color
 	color StatusBarColor;	//Status bar color
+	bool ShapeIsFilled = false;
 	int PenWidth;			//width of the pen that draws shapes
 
 	/// Add more members if needed
