@@ -51,6 +51,10 @@ class color {
         {
             return color(165, 42, 42);;
         }
+        else if (strcmp(nColor, "LIGHTPINK") == 0)
+        {
+            return color(255, 182, 193);
+        }
     }
 
 };

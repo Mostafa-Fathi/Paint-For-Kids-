@@ -1,4 +1,5 @@
 #include "CEllipse.h"
+#include <fstream>
  
 CEllipse::CEllipse(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfxInfo)
 {
@@ -10,6 +11,10 @@ CEllipse::CEllipse(Point P1, Point P2, GfxInfo FigureGfxInfo) :CFigure(FigureGfx
 	radiusY = abs(TopLeftCorner.y - Center.y);
 }
 
+CEllipse::CEllipse()
+{
+
+}
 
 void CEllipse::DrawMe(GUI* pGUI) const
 {
@@ -30,6 +35,7 @@ string CEllipse::GetDetails() const {
 		+ " | area=" + to_string(3.14159265 * radiusX*radiusY);
 	return details;
 }
+
 void CEllipse::Resize(float factor)
 {
 	//resize code here
@@ -45,4 +51,24 @@ void CEllipse::Resize(float factor)
 
 void CEllipse::Load(ifstream& fin)
 {
+	string draw, fill;
+	bool is_fill = false;
+	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
+		>> BottomRightCorner.x >> BottomRightCorner.y >> draw >> fill;
+
+	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	{
+		is_fill = true;
+		FigGfxInfo.FillClr = ConvertToColor(fill);
+	}
+
+	FigGfxInfo.DrawClr = ConvertToColor(draw);
+	FigGfxInfo.isFilled = is_fill;
+	FigGfxInfo.BorderWdth = 3;
+	Selected = false;
+
+	Center.x = (TopLeftCorner.x + BottomRightCorner.x) / 2;
+	Center.y = (TopLeftCorner.y + BottomRightCorner.y) / 2;
+	radiusX = abs(TopLeftCorner.x - Center.x);
+	radiusY = abs(TopLeftCorner.y - Center.y);
 }

@@ -63,6 +63,8 @@ public:
 	virtual void Load(ifstream &Infile) = 0;	
 
 	//virtual void PrintInfo(Output* pOut) = 0;	//print all figure info on the status bar
+
+	color ConvertToColor(string color_as_string);
 };
 
 #endif

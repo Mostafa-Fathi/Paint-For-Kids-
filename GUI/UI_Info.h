@@ -38,7 +38,6 @@ enum SizeMenuItem // The items of colors
 	ITM_HALF,
 	ITM_DOUBLE,
 	ITM_QUADRUPLE,
-
 	ITM_BACK2,
 
 	SIZE_ITM_COUNT

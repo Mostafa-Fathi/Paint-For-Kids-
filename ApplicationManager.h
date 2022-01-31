@@ -46,6 +46,7 @@ public:
 	int getFigCount();
 	int getFigMaxCount();
 	CFigure** getFigList();
+	color ConvertToColor(string color_as_string);
 };
 
 #endif

@@ -132,7 +132,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_HALF: return HALF;
 			case ITM_DOUBLE: return DOUBLED;
 			case ITM_QUADRUPLE: return QUADRUPLE;
-			case ITM_BACK2:return BACK;
+			case ITM_BACK2: return BACK;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
