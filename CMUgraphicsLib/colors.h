@@ -2,7 +2,7 @@
 See "version.h" for version info and copyright information
 This file was last modified on 05.16.1999
 */
-
+#include <string.h>
 #ifndef COLORS_H
 #define COLORS_H
 
