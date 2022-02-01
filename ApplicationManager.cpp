@@ -162,7 +162,6 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
-
 	for (int i = (FigCount - 1); i >= 0; i--) {
 		if (FigList[i]->HasPoint(x, y)) return FigList[i];
 	}
@@ -183,6 +182,8 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 	}
 	return NULL;
 }
+////////////////////////////////////////////////////////////////////////////////////
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//

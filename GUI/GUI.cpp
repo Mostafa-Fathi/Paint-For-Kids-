@@ -56,6 +56,7 @@ void GUI::GetPointClicked(int &x, int &y) const
 string GUI::GetSrting() const 
 {
 	string Label;
+	
 	char Key;
 	while (1)
 	{
@@ -65,6 +66,7 @@ string GUI::GetSrting() const
 			PrintMessage("The Save action is cancelled");
 			return "";	//returns nothing as user has cancelled label
 		}
+
 		if (Key == 13 && !Label.empty())	//ENTER key is pressed
 			return Label;
 		if (Key == 8 && Label.size() > 0)	//BackSpace is pressed
@@ -74,7 +76,11 @@ string GUI::GetSrting() const
 		PrintMessage(Label);
 	}
 }
-
+bool GUI::IsClickInDrawArea(int y) const {
+	if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) 
+		return true;
+	return false;
+}
 //This function reads the position where the user clicks to determine the desired action
 ActionType GUI::MapInputToActionType(int& x, int& y) const
 {	
@@ -86,7 +92,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 	if(UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
 	{
 		//[1] If user clicks on the Toolbar
-		if ( y >= 0 && y < UI.ToolBarHeight)
+		if (y >= 0 && y < UI.ToolBarHeight)
 		{	
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
@@ -116,7 +122,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 		}
 
 		//[2] User clicks on the drawing area
-		if ( y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		if (IsClickInDrawArea(y))
 		{
 			return DRAWING_AREA;	
 		}

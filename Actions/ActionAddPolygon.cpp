@@ -27,16 +27,20 @@ void ActionAddPolygon::Execute()
 
 	//Step 1 - Read Square data from the user
 
-	pGUI->PrintMessage("New Hexagon: Click at first point");
-	//Read 1st point and store in point P1
-	pGUI->GetPointClicked(P1.x, P1.y);
+	//Read 1st point and store in point P1 while pointes is not in the draw area
+	do {
+		pGUI->PrintMessage("New Square: Click at first point (in draw area)");
+		pGUI->GetPointClicked(P1.x, P1.y);
+	} while (!pGUI->IsClickInDrawArea(P1.y));
 
-	pGUI->PrintMessage("New Hexagon: Click at second point");
-	//Read 2nd point and store in point P2
-	pGUI->GetPointClicked(P2.x, P2.y);
+
+	//Read 2nd point and store in point P2 while pointes is not in the draw area
+	do {
+		pGUI->PrintMessage("New Square: Click at second point (in draw area)");
+		pGUI->GetPointClicked(P2.x, P2.y);
+	} while (!pGUI->IsClickInDrawArea(P2.y));
 
 	pGUI->ClearStatusBar();
-
 
 	//Step 2 - prepare square data
 	//User has entered two points P1&P2
@@ -49,6 +53,7 @@ void ActionAddPolygon::Execute()
 	//The square side length would be the longer distance between the two points coordinates
 	int SideLength = max(abs(P1.x - P2.x), abs(P1.y - P2.y));
 
+	if (!pGUI->IsClickInDrawArea(topLeft.y + SideLength))return;
 
 	//Step 3 - Create a Square with the parameters read from the user
 	CPolygon* R = new CPolygon(topLeft, SideLength, SqrGfxInfo);
