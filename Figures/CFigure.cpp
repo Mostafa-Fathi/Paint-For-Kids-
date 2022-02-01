@@ -49,7 +49,7 @@ string CFigure::ConvertToString(color _color)
 	else if (_color == YELLOW) return "YELLOW";
 	else if (_color == GREEN) return "GREEN";
 	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
-	else if (_color == MAGENTA) return "MAGENTA";
+	else if (_color == ORANGE) return "ORANGE";
 	else if (_color == TURQUOISE) return "TURQUOISE";
 }
 
@@ -67,8 +67,8 @@ color CFigure::ConvertToColor(string color_as_string)
 		return GREEN;
 	else if (color_as_string == "LIGHTGOLDENRODYELLOW")
 		return LIGHTGOLDENRODYELLOW;
-	else if (color_as_string == "MAGENTA")
-		return MAGENTA;
+	else if (color_as_string == "ORANGE")
+		return ORANGE;
 	else if (color_as_string == "TURQUOISE")
 		return TURQUOISE;
 	else

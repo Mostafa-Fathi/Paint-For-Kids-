@@ -49,9 +49,16 @@ enum ActionType //The actions supported (you can add more if needed)
 	DOUBLED,
 	QUADRUPLE,
 
+	// Actions related to play mode
+	PICK_BY_TYPE,
+	PICK_BY_COLOR,
+	PICK_BY_TYPE_COLOR,
+
 	BACK
 
 	///TODO: Add more action types (if needed)
+	
+
 };
 
 struct Point	//To be used for figures points

@@ -13,6 +13,8 @@
 #include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
+#include "Actions/ActionSwitchToPlay.h"
+#include "Actions/ActionSwitchToDraw.h"
 
 
  
@@ -104,6 +106,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case BRING_FRONT:
 			newAct = new ActionBringFront(this);
+			break;
+		case TO_PLAY:
+			newAct = new ActionSwitchToPlay(this);
+			break;
+		case TO_DRAW:
+			newAct = new ActionSwitchToDraw(this);
 			break;
 		case SAVE:
 			newAct = new ActionSave(this/*, FigCount*/);
@@ -219,7 +227,7 @@ string ApplicationManager::ConvertToString(color _color)
 	else if (_color == YELLOW) return "YELLOW";
 	else if (_color == GREEN) return "GREEN";
 	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
-	else if (_color == MAGENTA) return "MAGENTA";
+	else if (_color == ORANGE) return "ORANGE";
 	else if (_color == TURQUOISE) return "TURQUOISE";
 }
 
@@ -237,8 +245,8 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 		return GREEN;
 	else if (color_as_string == "LIGHTGOLDENRODYELLOW")
 		return LIGHTGOLDENRODYELLOW;
-	else if (color_as_string == "MAGENTA")
-		return MAGENTA;
+	else if (color_as_string == "ORANGE")
+		return ORANGE;
 	else if (color_as_string == "TURQUOISE")
 		return TURQUOISE;
 	else
