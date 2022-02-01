@@ -18,38 +18,46 @@ void ActionFillColor::Execute()
 	if (pAct == EMPTYFILL)
 	{ 
 		pGUI->PrintMessage("empty clicked"); 
-		UI.ShapeIsFilled = false;
+		
 		if (Selected != NULL) {
-			UI.ShapeIsFilled = true;
-			Selected->ChngFillClr(UI.oldFillColor);
+			Selected->ChngFillClr(EMPTYFILL);
 		}
+		else UI.ShapeIsFilled = false;
 	}
 	else if (pAct == REDFILL)
 	{
 		pGUI->PrintMessage("red clicked"); 
-		UI.ShapeIsFilled = true;
-		UI.FillColor = RED;
+
 		if (Selected != NULL) 
 			Selected->ChngFillClr(RED);
-
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = RED;
+		}
 	}
+
 	else if (pAct == BLUEFILL)
 	{
 		pGUI->PrintMessage("blue clicked"); 
-		UI.ShapeIsFilled = true;
-		UI.FillColor = BLUE;
+
 		if (Selected != NULL)
 			Selected->ChngFillClr(BLUE);
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = BLUE;
+		}
 
 	}
 	else if (pAct == GREENFILL)
 	{
 		pGUI->PrintMessage("green clicked");
-		UI.ShapeIsFilled = true;
-		UI.FillColor = GREEN;
+
 		if (Selected != NULL)
 			Selected->ChngFillClr(GREEN);
-
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = GREEN;
+		}
 
 	} 
 	pOut->ClearDrawArea(); 

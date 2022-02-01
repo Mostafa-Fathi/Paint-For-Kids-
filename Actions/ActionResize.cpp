@@ -12,7 +12,6 @@ void ActionResize::Execute()
 {
 	GUI* pOut = pManager->GetGUI();
 
-
 	int x, y;
 	if (Selected != NULL)
 	{
