@@ -30,8 +30,13 @@ color CFigure::GetDrawColor() {
 }
 void CFigure::ChngFillClr(color Fclr)
 {
-	FigGfxInfo.isFilled = true;
-	FigGfxInfo.FillClr = Fclr;
+	if (Fclr == EMPTYFILL)
+		FigGfxInfo.isFilled = false;
+	else
+	{
+		FigGfxInfo.isFilled = true;
+		FigGfxInfo.FillClr = Fclr;
+	}
 }
 color CFigure::GetPreviousDrawColor() {
 	return FigGfxInfo.PrevDrawClr;

@@ -2,6 +2,7 @@
 
 ActionDrawColor::ActionDrawColor(ApplicationManager* pApp) :Action(pApp)
 {
+	Selected = pManager->GetSelectedFigure();
 }
 
 void ActionDrawColor::Execute()
@@ -16,24 +17,32 @@ void ActionDrawColor::Execute()
 	if (pAct == DRAW_RED)
 	{
 		pGUI->PrintMessage("red  ");
-		UI.DrawColor = RED;
+		if (Selected != NULL) {
+			Selected->ChngDrawClr(RED);
+		}
+		else UI.DrawColor = RED;
 	}
 	else if (pAct == DRAW_ORANGE)
 	{
 		pGUI->PrintMessage("orange  ");
-		UI.DrawColor = ORANGE;
-
+		if (Selected != NULL)
+			Selected->ChngDrawClr(ORANGE);
+		else UI.DrawColor = ORANGE;
 	}
 	else if (pAct == DRAW_BLUE)
 	{
 		pGUI->PrintMessage("blue  ");
-		UI.DrawColor = BLUE;
+		if (Selected != NULL)
+			Selected->ChngDrawClr(BLUE);
+		else UI.DrawColor = BLUE;
 
 	}
 	else if (pAct == DRAW_GREEN)
 	{
 		pGUI->PrintMessage("green  ");
-		UI.DrawColor = GREEN; 
+		if (Selected != NULL)
+			Selected->ChngDrawClr(GREEN);
+		else UI.DrawColor = GREEN;
 
 	}
 	else
