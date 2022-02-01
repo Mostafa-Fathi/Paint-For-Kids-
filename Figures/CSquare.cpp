@@ -62,7 +62,7 @@ void CSquare::Save(ofstream& OutFile) {
 	OutFile << "SQR" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
 		<< this->TopLeftCorner.y << "\t" << this->length << "\t" << this->ConvertToString(figCol) << "\t";
 	if (this->FigGfxInfo.isFilled == true) {
-		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr) << "\n";
 	}
 	else {
 		OutFile << "NO_FILL" << "\n";

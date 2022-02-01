@@ -71,7 +71,7 @@ void CEllipse::Save(ofstream& OutFile) {
 	OutFile << "ELPS" << "\t" << this->ID << "\t" << this->TopLeftCorner.x << "\t"
 		<< this->TopLeftCorner.y << "\t" << this->BottomRightCorner.x << "\t" << this->BottomRightCorner.y << "\t" << this->ConvertToString(figCol) << "\t";
 	if (this->FigGfxInfo.isFilled == true) {
-		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr);
+		OutFile << this->ConvertToString(this->FigGfxInfo.FillClr) << "\n";
 	}
 	else {
 		OutFile << "NO_FILL" << "\n";
