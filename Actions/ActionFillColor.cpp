@@ -21,7 +21,7 @@ void ActionFillColor::Execute()
 		UI.ShapeIsFilled = false;
 		if (Selected != NULL) {
 			UI.ShapeIsFilled = true;
-			Selected->ChngFillClr(UI.oldFillColor);
+			Selected->ChngFillClr(EMPTYFILL);
 		}
 	}
 	else if (pAct == REDFILL)
