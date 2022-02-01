@@ -53,7 +53,7 @@ void ActionAddPolygon::Execute()
 	//The square side length would be the longer distance between the two points coordinates
 	int SideLength = max(abs(P1.x - P2.x), abs(P1.y - P2.y));
 
-	if (!pGUI->IsClickInDrawArea(topLeft.y + SideLength))return;
+	if (!pGUI->IsClickInDrawArea(topLeft.y + SideLength)) { pGUI->PrintMessage("this figure is too big or it will be drawn out of the draw area"); return; }
 
 	//Step 3 - Create a Square with the parameters read from the user
 	CPolygon* R = new CPolygon(topLeft, SideLength, SqrGfxInfo);
