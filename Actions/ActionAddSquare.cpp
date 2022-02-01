@@ -34,14 +34,14 @@ void ActionAddSquare::Execute()
 	do {
 		pGUI->PrintMessage("New Square: Click at first point (in draw area)");	
 		pGUI->GetPointClicked(P1.x, P1.y);
-	} while (!pGUI->IsClickInDrawArea(P1.y));
+	} while (!pGUI->IsValueInDrawArea(P1.y));
 
 	
 	//Read 2nd point and store in point P2 while pointes is not in the draw area
 	do {
 	pGUI->PrintMessage("New Square: Click at second point (in draw area)");
 	pGUI->GetPointClicked(P2.x, P2.y);
-	} while (!pGUI->IsClickInDrawArea(P2.y));
+	} while (!pGUI->IsValueInDrawArea(P2.y));
 
 	pGUI->ClearStatusBar();
 
@@ -57,7 +57,7 @@ void ActionAddSquare::Execute()
 	//The square side length would be the longer distance between the two points coordinates
 	int SideLength = max(abs(P1.x-P2.x), abs(P1.y-P2.y));
 
-	if (!pGUI->IsClickInDrawArea(topLeft.y + SideLength)) { pGUI->PrintMessage("this figure is too big or it will be drawn out of the draw area"); return; }
+	if (!pGUI->IsValueInDrawArea(topLeft.y + SideLength)) { pGUI->PrintMessage("this figure is too big or it will be drawn out of the draw area"); return; }
 
 	//Step 3 - Create a Square with the parameters read from the user
 	CSquare *R=new CSquare(topLeft, SideLength, SqrGfxInfo);

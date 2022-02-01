@@ -52,7 +52,8 @@ public:
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
-	bool IsClickInDrawArea(int y) const;
+	bool IsValueInDrawArea(int y) const;
+	bool IsValueInDrawArea(Point p) const;
 
 	// -- Convert Colors to string and string to colors
 	string ConvertToString(color _color);   //Convert from Color Type to String Type

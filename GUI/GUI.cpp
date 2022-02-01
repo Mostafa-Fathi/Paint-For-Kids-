@@ -76,8 +76,13 @@ string GUI::GetSrting() const
 		PrintMessage(Label);
 	}
 }
-bool GUI::IsClickInDrawArea(int y) const {
+bool GUI::IsValueInDrawArea(int y) const {
 	if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) 
+		return true;
+	return false;
+}
+bool GUI::IsValueInDrawArea(Point p) const {
+	if ((p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight)&&(p.x>=0 && p.x <= UI.width))
 		return true;
 	return false;
 }
@@ -122,7 +127,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 		}
 
 		//[2] User clicks on the drawing area
-		if (IsClickInDrawArea(y))
+		if (IsValueInDrawArea(y))
 		{
 			return DRAWING_AREA;	
 		}

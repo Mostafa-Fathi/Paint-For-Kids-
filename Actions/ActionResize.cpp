@@ -20,19 +20,27 @@ void ActionResize::Execute()
 		ActionType pAct = pOut->MapInputToActionType(x, y);
 		if (pAct == HALF)
 		{
-			Selected->Resize(.5);
+			Selected->Resize(.5,pOut);
 		}
 		else if (pAct == QUARTER)
 		{
-			Selected->Resize(.25);
+			Selected->Resize(.25,pOut);
 		}
 		else if (pAct == DOUBLED)
 		{
-			Selected->Resize(2);
+			
+			if (!Selected->Resize(2, pOut)) {
+				Selected->Resize(.5, pOut);
+				pOut->PrintMessage("This Fig cannot be more bigger ");
+			}
+			
 		}
 		else if (pAct == QUADRUPLE)
 		{
-			Selected->Resize(4);
+			if (!Selected->Resize(4, pOut)) {
+				Selected->Resize(.25, pOut);
+				pOut->PrintMessage("This Fig cannot be more bigger ");
+			}
 		}
 		else if (pAct == BACK)
 		{
