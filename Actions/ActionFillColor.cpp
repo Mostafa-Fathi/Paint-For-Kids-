@@ -2,6 +2,8 @@
 
 ActionFillColor::ActionFillColor(ApplicationManager* pApp) :Action(pApp)
 {
+	Selected = pManager->GetSelectedFigure();
+
 }
   
 void ActionFillColor::Execute()
@@ -17,12 +19,18 @@ void ActionFillColor::Execute()
 	{ 
 		pGUI->PrintMessage("empty clicked"); 
 		UI.ShapeIsFilled = false;
+		if (Selected != NULL) {
+			UI.ShapeIsFilled = true;
+			Selected->ChngFillClr(UI.oldFillColor);
+		}
 	}
 	else if (pAct == REDFILL)
 	{
 		pGUI->PrintMessage("red clicked"); 
 		UI.ShapeIsFilled = true;
 		UI.FillColor = RED;
+		if (Selected != NULL) 
+			Selected->ChngFillClr(RED);
 
 	}
 	else if (pAct == BLUEFILL)
@@ -30,6 +38,8 @@ void ActionFillColor::Execute()
 		pGUI->PrintMessage("blue clicked"); 
 		UI.ShapeIsFilled = true;
 		UI.FillColor = BLUE;
+		if (Selected != NULL)
+			Selected->ChngFillClr(BLUE);
 
 	}
 	else if (pAct == GREENFILL)
@@ -37,6 +47,8 @@ void ActionFillColor::Execute()
 		pGUI->PrintMessage("green clicked");
 		UI.ShapeIsFilled = true;
 		UI.FillColor = GREEN;
+		if (Selected != NULL)
+			Selected->ChngFillClr(GREEN);
 
 
 	} 
