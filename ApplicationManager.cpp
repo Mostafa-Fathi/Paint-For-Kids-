@@ -13,6 +13,7 @@
 #include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
+#include "Actions/ActionUiBackground.h"
 
 
  
@@ -97,7 +98,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case FILL_COLOR:
 			newAct = new ActionFillColor(this); 
 			break;
-
+		case BACKGROUND_COLOR:
+			newAct = new ActionUiBackground(this);
+			break;
 		case SEND_BACK:
 			newAct = new ActionSendToBack(this);
 			break;
