@@ -16,7 +16,7 @@
     <Filter Include="GUI Classes">
       <UniqueIdentifier>{03fd4e0d-92e0-4271-bb9b-d6e9f21ec35f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Application Manager">
+    <Filter Include="Action Classes\Application Manager">
       <UniqueIdentifier>{be3a4e10-d854-4bf8-9add-2f85904b4103}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -130,7 +130,7 @@
       <Filter>Figures Classes</Filter>
     </ClCompile>
     <ClCompile Include="ApplicationManager.cpp">
-      <Filter>Application Manager</Filter>
+      <Filter>Action Classes\Application Manager</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Figures\CSquare.cpp">
@@ -265,7 +265,7 @@
       <Filter>GUI Classes</Filter>
     </ClInclude>
     <ClInclude Include="ApplicationManager.h">
-      <Filter>Application Manager</Filter>
+      <Filter>Action Classes\Application Manager</Filter>
     </ClInclude>
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="Figures\CSquare.h">

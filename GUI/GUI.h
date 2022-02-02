@@ -52,6 +52,8 @@ public:
 	color getCrntDrawColor() const;	//get current drwawing color
 	color getCrntFillColor() const;	//get current filling color
 	int getCrntPenWidth() const;		//get current pen width
+	bool IsValueInDrawArea(int y) const;
+	bool IsValueInDrawArea(Point p) const;
 
 };
 

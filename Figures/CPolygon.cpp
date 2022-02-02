@@ -64,13 +64,18 @@ string CPolygon::GetDetails() const {
 
 	return details;
 }
-void CPolygon::Resize(float factor)
+bool CPolygon::Resize(float factor , const GUI* Gui)
 {
 	
 	length = length * factor;
 
 	TopLeftCorner.x = Center.x - (length / 2);
 	TopLeftCorner.y = Center.y - (length / 2);
+	Point BottomRight;
+	BottomRight.x = TopLeftCorner.x + length;
+	BottomRight.y = TopLeftCorner.y + (2*length);
+	if (Gui->IsValueInDrawArea(TopLeftCorner) && Gui->IsValueInDrawArea(BottomRight)) { return true; }
+	else return false;
 
 	
 }

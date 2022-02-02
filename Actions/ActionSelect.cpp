@@ -16,15 +16,16 @@ void ActionSelect::Execute() {
 		if (fig->IsSelected())
 		{
 			pGUI->ClearStatusBar();
-			fig->ChngDrawClr(fig->GetPreviousDrawColor());
 			fig->SetSelected(false);
+			fig->ChngDrawClr(fig->GetPreviousDrawColor());
 		}
 		else
 		{
 			CFigure* selectedFigure = pManager->GetSelectedFigure();
 			if (selectedFigure != NULL) {
-				selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
 				selectedFigure->SetSelected(false);
+				selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
+				
 			}
 			pGUI->PrintMessage(fig->GetDetails());
 			fig->SetPreviousDrawColor(fig->GetDrawColor());
@@ -35,8 +36,8 @@ void ActionSelect::Execute() {
 	else {
 		CFigure* selectedFigure = pManager->GetSelectedFigure();
 		if (selectedFigure != NULL) {
-			selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
 			selectedFigure->SetSelected(false);
+			selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
 			pGUI->ClearStatusBar();
 		}
 	}
