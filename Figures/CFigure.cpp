@@ -23,7 +23,12 @@ bool CFigure::IsSelected() const
 
 void CFigure::ChngDrawClr(color Dclr)
 {
-	FigGfxInfo.DrawClr = Dclr;
+	if (Selected) {
+		FigGfxInfo.PrevDrawClr = Dclr;
+	}
+	else {
+		FigGfxInfo.DrawClr = Dclr;
+	}
 }
 color CFigure::GetDrawColor() {
 	return FigGfxInfo.DrawClr;

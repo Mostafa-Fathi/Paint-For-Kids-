@@ -48,7 +48,7 @@ void ActionDrawColor::Execute()
 	else
 		pGUI->PrintMessage("error");
 
-	pOut->ClearDrawArea();
+	//pOut->ClearDrawArea();
 
 	pOut->CreateDrawToolBar();
 

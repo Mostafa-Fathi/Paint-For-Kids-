@@ -33,8 +33,6 @@ int ApplicationManager::getFigCount() {
 	return FigCount;
 }
 
-
-
 void ApplicationManager::Run()
 {
 	int x, y;
@@ -136,6 +134,7 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 		delete pAct;	//Action is not needed any more ==> delete it
 		pAct = NULL;
 	}
+
 }
 //////////////////////////////////////////////////////////////////////
 // Save the file
@@ -275,11 +274,11 @@ void ApplicationManager::BringSelectedFigFront() {
 		int Index = Selected->ID - 1;
 
 		for (int i = Index; i < FigCount - 1; i++) {
-			cout << "\n fig count is =" << FigCount - 1;
+			//cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
 			FigList[i]->ID = i + 1;
 
-			cout << "\n id of fig is :" << FigList[i]->ID;
+			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = FigCount;
 		FigList[FigCount - 1] = Selected;
@@ -303,7 +302,7 @@ void ApplicationManager::SendSelectedFigBack() {
 			FigList[i] = FigList[i - 1];
 			FigList[i]->ID = i + 1;
 
-			cout << "\n id of fig is :" << FigList[i]->ID;
+			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = 1;
 		FigList[0] = Selected;
@@ -321,11 +320,11 @@ void ApplicationManager::DeleteSelectedFig() {
 	{
 		int Index = Selected->ID - 1;
 		for (int i = Index; i < FigCount - 1; i++) {
-			cout << "\n fig count is =" << FigCount - 1;
+			//cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
 			FigList[i]->ID = i + 1;
 
-			cout << "\n id of fig is :" << FigList[i]->ID;
+			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		
 		FigCount--;
@@ -335,6 +334,6 @@ void ApplicationManager::DeleteSelectedFig() {
 		pGUI->ClearStatusBar();
 	}
 	else
-		pGUI->PrintMessage("Firstly, Select a fig");
+		pGUI->PrintMessage("Firstly, Select a Figure");
 
 }
