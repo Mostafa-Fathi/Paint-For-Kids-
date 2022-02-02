@@ -23,8 +23,9 @@ void ActionSelect::Execute() {
 		{
 			CFigure* selectedFigure = pManager->GetSelectedFigure();
 			if (selectedFigure != NULL) {
-				selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
 				selectedFigure->SetSelected(false);
+				selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
+				
 			}
 			pGUI->PrintMessage(fig->GetDetails());
 			fig->SetPreviousDrawColor(fig->GetDrawColor());
