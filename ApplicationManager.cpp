@@ -13,6 +13,8 @@
 #include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
+#include "Actions/ActionSwitchToPlay.h"
+#include "Actions/ActionSwitchToDraw.h"
 #include "Actions/ActionUiBackground.h"
 
 
@@ -33,8 +35,6 @@ ApplicationManager::ApplicationManager()
 int ApplicationManager::getFigCount() {
 	return FigCount;
 }
-
-
 
 void ApplicationManager::Run()
 {
@@ -108,6 +108,12 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case BRING_FRONT:
 			newAct = new ActionBringFront(this);
 			break;
+		case TO_PLAY:
+			newAct = new ActionSwitchToPlay(this);
+			break;
+		case TO_DRAW:
+			newAct = new ActionSwitchToDraw(this);
+			break;
 		case SAVE:
 			newAct = new ActionSave(this/*, FigCount*/);
 			break;
@@ -139,6 +145,7 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 		delete pAct;	//Action is not needed any more ==> delete it
 		pAct = NULL;
 	}
+
 }
 //////////////////////////////////////////////////////////////////////
 // Save the file
@@ -165,7 +172,6 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
-
 	for (int i = (FigCount - 1); i >= 0; i--) {
 		if (FigList[i]->HasPoint(x, y)) return FigList[i];
 	}
@@ -186,6 +192,8 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 	}
 	return NULL;
 }
+////////////////////////////////////////////////////////////////////////////////////
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
@@ -222,7 +230,7 @@ string ApplicationManager::ConvertToString(color _color)
 	else if (_color == YELLOW) return "YELLOW";
 	else if (_color == GREEN) return "GREEN";
 	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
-	else if (_color == MAGENTA) return "MAGENTA";
+	else if (_color == ORANGE) return "ORANGE";
 	else if (_color == TURQUOISE) return "TURQUOISE";
 }
 
@@ -240,8 +248,8 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 		return GREEN;
 	else if (color_as_string == "LIGHTGOLDENRODYELLOW")
 		return LIGHTGOLDENRODYELLOW;
-	else if (color_as_string == "MAGENTA")
-		return MAGENTA;
+	else if (color_as_string == "ORANGE")
+		return ORANGE;
 	else if (color_as_string == "TURQUOISE")
 		return TURQUOISE;
 	else
@@ -277,11 +285,11 @@ void ApplicationManager::BringSelectedFigFront() {
 		int Index = Selected->ID - 1;
 
 		for (int i = Index; i < FigCount - 1; i++) {
-			cout << "\n fig count is =" << FigCount - 1;
+			//cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
 			FigList[i]->ID = i + 1;
 
-			cout << "\n id of fig is :" << FigList[i]->ID;
+			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = FigCount;
 		FigList[FigCount - 1] = Selected;
@@ -305,7 +313,7 @@ void ApplicationManager::SendSelectedFigBack() {
 			FigList[i] = FigList[i - 1];
 			FigList[i]->ID = i + 1;
 
-			cout << "\n id of fig is :" << FigList[i]->ID;
+			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = 1;
 		FigList[0] = Selected;
@@ -323,11 +331,11 @@ void ApplicationManager::DeleteSelectedFig() {
 	{
 		int Index = Selected->ID - 1;
 		for (int i = Index; i < FigCount - 1; i++) {
-			cout << "\n fig count is =" << FigCount - 1;
+			//cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
 			FigList[i]->ID = i + 1;
 
-			cout << "\n id of fig is :" << FigList[i]->ID;
+			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		
 		FigCount--;
@@ -337,6 +345,6 @@ void ApplicationManager::DeleteSelectedFig() {
 		pGUI->ClearStatusBar();
 	}
 	else
-		pGUI->PrintMessage("Firstly, Select a fig");
+		pGUI->PrintMessage("Firstly, Select a Figure");
 
 }

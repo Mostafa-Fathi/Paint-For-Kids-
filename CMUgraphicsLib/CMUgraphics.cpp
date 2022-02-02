@@ -99,7 +99,11 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
                 wipInput->SetKeyInfo(hwnd, ARROW, 8);
 			}
 			break;
-
+		  /**/case VK_CONTROL:
+			  if (wipInput != NULL) {
+				  wipInput->SetKeyInfo(hwnd, CONTROL, 1);
+			  }
+			  break; 
 		  case VK_PRIOR:
             if(wipInput != NULL) {
                 wipInput->SetKeyInfo(hwnd, ARROW, 9);

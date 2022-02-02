@@ -42,12 +42,10 @@ string CEllipse::GetDetails() const {
 	return details;
 }
 
-void CEllipse::Resize(float factor)
+bool CEllipse::Resize(float factor,const GUI* Gui)  
 {
 	//resize code here
 	//if (radiusX > 25 && radiusY > 25) {
-		int sgin = 1;
-		if (factor < 1) { sgin = -1; }
 		//int vRadius = (BottomRightCorner.y- TopLeftCorner.y) / 2 * factor;
 		//int hRadius = (BottomRightCorner.x- TopLeftCorner.x) / 2 * factor;
 		radiusX *= factor;
@@ -56,6 +54,8 @@ void CEllipse::Resize(float factor)
 		TopLeftCorner.y = Center.y - radiusY;
 		BottomRightCorner.x = Center.x + radiusX;
 		BottomRightCorner.y = Center.y + radiusY;
+		if (Gui->IsValueInDrawArea(TopLeftCorner) && Gui->IsValueInDrawArea(BottomRightCorner)) { return true; }
+		else return false;
 	//}
 }
 

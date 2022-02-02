@@ -38,7 +38,7 @@ string CSquare::GetDetails() const {
 		+ " | area=" + to_string(length * length);
 	return details;
 }
-void CSquare::Resize(float factor)
+bool CSquare::Resize(float factor ,const GUI* Gui)
 {	
 	Point center;
 	center.x = (2*TopLeftCorner.x + length) / 2;
@@ -46,6 +46,12 @@ void CSquare::Resize(float factor)
 	length = length * factor;
 	TopLeftCorner.x = center.x - (length / 2);
 	TopLeftCorner.y = center.y - (length / 2);
+	Point BottomRight;
+	BottomRight.x = TopLeftCorner.x + length;
+	BottomRight.y = TopLeftCorner.y + length;
+	if (Gui->IsValueInDrawArea(TopLeftCorner) && Gui->IsValueInDrawArea(BottomRight)) { return true; }
+	else return false;
+
 
 }
 

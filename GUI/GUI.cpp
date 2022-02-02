@@ -56,6 +56,7 @@ void GUI::GetPointClicked(int &x, int &y) const
 string GUI::GetSrting() const 
 {
 	string Label;
+	
 	char Key;
 	while (1)
 	{
@@ -65,6 +66,7 @@ string GUI::GetSrting() const
 			PrintMessage("The Save action is cancelled");
 			return "";	//returns nothing as user has cancelled label
 		}
+
 		if (Key == 13 && !Label.empty())	//ENTER key is pressed
 			return Label;
 		if (Key == 8 && Label.size() > 0)	//BackSpace is pressed
@@ -74,7 +76,16 @@ string GUI::GetSrting() const
 		PrintMessage(Label);
 	}
 }
-
+bool GUI::IsValueInDrawArea(int y) const {
+	if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) 
+		return true;
+	return false;
+}
+bool GUI::IsValueInDrawArea(Point p) const {
+	if ((p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight)&&(p.x>=0 && p.x <= UI.width))
+		return true;
+	return false;
+}
 //This function reads the position where the user clicks to determine the desired action
 ActionType GUI::MapInputToActionType(int& x, int& y) const
 {	
@@ -86,7 +97,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 	if(UI.InterfaceMode == MODE_DRAW)	//GUI in the DRAW mode
 	{
 		//[1] If user clicks on the Toolbar
-		if ( y >= 0 && y < UI.ToolBarHeight)
+		if (y >= 0 && y < UI.ToolBarHeight)
 		{	
 			//Check whick Menu item was clicked
 			//==> This assumes that menu items are lined up horizontally <==
@@ -108,6 +119,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
+			case ITM_SWITCH_PLAY_MODE: return TO_PLAY;
 			case ITM_SAVE: return SAVE;
 			case ITM_DEL:return DEL;
 			case ITM_LOAD: return LOAD;
@@ -118,7 +130,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 		}
 
 		//[2] User clicks on the drawing area
-		if ( y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		if (IsValueInDrawArea(y))
 		{
 			return DRAWING_AREA;	
 		}
@@ -261,10 +273,29 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 	}
 	else	//GUI is in PLAY mode
 	{
-		///TODO:
-		//perform checks similar to Draw mode checks above
-		//and return the correspoding action
-		return TO_PLAY;	//just for now. This should be updated
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight) {
+
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_TYPE: return PICK_BY_TYPE;
+			case ITM_COLOR: return PICK_BY_COLOR;
+			case ITM_TYPE_COLOR: return PICK_BY_TYPE_COLOR;
+			case ITM_SWITCH_DRAW_MODE: return TO_DRAW;
+			default: return EMPTY;
+			}
+
+			if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) {
+				return DRAWING_AREA;
+			}
+			return STATUS;
+		}
 	}	
 
 }
@@ -321,6 +352,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
+	MenuItemImages[ITM_SWITCH_PLAY_MODE] = "images\\MenuItems\\playMode.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
@@ -442,8 +474,25 @@ void GUI::CreatebackgroundBar() const
 void GUI::CreatePlayToolBar() const
 {
 	CreateToolBar();
+	
+
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
+
+	string MenuItemImages[PLAY_ITM_COUNT];
+
+	MenuItemImages[ITM_TYPE] = "images\\MenuItems\\Menu_Red.JPG";
+	MenuItemImages[ITM_COLOR] = "images\\MenuItems\\Menu_Blue.jpg";
+	MenuItemImages[ITM_TYPE_COLOR] = "images\\MenuItems\\Menu_Green.JPG";
+	MenuItemImages[ITM_SWITCH_DRAW_MODE] = "images\\MenuItems\\drawRed.JPG";
+
+
+	for (int i = 0; i < PLAY_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 

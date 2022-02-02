@@ -44,7 +44,7 @@ public:
 	virtual string GetDetails() const = 0;
 
 	//Resize the figure
-	virtual void Resize(float) = 0;
+	virtual bool Resize(float, const GUI*)  = 0;
 
 
 	///The following functions should be supported by the figure class

@@ -59,7 +59,6 @@ public:
 
 	void DeleteSelectedFig();
 
-
 	// -- Convert Colors to string and string to colors
 	static string ConvertToString(color _color);   //Convert from Color Type to String Type
 	color ConvertToColor(string color_as_string);
