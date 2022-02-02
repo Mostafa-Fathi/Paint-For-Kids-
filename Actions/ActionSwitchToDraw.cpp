@@ -10,6 +10,8 @@ void ActionSwitchToDraw::Execute()
 	GUI* pGUI = pManager->GetGUI();
 
 	pGUI->CreateDrawToolBar();
+
+	pGUI->PrintMessage("Switched to draw mode");
 }
 
 
