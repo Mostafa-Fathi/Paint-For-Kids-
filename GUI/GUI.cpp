@@ -291,9 +291,11 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			default: return EMPTY;
 			}
 
-			if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) {
-				return DRAWING_AREA;
-			}
+		}
+		else if (IsValueInDrawArea(y)) {
+			return DRAWING_AREA;
+		}
+		else {
 			return STATUS;
 		}
 	}	
