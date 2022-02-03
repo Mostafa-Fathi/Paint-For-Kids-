@@ -352,10 +352,10 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
-	MenuItemImages[ITM_SWITCH_PLAY_MODE] = "images\\MenuItems\\playMode.jpg";
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
+	MenuItemImages[ITM_SWITCH_PLAY_MODE] = "images\\MenuItems\\playMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
 	
@@ -481,9 +481,9 @@ void GUI::CreatePlayToolBar() const
 
 	string MenuItemImages[PLAY_ITM_COUNT];
 
-	MenuItemImages[ITM_TYPE] = "images\\MenuItems\\Menu_Red.JPG";
-	MenuItemImages[ITM_COLOR] = "images\\MenuItems\\Menu_Blue.jpg";
-	MenuItemImages[ITM_TYPE_COLOR] = "images\\MenuItems\\Menu_Green.JPG";
+	MenuItemImages[ITM_TYPE] = "images\\MenuItems\\byShapes.jpg";
+	MenuItemImages[ITM_COLOR] = "images\\MenuItems\\byColors.jpg";
+	MenuItemImages[ITM_TYPE_COLOR] = "images\\MenuItems\\byShapesAndColors.jpg";
 	MenuItemImages[ITM_SWITCH_DRAW_MODE] = "images\\MenuItems\\drawRed.JPG";
 
 

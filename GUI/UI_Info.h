@@ -31,10 +31,10 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	ITM_RESIZE,		//resize menu
 	ITM_SEND_TO_BACK,
 	ITM_BRING_TO_FORWARED,
-	ITM_SWITCH_PLAY_MODE,
 	ITM_SAVE,
 	ITM_LOAD,
 	ITM_DEL,
+	ITM_SWITCH_PLAY_MODE,
 	ITM_EXIT,//Exit item
 
 	//no. of menu items ==> This should be the last line in this enum
