@@ -105,22 +105,27 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case BRING_FRONT:
 			newAct = new ActionBringFront(this);
 			break;
+
 		case TO_PLAY:
 			newAct = new ActionSwitchToPlay(this);
 			break;
+
 		case TO_DRAW:
 			newAct = new ActionSwitchToDraw(this);
 			break;
+
 		case SAVE:
 			newAct = new ActionSave(this/*, FigCount*/);
 			break;
+
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
-		case DEL:
 
+		case DEL:
 			newAct= new ActionDelete(this);
 			break;
+
 		case EXIT:
 			newAct = new ActionExit(this);
 			break;
