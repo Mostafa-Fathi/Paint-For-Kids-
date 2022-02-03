@@ -87,10 +87,10 @@ void ActionFillColor::Execute()
 		pGUI->PrintMessage("brown clicked");
 
 		if (Selected != NULL)
-			Selected->ChngFillClr(BROWN);
+			Selected->ChngFillClr(BURLYWOOD);
 		else {
 			UI.ShapeIsFilled = true;
-			UI.FillColor = BROWN;
+			UI.FillColor = BURLYWOOD;
 		}
 	}
 	else if (pAct ==  ORANGEFILL)
