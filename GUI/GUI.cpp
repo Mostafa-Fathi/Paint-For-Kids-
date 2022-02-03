@@ -115,6 +115,8 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_RESIZE: return RESIZE;
 			case ITM_DRAW_COLOR: return DRAW_COLOR;
 			case ITM_FILL_COLOR: return FILL_COLOR;
+			case ITM_BACKGROUND_COLOR: return BACKGROUND_COLOR;
+
 			case ITM_SEND_TO_BACK: return SEND_BACK;
 			case ITM_BRING_TO_FORWARED: return BRING_FRONT;
 			case ITM_SWITCH_PLAY_MODE: return TO_PLAY;
@@ -155,6 +157,36 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_DOUBLE: return DOUBLED;
 			case ITM_QUADRUPLE: return QUADRUPLE;
 			case ITM_BACK2: return BACK;
+
+			default: return EMPTY;	//A click on empty place in desgin toolbar
+			}
+		}
+
+		//[2] User clicks on the drawing area
+		if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight)
+		{
+			return DRAWING_AREA;
+		}
+
+		//[3] User clicks on the status bar
+		return STATUS;
+	}
+	if (UI.InterfaceMode == MODE_BACKGROUND)	//GUI in the DRAW mode
+	{
+		//[1] If user clicks on the Toolbar
+		if (y >= 0 && y < UI.ToolBarHeight)
+		{
+			//Check whick Menu item was clicked
+			//==> This assumes that menu items are lined up horizontally <==
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			//Divide x coord of the point clicked by the menu item width (int division)
+			//if division result is 0 ==> first item is clicked, if 1 ==> 2nd item and so on
+
+			switch (ClickedItemOrder)
+			{
+			case ITM_BURLYWOOD: return BACKG_BURLYWOOD;
+			case ITM_LIGHTGOLDENRODYELLOW: return BACKG_LIGHTGOLDENRODYELLOW;
+			case ITM_BLANCHEDALMOND: return BACKG_blanchedalmond;
 
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
@@ -219,7 +251,13 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_RED: return REDFILL;
 			case ITM_BLUE: return BLUEFILL;
 			case ITM_GREEN: return GREENFILL;
-
+			case ITM_WHITE: return WHITEFILL;
+			case ITM_BLACK: return BLACKFILL;
+			case ITM_BROWN: return BROWNFILL;
+			case ITM_YELLOW: return YELLOWFILL;
+			case ITM_ORANGE: return ORANGEFILL;
+				 
+					
 			default: return EMPTY;	//A click on empty place in desgin toolbar
 			}
 		}
@@ -308,8 +346,9 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\MenuItems\\fill.JPG";
 	MenuItemImages[ITM_DRAW_COLOR] = "images\\MenuItems\\brush.JPG";
+	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\MenuItems\\ui2.JPG";
 
-
+	 
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
 	MenuItemImages[ITM_SEND_TO_BACK]= "images\\MenuItems\\sendToback.jpg";
 	MenuItemImages[ITM_BRING_TO_FORWARED]= "images\\MenuItems\\bringtoforward.jpg";
@@ -318,6 +357,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
 	MenuItemImages[ITM_SWITCH_PLAY_MODE] = "images\\MenuItems\\playMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
+
 	
 
 	//TODO: Prepare images for each menu item and add it to the list
@@ -393,11 +433,38 @@ void GUI::CreateFillColorBar() const
 	MenuFillItemImages[ITM_RED] = "images\\MenuItems\\Menu_Red.JPG";
 	MenuFillItemImages[ITM_GREEN] = "images\\MenuItems\\Menu_Green.JPG";
 	MenuFillItemImages[ITM_BLUE] = "images\\MenuItems\\Menu_Blue.jpg";
-	 
+
+	MenuFillItemImages[ITM_WHITE ] = "images\\MenuItems\\Menu_White.JPG";
+	MenuFillItemImages[ITM_BLACK ] = "images\\MenuItems\\Menu_Black.jpg";
+	MenuFillItemImages[ITM_BROWN ] = "images\\MenuItems\\Menu_Brown.JPG";
+	MenuFillItemImages[ITM_YELLOW] = "images\\MenuItems\\Menu_Yellow.JPG";
+	MenuFillItemImages[ITM_ORANGE] = "images\\MenuItems\\Menu_Orange.JPG";
+
+
 
 	///TODO: write code to create Color mode menu
 	for (int i = 0; i < Fill_Color_ITM_COUNT; i++)
 		pWind->DrawImage(MenuFillItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
+
+	//Draw a line under the toolbar
+	pWind->SetPen(RED, 3);
+	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
+}
+void GUI::CreatebackgroundBar() const
+{
+	CreateToolBar();
+	CreateStatusBar(); // clear the prev tool bar
+	UI.InterfaceMode = MODE_BACKGROUND;
+
+	string MenuItemImages[BACKGROUND_COLOR_ITM_COUNT];
+
+	MenuItemImages[ITM_BURLYWOOD] = "images\\MenuItems\\1.jpg";
+	MenuItemImages[ITM_LIGHTGOLDENRODYELLOW] = "images\\MenuItems\\2.jpg";
+	MenuItemImages[ITM_BLANCHEDALMOND] = "images\\MenuItems\\3.jpg";
+	  
+	///TODO: write code to create Color mode menu
+	for (int i = 0; i < BACKGROUND_COLOR_ITM_COUNT; i++)
+		pWind->DrawImage(MenuItemImages[i], i * UI.MenuItemWidth, 0, UI.MenuItemWidth, UI.ToolBarHeight);
 
 	//Draw a line under the toolbar
 	pWind->SetPen(RED, 3);

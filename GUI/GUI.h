@@ -34,6 +34,7 @@ public:
 	void CreateSizeBar() const;
 	void CreateDrawColorBar() const; // toolbar for draw colors 
 	void CreateFillColorBar() const; // toolbar for fill colors 
+	void CreatebackgroundBar() const;
 	void CreateToolBar() const;
 	
 	// -- Figures Drawing functions

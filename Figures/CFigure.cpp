@@ -70,6 +70,12 @@ string CFigure::ConvertToString(color _color)
 	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
 	else if (_color == ORANGE) return "ORANGE";
 	else if (_color == TURQUOISE) return "TURQUOISE";
+	//brakat
+	else if (_color == BROWN) return "BROWN";
+	else if (_color == BURLYWOOD) return "BURLYWOOD";
+	else if (_color == BLANCHEDALMOND) return "BLANCHEDALMOND";
+	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
+
 }
 
 color CFigure::ConvertToColor(string color_as_string)
@@ -90,6 +96,16 @@ color CFigure::ConvertToColor(string color_as_string)
 		return ORANGE;
 	else if (color_as_string == "TURQUOISE")
 		return TURQUOISE;
+
+	//brakat 
+	else if (color_as_string == "BROWN")
+		return BROWN;
+	else if (color_as_string == "BURLYWOOD")
+		return BURLYWOOD;
+	else if (color_as_string == "LIGHTGOLDENRODYELLOW")
+		return LIGHTGOLDENRODYELLOW;
+	else if (color_as_string == "BLANCHEDALMOND")
+		return BLANCHEDALMOND;
 	else
 		return BLACK;
 }
