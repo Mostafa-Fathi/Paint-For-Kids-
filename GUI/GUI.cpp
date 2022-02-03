@@ -121,6 +121,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_SAVE: return SAVE;
 			case ITM_DEL:return DEL;
 			case ITM_LOAD: return LOAD;
+			case ITM_MULSEL: return MULTI_SELECT;
 
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -317,6 +318,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
+	MenuItemImages[ITM_MULSEL] = "images\\MenuItems\\SelectMany.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 	
 

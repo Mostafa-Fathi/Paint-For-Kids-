@@ -10,6 +10,7 @@
 #include "Actions/ActionSave.h"
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionExit.h"
+#include "Actions/ActionSelectMany.h"
 #include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
@@ -105,22 +106,31 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case BRING_FRONT:
 			newAct = new ActionBringFront(this);
 			break;
+
 		case TO_PLAY:
 			newAct = new ActionSwitchToPlay(this);
 			break;
+
 		case TO_DRAW:
 			newAct = new ActionSwitchToDraw(this);
 			break;
+
 		case SAVE:
 			newAct = new ActionSave(this/*, FigCount*/);
 			break;
+
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
-		case DEL:
 
+		case DEL:
 			newAct= new ActionDelete(this);
 			break;
+
+		case MULTI_SELECT:
+			newAct = new ActionSelectMany(this);
+			break;
+
 		case EXIT:
 			newAct = new ActionExit(this);
 			break;
@@ -345,3 +355,14 @@ void ApplicationManager::DeleteSelectedFig() {
 		pGUI->PrintMessage("Firstly, Select a Figure");
 
 }
+
+void ApplicationManager::UnSelectAllFig()
+{
+	for (int i = (FigCount - 1); i >= 0; i--) {
+		if (FigList[i]->IsSelected()) {
+			FigList[i]->SetSelected(false);
+			FigList[i]->ChngDrawClr(FigList[i]->GetPreviousDrawColor());
+		}
+	}
+}
+

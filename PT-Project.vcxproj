@@ -140,6 +140,7 @@
     <ClCompile Include="Actions\ActionDrawColor.cpp" />
     <ClCompile Include="Actions\ActionFillColor.cpp" />
     <ClCompile Include="Actions\ActionSelect.cpp" />
+    <ClCompile Include="Actions\ActionSelectMany.cpp" />
     <ClCompile Include="Actions\ActionSendToBack.cpp" />
     <ClCompile Include="Actions\ActionSwitchToDraw.cpp" />
     <ClCompile Include="Actions\ActionSwitchToPlay.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="Actions\ActionDrawColor.h" />
     <ClInclude Include="Actions\ActionFillColor.h" />
     <ClInclude Include="Actions\ActionSelect.h" />
+    <ClInclude Include="Actions\ActionSelectMany.h" />
     <ClInclude Include="Actions\ActionSendToBack.h" />
     <ClInclude Include="Actions\ActionSwitchToDraw.h" />
     <ClInclude Include="Actions\ActionSwitchToPlay.h" />
