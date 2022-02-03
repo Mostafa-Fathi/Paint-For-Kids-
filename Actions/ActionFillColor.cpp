@@ -32,7 +32,7 @@ void ActionFillColor::Execute()
 			Selected->ChngFillClr(RED);
 		else {
 			UI.ShapeIsFilled = true;
-			UI.FillColor = RED;
+			UI.FillColor = RED; 
 		}
 	}
 
@@ -60,6 +60,62 @@ void ActionFillColor::Execute()
 		}
 
 	} 
+	else if (pAct == WHITEFILL)
+	{
+		pGUI->PrintMessage("WHITE clicked");
+
+		if (Selected != NULL)
+			Selected->ChngFillClr(WHITE);
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = WHITE;
+		}
+	}
+	else if (pAct == BLACKFILL)
+	{
+		pGUI->PrintMessage("black clicked");
+
+		if (Selected != NULL)
+			Selected->ChngFillClr(BLACK);
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = BLACK;
+		}
+	}
+	else if (pAct == BROWNFILL)
+	{
+		pGUI->PrintMessage("brown clicked");
+
+		if (Selected != NULL)
+			Selected->ChngFillClr(BURLYWOOD);
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = BURLYWOOD;
+		}
+	}
+	else if (pAct ==  ORANGEFILL)
+	{
+		pGUI->PrintMessage("orange clicked");
+
+		if (Selected != NULL)
+			Selected->ChngFillClr(ORANGE);
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = ORANGE;
+		}
+	}
+	else if (pAct == YELLOWFILL)
+	{
+		pGUI->PrintMessage("YELLOW clicked");
+
+		if (Selected != NULL)
+			Selected->ChngFillClr(YELLOW);
+		else {
+			UI.ShapeIsFilled = true;
+			UI.FillColor = YELLOW;
+		}
+	}
+	 
 	pOut->ClearDrawArea(); 
 
 	pOut->CreateDrawToolBar();

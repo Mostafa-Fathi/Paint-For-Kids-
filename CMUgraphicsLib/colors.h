@@ -39,7 +39,12 @@ bool operator!=(color a, color b);
 
 */
 
-const color SNOW = color(255, 250, 250);
+const color SNOW = 
+
+
+
+
+(255, 250, 250);
 const color GHOSTWHITE = color(248, 248, 255);
 const color WHITESMOKE = color(245, 245, 245);
 const color GAINSBORO = color(220, 220, 220);

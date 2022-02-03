@@ -15,6 +15,11 @@ enum ActionType //The actions supported (you can add more if needed)
 	REDFILL,		//red
 	BLUEFILL,		//blue
 	GREENFILL,		//green
+	WHITEFILL,
+	BLACKFILL,
+	BROWNFILL,
+	YELLOWFILL,
+	ORANGEFILL,
 
 	//draw colors
 	DRAW_COLOR,
@@ -23,7 +28,14 @@ enum ActionType //The actions supported (you can add more if needed)
 	DRAW_RED,
 	DRAW_ORANGE,
 
-	CHNG_DRAW_CLR,	//Change the drawing color
+	//background color 
+	BACKGROUND_COLOR,
+	BACKG_BURLYWOOD,
+	BACKG_blanchedalmond,
+	BACKG_LIGHTGOLDENRODYELLOW,
+
+	CHNG_DRAW_CLR,	//Change the drawing 
+
 	CHNG_FILL_CLR,	//Change the filling color
 	CHNG_BK_CLR,	//Change background color
 	DEL,			//Delete a figure(s)
