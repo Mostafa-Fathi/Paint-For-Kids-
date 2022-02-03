@@ -57,6 +57,8 @@ public:
 
 	void SendSelectedFigBack();
 
+	void ShowAllFig();
+
 	void DeleteSelectedFig();
 
 	// -- Convert Colors to string and string to colors

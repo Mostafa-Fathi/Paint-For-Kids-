@@ -321,6 +321,12 @@ void ApplicationManager::SendSelectedFigBack() {
 		pGUI->PrintMessage("Firstly, Select a fig");
 
 }
+void ApplicationManager::ShowAllFig() {
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->ShowMe();
+	}
+}
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();
 

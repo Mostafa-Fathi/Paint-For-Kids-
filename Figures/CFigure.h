@@ -10,6 +10,7 @@ class CFigure
 protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
+	bool Hidden;
 
 	/// Add more parameters if needed.
 
@@ -17,6 +18,8 @@ public:
 	int ID;		//Each figure has an ID
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
+	void HideMe();
+	void ShowMe();
 	void SetSelected(bool);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 

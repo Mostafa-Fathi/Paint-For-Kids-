@@ -4,10 +4,19 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	Hidden = false;
 }
 
 CFigure::CFigure()
 {
+
+}
+void CFigure::HideMe() {
+
+	Hidden = true;
+}
+void CFigure::ShowMe() {
+	Hidden = false;
 
 }
 
