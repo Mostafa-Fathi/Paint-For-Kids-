@@ -13,7 +13,8 @@ enum GUI_MODE	//Graphical user interface mode
 	MODE_PLAY,	//Playing mode
 	MODE_RESIZE,
 	MODE_DRAWCOLOR,
-	MODE_FILLCOLOR  
+	MODE_FILLCOLOR,
+	MODE_BACKGROUND
 };
 
 enum DrawMenuItem //The items of the Draw menu (you should add more items)
@@ -26,14 +27,15 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 	//TODO: Add more items names here
 	ITM_DRAW_COLOR,    //draw color icon
 	ITM_FILL_COLOR,   //fill color icon
+	ITM_BACKGROUND_COLOR,
 	ITM_RESIZE,		//resize menu
 	ITM_SEND_TO_BACK,
 	ITM_BRING_TO_FORWARED,
-	ITM_SWITCH_PLAY_MODE,
 	ITM_SAVE,
 	ITM_LOAD,
 	ITM_DEL,
 	ITM_MULSEL,
+	ITM_SWITCH_PLAY_MODE,
 	ITM_EXIT,//Exit item
 
 	//no. of menu items ==> This should be the last line in this enum
@@ -50,14 +52,21 @@ enum SizeMenuItem // The items of colors
 
 	SIZE_ITM_COUNT
 };
+//background colors
+enum BackgroundMenuItem // The items of draw colors
+{
+	ITM_BLANCHEDALMOND,
+	ITM_BURLYWOOD,
+	ITM_LIGHTGOLDENRODYELLOW,
+	BACKGROUND_COLOR_ITM_COUNT
+};
 //draw colors
 enum DrawColorMenuItem // The items of draw colors
 {
 	ITM_DORANGE,
 	ITM_DRED,
 	ITM_DGREEN,
-	ITM_DBLUE,
-
+	ITM_DBLUE, 
 	Draw_Color_ITM_COUNT
 };
 //mbfillcolor
@@ -67,10 +76,16 @@ enum FillColorMenuItem // The items of fill colors
 	ITM_RED,
 	ITM_GREEN,
 	ITM_BLUE,
-	 
+	ITM_WHITE,
+	ITM_BLACK,
+	ITM_BROWN,
+	ITM_YELLOW,
+	ITM_ORANGE,
+
 	Fill_Color_ITM_COUNT
 };
 
+ 
 enum PlayMenuItem //The items of the Play menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu

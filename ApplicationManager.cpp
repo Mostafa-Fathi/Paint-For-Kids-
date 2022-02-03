@@ -16,6 +16,7 @@
 #include "Actions/ActionDrawColor.h"
 #include "Actions/ActionSwitchToPlay.h"
 #include "Actions/ActionSwitchToDraw.h"
+#include "Actions/ActionUiBackground.h"
 
 
  
@@ -98,7 +99,9 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case FILL_COLOR:
 			newAct = new ActionFillColor(this); 
 			break;
-
+		case BACKGROUND_COLOR:
+			newAct = new ActionUiBackground(this);
+			break;
 		case SEND_BACK:
 			newAct = new ActionSendToBack(this);
 			break;
@@ -238,7 +241,13 @@ string ApplicationManager::ConvertToString(color _color)
 	else if (_color == GREEN) return "GREEN";
 	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
 	else if (_color == ORANGE) return "ORANGE";
-	else if (_color == TURQUOISE) return "TURQUOISE";
+	else if (_color == TURQUOISE) return "TURQUOISE"; 
+	//brakat
+	else if (_color == BROWN) return "BROWN";
+	else if (_color == BURLYWOOD) return "BURLYWOOD";
+	else if (_color == LIGHTGOLDENRODYELLOW) return "LIGHTGOLDENRODYELLOW";
+	else if (_color == BLANCHEDALMOND) return "BLANCHEDALMOND";
+	
 }
 
 color ApplicationManager::ConvertToColor(string color_as_string)
@@ -259,6 +268,14 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 		return ORANGE;
 	else if (color_as_string == "TURQUOISE")
 		return TURQUOISE;
+	else if (color_as_string == "BROWN")
+		return BROWN;
+	else if (color_as_string == "BURLYWOOD")
+		return BURLYWOOD;
+	else if (color_as_string == "LIGHTGOLDENRODYELLOW")
+		return LIGHTGOLDENRODYELLOW;
+	else if (color_as_string == "BLANCHEDALMOND")
+		return BLANCHEDALMOND;
 	else
 		return BLACK;
 }
@@ -330,6 +347,12 @@ void ApplicationManager::SendSelectedFigBack() {
 	else
 		pGUI->PrintMessage("Firstly, Select a fig");
 
+}
+void ApplicationManager::ShowAllFig() {
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->ShowMe();
+	}
 }
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();

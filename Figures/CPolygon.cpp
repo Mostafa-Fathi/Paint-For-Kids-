@@ -17,41 +17,47 @@ CPolygon::CPolygon()
 void CPolygon::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawRect to draw a hexagon on the screen	
-	pGUI->DrawPolygon(TopLeftCorner, length, FigGfxInfo, Selected);
+	if (Hidden==false)
+	{
+		pGUI->DrawPolygon(TopLeftCorner, length, FigGfxInfo, Selected);
+	}
+	
 }
 
 bool CPolygon::HasPoint(int x, int y) const {
 	boolean c = false;
-	int xs[6];
-	int ys[6];
+	if (Hidden == false) {
+		int xs[6];
+		int ys[6];
 
-	int nOfSides = 6;
-	
-	float const PI = 3.14159265;
-	const int nsides = 6;
-	int radius = length / 2;
-	float angle = 0.0f;
-	float incr = 2.0 * PI / nsides;
+		int nOfSides = 6;
+
+		float const PI = 3.14159265;
+		const int nsides = 6;
+		int radius = length / 2;
+		float angle = 0.0f;
+		float incr = 2.0 * PI / nsides;
 
 
-	int newX = radius * cos(angle) + Center.x;
-	int newY = radius * sin(angle) + Center.y;
+		int newX = radius * cos(angle) + Center.x;
+		int newY = radius * sin(angle) + Center.y;
 
-	for (int i = 0; i < nsides; i++)
-	{
-		int oldX = newX;
-		int oldY = newY;
-		angle += incr;
-		newX = radius * cos(angle) + Center.x;
-		newY = radius * sin(angle) + Center.y;
-		xs[i] = oldX;
-		ys[i] = oldY;
-	}
-	for (int i = 0, j = 5; i < 6; j = i++)
-	{
-		if (((ys[i] > y) != (ys[j] > y))
-			&& (x < (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]))
-			c = !c;
+		for (int i = 0; i < nsides; i++)
+		{
+			int oldX = newX;
+			int oldY = newY;
+			angle += incr;
+			newX = radius * cos(angle) + Center.x;
+			newY = radius * sin(angle) + Center.y;
+			xs[i] = oldX;
+			ys[i] = oldY;
+		}
+		for (int i = 0, j = 5; i < 6; j = i++)
+		{
+			if (((ys[i] > y) != (ys[j] > y))
+				&& (x < (xs[j] - xs[i]) * (y - ys[i]) / (ys[j] - ys[i]) + xs[i]))
+				c = !c;
+		}
 	}
 	return c;
 }
@@ -120,6 +126,8 @@ void CPolygon::Load(ifstream& fin)
 	FigGfxInfo.isFilled = is_fill;
 	FigGfxInfo.BorderWdth = 3;
 	Selected = false;
+	Hidden = false;
+
 
 	Center.x = TopLeftCorner.x + length / 2;
 	Center.y = TopLeftCorner.y + length / 2;
