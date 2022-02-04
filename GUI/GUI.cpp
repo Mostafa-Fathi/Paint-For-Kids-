@@ -224,7 +224,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_DBLUE: return DRAW_BLUE;
 			case ITM_DGREEN: return DRAW_GREEN;
 
-			default: return DRAW_RED;//  EMPTY;	//A click on empty place in desgin toolbar
+			default: return EMPTY; //DRAW_RED;// 	//A click on empty place in desgin toolbar
 			}
 		}
 
