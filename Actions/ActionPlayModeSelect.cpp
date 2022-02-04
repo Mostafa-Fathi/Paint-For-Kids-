@@ -15,8 +15,6 @@ void ActionPlayModeSelect::Execute() {
 				pManager->Game->SelectedType = fig->GetType();
 				pManager->Game->SelectedColor = fig->GetFillColor();
 				pManager->CalcMaxScore();
-				
-
 				pManager->Game->SelectedFillState = fig->IsFilled();
 			}
 			switch (pManager->Game->Mode) {

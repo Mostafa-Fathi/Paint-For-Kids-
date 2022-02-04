@@ -52,19 +52,33 @@ void ApplicationManager::CalcMaxScore() {
 
 	case ByColor:
 		for (int i = 0; i < FigCount; i++) {
-			if (FigList[i]->GetFillColor() == Game->SelectedColor)
-			{
-				Game->MaxScore++;
+			if (Game->SelectedFillState) {
+				if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
+				{
+					Game->MaxScore++;
+				}
 			}
+			else if (!FigList[i]->IsFilled())
+				{
+					Game->MaxScore++;
+				}
+			
 		}
 		break;
 	case ByTypeAndColor:
 		for (int i = 0; i < FigCount; i++) {
-			if (FigList[i]->GetType() == Game->SelectedType
-				&& FigList[i]->GetFillColor() == Game->SelectedColor)
-			{
-				Game->MaxScore++;
-
+			if (FigList[i]->GetType() == Game->SelectedType) {
+				if (Game->SelectedFillState) {
+					if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
+					{
+						Game->MaxScore++;
+					}
+				}
+				else if (!FigList[i]->IsFilled())
+				{
+						Game->MaxScore++;
+				}
+				
 			}
 			
 		}
