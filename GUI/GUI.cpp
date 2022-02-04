@@ -348,7 +348,7 @@ void GUI::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
-	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpeg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\MenuItems\\fill.JPG";
 	MenuItemImages[ITM_DRAW_COLOR] = "images\\MenuItems\\brush.JPG";
 	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\MenuItems\\ui2.JPG";
@@ -360,7 +360,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
-	MenuItemImages[ITM_MULSEL] = "images\\MenuItems\\SelectMany.jpg";
+	MenuItemImages[ITM_MULSEL] = "images\\MenuItems\\SelectMany.jpeg";
 	MenuItemImages[ITM_SWITCH_PLAY_MODE] = "images\\MenuItems\\playMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 

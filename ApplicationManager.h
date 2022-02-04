@@ -52,7 +52,10 @@ public:
 	int getFigCount();
 	//int getFigMaxCount();
 	//CFigure** getFigList();
-	virtual void LoadTest();
+    void LoadTest();
+
+	void LoadSteps(ifstream &file);
+
 	void ClearFigList();
 
 	void BringSelectedFigFront();
