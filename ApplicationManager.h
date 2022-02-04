@@ -46,7 +46,9 @@ public:
 	CFigure* GetSelectedFigure();
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() const;
+	void CalcMaxScore();
+	//Redraws all the drawing window	
 	int getFigCount();
 	//int getFigMaxCount();
 	//CFigure** getFigList();

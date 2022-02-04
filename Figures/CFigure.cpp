@@ -112,4 +112,5 @@ color CFigure::ConvertToColor(string color_as_string)
 		return BLANCHEDALMOND;
 	else
 		return BLACK;
+	
 }

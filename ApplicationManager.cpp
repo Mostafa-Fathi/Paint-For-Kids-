@@ -38,6 +38,40 @@ ApplicationManager::ApplicationManager()
 		FigList[i] = NULL;	
 }
 
+void ApplicationManager::CalcMaxScore() {
+	switch (Game->Mode) {
+	case ByType:
+		for (int i =0 ;i<FigCount;i++){
+			if (FigList[i]->GetType() == Game->SelectedType)
+			{
+				Game->MaxScore++;
+			}
+		}
+		break;
+		
+
+	case ByColor:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->GetFillColor() == Game->SelectedColor)
+			{
+				Game->MaxScore++;
+			}
+		}
+		break;
+	case ByTypeAndColor:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->GetType() == Game->SelectedType
+				&& FigList[i]->GetFillColor() == Game->SelectedColor)
+			{
+				Game->MaxScore++;
+
+			}
+			
+		}
+		break;
+	}
+
+}
 int ApplicationManager::getFigCount() {
 	return FigCount;
 }
@@ -165,6 +199,8 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	}	
 	return newAct;
 }
+
+
 //////////////////////////////////////////////////////////////////////
 //Executes the created Action
 void ApplicationManager::ExecuteAction(Action* &pAct) 

@@ -94,7 +94,11 @@ void CSquare::Load(ifstream & fin)
 		is_fill = true;
 		FigGfxInfo.FillClr = ConvertToColor(fill);
 	}
-
+	else {
+		is_fill = false;
+		FigGfxInfo.FillClr = BLACK;
+	
+	}
 	FigGfxInfo.DrawClr = ConvertToColor(draw);
 	FigGfxInfo.isFilled = is_fill;
 	FigGfxInfo.BorderWdth = 3;

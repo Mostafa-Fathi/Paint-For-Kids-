@@ -104,12 +104,14 @@ public:
 	CurrentPlayMode Mode;
 	int Valid;
 	int InValid;
+	int MaxScore;
 	figure SelectedType;
 	color SelectedColor;
 	Game() {
 		Mode = None;
 		Valid = 0;
 		InValid = 0;
+		MaxScore = 0;
 	}
 };
 
