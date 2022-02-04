@@ -351,7 +351,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpeg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\MenuItems\\fill.JPG";
 	MenuItemImages[ITM_DRAW_COLOR] = "images\\MenuItems\\brush.JPG";
-	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\MenuItems\\ui2.JPG";
+	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\MenuItems\\ui2.jpg";
 
 	 
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
