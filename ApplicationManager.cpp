@@ -1,4 +1,3 @@
-#include <iostream>
 #include "ApplicationManager.h"
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
@@ -11,6 +10,8 @@
 #include "Actions/ActionSave.h"
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionExit.h"
+#include "Actions/ActionSelectMany.h"
+#include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
 #include "Actions/ActionSwitchToPlay.h"
@@ -136,6 +137,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case DEL:
 			newAct= new ActionDelete(this);
+			break;
+
+		case MULTI_SELECT:
+			newAct = new ActionSelectMany(this);
 			break;
 
 		case EXIT:
@@ -394,3 +399,14 @@ void ApplicationManager::DeleteSelectedFig() {
 		pGUI->PrintMessage("Firstly, Select a Figure");
 
 }
+
+void ApplicationManager::UnSelectAllFig()
+{
+	for (int i = (FigCount - 1); i >= 0; i--) {
+		if (FigList[i]->IsSelected()) {
+			FigList[i]->SetSelected(false);
+			FigList[i]->ChngDrawClr(FigList[i]->GetPreviousDrawColor());
+		}
+	}
+}
+

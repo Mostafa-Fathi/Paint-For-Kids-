@@ -193,6 +193,9 @@
     <ClCompile Include="Actions\ActionSwitchToDraw.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionSelectMany.cpp">
+      <Filter>Action Classes</Filter>
+    </ClCompile>
     <ClCompile Include="Actions\ActionUiBackground.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
