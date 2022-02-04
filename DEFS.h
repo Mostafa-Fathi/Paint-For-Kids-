@@ -106,6 +106,7 @@ public:
 	int InValid;
 	figure SelectedType;
 	color SelectedColor;
+	bool SelectedFillState;
 	Game() {
 		Mode = None;
 		Valid = 0;
