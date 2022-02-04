@@ -45,9 +45,6 @@ void ActionDrawColor::Execute()
 		else UI.DrawColor = GREEN;
 
 	}
-
-
-
 	pOut->CreateDrawToolBar();
 
 	return;
