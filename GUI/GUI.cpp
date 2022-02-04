@@ -493,7 +493,7 @@ void GUI::CreatePlayToolBar() const
 	MenuItemImages[ITM_TYPE] = "images\\MenuItems\\byShapes.jpg";
 	MenuItemImages[ITM_COLOR] = "images\\MenuItems\\byColors.jpg";
 	MenuItemImages[ITM_TYPE_COLOR] = "images\\MenuItems\\byShapesAndColors.jpg";
-	MenuItemImages[ITM_SWITCH_DRAW_MODE] = "images\\MenuItems\\drawRed.JPG";
+	MenuItemImages[ITM_SWITCH_DRAW_MODE] = "images\\MenuItems\\Draw.jpg";
 
 
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)

@@ -21,7 +21,7 @@ void ActionSave::Execute() {
 	
 	if (!FileName.empty()) {
 		ofstream OutFile;
-		OutFile.open(FileName + ".txt");
+		OutFile.open(".\\saved\\" + FileName + ".txt");
 		OutFile << pManager->ConvertToString(UI.DrawColor) << "\t" << pManager->ConvertToString(UI.FillColor) << "\t" << pManager->ConvertToString(UI.BkGrndColor) << "\n" << pManager->getFigCount() << "\n";
 		pManager->SaveAll(OutFile);
 		pGUI->PrintMessage("File is saved successfully");
