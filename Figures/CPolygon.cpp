@@ -116,7 +116,7 @@ void CPolygon::Load(ifstream& fin)
 	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
 		>> length >> draw >> fill;
 
-	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	if (fill != "NO_FILL")
 	{
 		is_fill = true;
 		FigGfxInfo.FillClr = ConvertToColor(fill);

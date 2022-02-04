@@ -91,7 +91,7 @@ void CEllipse::Load(ifstream& fin)
 	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
 		>> BottomRightCorner.x >> BottomRightCorner.y >> draw >> fill;
 
-	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	if (fill != "NO_FILL")
 	{
 		is_fill = true;
 		FigGfxInfo.FillClr = ConvertToColor(fill);

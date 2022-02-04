@@ -21,7 +21,10 @@
 #include "Actions/ActionPickByColor.h"
 #include "Actions/ActionPickByTypeColor.h"
 #include "Actions/ActionPlayModeSelect.h"
-
+#include "Figures/CEllipse.h"
+#include "Figures\CPolygon.h"
+#include "Figures\CSquare.h"
+#include <fstream>
 
 
  
@@ -361,8 +364,34 @@ void ApplicationManager::LoadTest()
 			ActionSave ActionS(this/*, getFigCount()*/);
 			ActionS.Execute();
 		}
-		ClearFigList();
-		pGUI->ClearDrawArea();
+
+	}
+}
+void ApplicationManager::LoadSteps(ifstream &file)
+{
+	int numberOfsapes;
+	file >> numberOfsapes;
+	string figType;
+	CFigure* Figure;
+
+	for (int x = 0; x < numberOfsapes; x++)
+	{
+		file >> figType;
+		if (figType == "SQR")
+		{
+			Figure = new CSquare;
+		}
+		else if (figType == "POLY")
+		{
+			Figure = new CPolygon;
+		}
+		else if (figType == "ELPS")
+		{
+			Figure = new CEllipse;
+		}
+
+		Figure->Load(file);
+		AddFigure(Figure);
 	}
 }
 /////////////////////////////////////////////////////////////////////////////////////////
