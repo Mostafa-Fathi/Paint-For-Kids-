@@ -2,12 +2,17 @@
 #include "..\ApplicationManager.h"
 #include "..\GUI\GUI.h"
 #include "..\CMUgraphicsLib\colors.h"
+#include <iostream>
+#include "ActionDelete.h"
 
 ActionSelectMany::ActionSelectMany(ApplicationManager* pApp) :Action(pApp) {}
 
 //Execute the action
 void ActionSelectMany::Execute() {
 	bool continu = true;
+	GUI* pOut = pManager->GetGUI();
+	pOut->PrintMessage("Select Muliple then press Delete to Delete Muliple Shapes ");
+
 	while (continu)
 	{
 		int x, y;
@@ -37,6 +42,12 @@ void ActionSelectMany::Execute() {
 		}
 		else {
 			continu = false;
+			int ClickedItemOrder = (x / UI.MenuItemWidth);
+			if (ClickedItemOrder == ITM_DEL) {
+				Action* DelMulti = new ActionDelete(pManager);
+				DelMulti->Execute();
+				delete DelMulti;
+			}
 			pManager->UnSelectAllFig();
 			pGUI->ClearStatusBar();
 

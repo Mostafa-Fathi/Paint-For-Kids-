@@ -382,22 +382,24 @@ void ApplicationManager::ShowAllFig() {
 /////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();
-
 	if (Selected != NULL)
 	{
-		int Index = Selected->ID - 1;
-		for (int i = Index; i < FigCount - 1; i++) {
-			//cout << "\n fig count is =" << FigCount - 1;
-			FigList[i] = FigList[i + 1];
-			FigList[i]->ID = i + 1;
+		while (Selected != NULL) {
+			int Index = Selected->ID - 1;
+			for (int i = Index; i < FigCount - 1; i++) {
+				//cout << "\n fig count is =" << FigCount - 1;
+				FigList[i] = FigList[i + 1];
+				FigList[i]->ID = i + 1;
 
-			//cout << "\n id of fig is :" << FigList[i]->ID;
+				//cout << "\n id of fig is :" << FigList[i]->ID;
+			}
+
+			FigCount--;
+			FigList[FigCount] = NULL;
+
+			delete Selected;
+			Selected = GetSelectedFigure();
 		}
-		
-		FigCount--;
-		FigList[FigCount] = NULL;
-		
-		delete Selected;
 		pGUI->ClearStatusBar();
 	}
 	else
