@@ -14,8 +14,8 @@ void ActionPlayModeSelect::Execute() {
 			if (pManager->Game->InValid == 0 && pManager->Game->Valid == 0) {
 				pManager->Game->SelectedType = fig->GetType();
 				pManager->Game->SelectedColor = fig->GetFillColor();
-				pManager->CalcMaxScore();
 				pManager->Game->SelectedFillState = fig->IsFilled();
+				pManager->CalcMaxScore();
 			}
 			switch (pManager->Game->Mode) {
 			case ByType:
@@ -67,9 +67,10 @@ void ActionPlayModeSelect::Execute() {
 						else pManager->Game->InValid++;
 					}
 				}
+				else pManager->Game->InValid++;
 				break;
 			}
-			if (pManager->Game->Valid == pManager->Game->MaxScore && pManager->Game->MaxScore) {
+			if (pManager->Game->Valid == pManager->Game->MaxScore && pManager->Game->MaxScore!=0) {
 				pManager->UpdateInterface();
 				pGUI->PrintMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid));
 				string message = "\tYou reached to Max Score ="+ to_string(pManager->Game->MaxScore)+" \n\twith clicks  =" + to_string(pManager->Game->InValid + pManager->Game->Valid);
@@ -89,7 +90,7 @@ void ActionPlayModeSelect::Execute() {
 			}
 
 			pManager->UpdateInterface();
-			pGUI->PrintMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid));
+			pGUI->PrintMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid)+ ", Max Score = " + to_string(pManager->Game->MaxScore));
 		}
 	}
 	else {
