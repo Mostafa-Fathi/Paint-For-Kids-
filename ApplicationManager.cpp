@@ -1,3 +1,4 @@
+#include <iostream>
 #include "ApplicationManager.h"
 #include "Actions/ActionAddSquare.h"
 #include "Actions/ActionAddEllipse.h"
@@ -11,7 +12,6 @@
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionExit.h"
 #include "Actions/ActionSelectMany.h"
-#include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
 #include "Actions/ActionSwitchToPlay.h"
@@ -270,7 +270,7 @@ string ApplicationManager::ConvertToString(color _color)
 	else if (_color == BLANCHEDALMOND) return "BLANCHEDALMOND";
 	
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 color ApplicationManager::ConvertToColor(string color_as_string)
 {
 	if (color_as_string == "BLUE")
@@ -300,7 +300,7 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 	else
 		return BLACK;
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::LoadTest()
 {
 	if (FigCount > 0)
@@ -315,6 +315,7 @@ void ApplicationManager::LoadTest()
 		pGUI->ClearDrawArea();
 	}
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::ClearFigList()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -323,6 +324,7 @@ void ApplicationManager::ClearFigList()
 	}
 	FigCount = 0;
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::BringSelectedFigFront() {
 	CFigure* Selected = GetSelectedFigure();
 	if (Selected != NULL)
@@ -345,6 +347,7 @@ void ApplicationManager::BringSelectedFigFront() {
 		pGUI->PrintMessage("Firstly, Select a fig");
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::SendSelectedFigBack() {
 
 	CFigure* Selected = GetSelectedFigure();
@@ -369,12 +372,14 @@ void ApplicationManager::SendSelectedFigBack() {
 		pGUI->PrintMessage("Firstly, Select a fig");
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::ShowAllFig() {
 	for (int i = 0; i < FigCount; i++)
 	{
 		FigList[i]->ShowMe();
 	}
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();
 
@@ -399,7 +404,7 @@ void ApplicationManager::DeleteSelectedFig() {
 		pGUI->PrintMessage("Firstly, Select a Figure");
 
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::UnSelectAllFig()
 {
 	for (int i = (FigCount - 1); i >= 0; i--) {
