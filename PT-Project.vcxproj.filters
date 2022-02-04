@@ -359,6 +359,9 @@
     <ClInclude Include="Actions\ActionPickByTypeColor.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ActionSelectMany.h">
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PT Project.rc" />
