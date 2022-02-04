@@ -135,6 +135,10 @@
     <ClCompile Include="Actions\ActionExit.cpp" />
     <ClCompile Include="Actions\ActionDelete.cpp" />
     <ClCompile Include="Actions\ActionLoad.cpp" />
+    <ClCompile Include="Actions\ActionPickByColor.cpp" />
+    <ClCompile Include="Actions\ActionPickByType.cpp" />
+    <ClCompile Include="Actions\ActionPickByTypeColor.cpp" />
+    <ClCompile Include="Actions\ActionPlayModeSelect.cpp" />
     <ClCompile Include="Actions\ActionResize.cpp" />
     <ClCompile Include="Actions\ActionSave.cpp" />
     <ClCompile Include="Actions\ActionDrawColor.cpp" />
@@ -196,6 +200,10 @@
     <ClInclude Include="Actions\ActionDelete.h" />
     <ClInclude Include="Actions\ActionExit.h" />
     <ClInclude Include="Actions\ActionLoad.h" />
+    <ClInclude Include="Actions\ActionPickByColor.h" />
+    <ClInclude Include="Actions\ActionPickByType.h" />
+    <ClInclude Include="Actions\ActionPickByTypeColor.h" />
+    <ClInclude Include="Actions\ActionPlayModeSelect.h" />
     <ClInclude Include="Actions\ActionResize.h" />
     <ClInclude Include="Actions\ActionSave.h" />
     <ClInclude Include="Actions\ActionDrawColor.h" />

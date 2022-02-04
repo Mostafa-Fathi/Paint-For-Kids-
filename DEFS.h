@@ -87,5 +87,31 @@ struct GfxInfo	//Graphical info of each figure (you may add more members)
 	//float Resize_Factor;//Size Factor
 };
 
+enum CurrentPlayMode {
+	None,
+	ByType,
+	ByColor,
+	ByTypeAndColor
+};
+
+enum figure {
+	Squr,
+	Elps,
+	Hexa
+};
+
+class Game {
+public:
+	CurrentPlayMode Mode;
+	int Valid;
+	int InValid;
+	figure SelectedType;
+	color SelectedColor;
+	Game() {
+		Mode = None;
+		Valid = 0;
+		InValid = 0;
+	}
+};
 
 #endif

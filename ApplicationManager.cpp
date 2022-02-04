@@ -1,8 +1,9 @@
+#include <iostream>
 #include "ApplicationManager.h"
-#include "Actions\ActionAddSquare.h"
-#include "Actions\ActionAddEllipse.h"
-#include "Actions\ActionAddPolygon.h"
-#include "Actions\ActionSelect.h"
+#include "Actions/ActionAddSquare.h"
+#include "Actions/ActionAddEllipse.h"
+#include "Actions/ActionAddPolygon.h"
+#include "Actions/ActionSelect.h"
 #include "Actions/ActionResize.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
@@ -10,12 +11,16 @@
 #include "Actions/ActionSave.h"
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionExit.h"
-#include <iostream>
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
 #include "Actions/ActionSwitchToPlay.h"
 #include "Actions/ActionSwitchToDraw.h"
 #include "Actions/ActionUiBackground.h"
+#include "Actions/ActionPickByType.h"
+#include "Actions/ActionPickByColor.h"
+#include "Actions/ActionPickByTypeColor.h"
+#include "Actions/ActionPlayModeSelect.h"
+
 
 
  
@@ -84,9 +89,11 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case DRAWING_AREA:
-			newAct = new ActionSelect(this);
+		{
+			if (UI.InterfaceMode == MODE_DRAW) newAct = new ActionSelect(this);
+			else if (UI.InterfaceMode == MODE_PLAY) newAct = new ActionPlayModeSelect(this);
 			break;
-
+		}
 		case RESIZE:
 			newAct = new ActionResize(this);
 			break;
@@ -98,9 +105,11 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case FILL_COLOR:
 			newAct = new ActionFillColor(this); 
 			break;
+
 		case BACKGROUND_COLOR:
 			newAct = new ActionUiBackground(this);
 			break;
+
 		case SEND_BACK:
 			newAct = new ActionSendToBack(this);
 			break;
@@ -118,7 +127,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case SAVE:
-			newAct = new ActionSave(this/*, FigCount*/);
+			newAct = new ActionSave(this);
 			break;
 
 		case LOAD:
@@ -132,7 +141,19 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case EXIT:
 			newAct = new ActionExit(this);
 			break;
-		
+
+		case PICK_BY_TYPE:
+			newAct = new ActionPickByType(this);
+			break;
+
+		case PICK_BY_COLOR:
+			newAct = new ActionPickByColor(this);
+			break;
+
+		case PICK_BY_TYPE_COLOR:
+			newAct = new ActionPickByTypeColor(this);
+			break;
+
 		case STATUS:	//a click on the status bar ==> no action
 			return NULL;
 			break;

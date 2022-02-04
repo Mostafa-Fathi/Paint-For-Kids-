@@ -13,4 +13,11 @@ void ActionSwitchToPlay::Execute()
 
 	pGUI->PrintMessage("Switched to Play mode");
 
+	pManager->Game = new Game();
+
+	CFigure* fig = pManager->GetSelectedFigure();
+	if (fig != NULL) {
+		fig->SetSelected(false);
+		fig->ChngDrawClr(fig->GetPreviousDrawColor());
+	}
 }

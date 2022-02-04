@@ -109,3 +109,7 @@ void CEllipse::Load(ifstream& fin)
 	radiusX = abs(TopLeftCorner.x - Center.x);
 	radiusY = abs(TopLeftCorner.y - Center.y);
 }
+
+figure CEllipse::GetType() const {
+	return Elps;
+}

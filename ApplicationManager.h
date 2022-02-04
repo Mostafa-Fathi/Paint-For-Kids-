@@ -22,8 +22,8 @@ private:
 
 public:	
 	int X, Y;
+	Game* Game;
 	ApplicationManager();
-	GUI* getGUI();
 
 	~ApplicationManager();
 

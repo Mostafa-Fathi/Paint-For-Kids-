@@ -22,7 +22,6 @@ public:
 	void ShowMe();
 	void SetSelected(bool);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
 	virtual void DrawMe(GUI*) const = 0;		//Draw the figure
 
 	//changes the figure's drawing color
@@ -33,6 +32,9 @@ public:
 
 	//changes the figure's filling color
 	void ChngFillClr(color Fclr);
+
+	//gets the current drawing color
+	color GetFillColor();
 
 	//gets the previous drawing color of the figure
 	color GetPreviousDrawColor();
@@ -49,6 +51,8 @@ public:
 	//Resize the figure
 	virtual bool Resize(float, const GUI*)  = 0;
 
+	//gets figure type
+	virtual figure GetType() const=0;
 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure

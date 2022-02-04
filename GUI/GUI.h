@@ -55,7 +55,7 @@ public:
 	int getCrntPenWidth() const;		//get current pen width
 	bool IsValueInDrawArea(int y) const;
 	bool IsValueInDrawArea(Point p) const;
-
+	GUI_MODE getCrntMode() const;
 };
 
 

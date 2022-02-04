@@ -12,6 +12,11 @@ void ActionSwitchToDraw::Execute()
 	pGUI->CreateDrawToolBar();
 
 	pGUI->PrintMessage("Switched to draw mode");
+
+	delete pManager->Game;
+
+	pManager->ShowAllFig();
+	pManager->UpdateInterface();
 }
 
 

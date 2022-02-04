@@ -289,7 +289,6 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_SWITCH_DRAW_MODE: return TO_DRAW;
 			default: return EMPTY;
 			}
-
 		}
 		else if (IsValueInDrawArea(y)) {
 			return DRAWING_AREA;
@@ -546,8 +545,11 @@ int GUI::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	
 
 }
-
-
+//////////////////////////////////////////////////////////////////////////////////////////
+GUI_MODE GUI::getCrntMode() const
+{
+	return UI.InterfaceMode;
+}
 
 
 //======================================================================================//

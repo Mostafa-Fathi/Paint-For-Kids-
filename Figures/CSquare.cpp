@@ -103,3 +103,6 @@ void CSquare::Load(ifstream & fin)
 	
 }
 
+figure CSquare::GetType() const {
+	return Squr;
+}

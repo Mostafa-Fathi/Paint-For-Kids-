@@ -13,7 +13,7 @@ void ActionExit::Execute() {
 	switch (returnedValue) {
 		case IDYES:
 		{
-			ActionSave* save = new ActionSave(pManager/*,pManager->getFigCount()*/);
+			ActionSave* save = new ActionSave(pManager);
 			save->Execute();
 		}
 	}

@@ -132,3 +132,6 @@ void CPolygon::Load(ifstream& fin)
 	Center.x = TopLeftCorner.x + length / 2;
 	Center.y = TopLeftCorner.y + length / 2;
 }
+figure CPolygon::GetType() const {
+	return Hexa;
+}

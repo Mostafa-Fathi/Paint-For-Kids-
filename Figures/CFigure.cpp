@@ -29,7 +29,6 @@ bool CFigure::IsSelected() const
 {
 	return Selected;
 }
-
 void CFigure::ChngDrawClr(color Dclr)
 {
 	if (Selected) {
@@ -42,6 +41,11 @@ void CFigure::ChngDrawClr(color Dclr)
 color CFigure::GetDrawColor() {
 	return FigGfxInfo.DrawClr;
 }
+
+color CFigure::GetFillColor() {
+	return FigGfxInfo.FillClr;
+}
+
 void CFigure::ChngFillClr(color Fclr)
 {
 	if (Fclr == EMPTYFILL)
