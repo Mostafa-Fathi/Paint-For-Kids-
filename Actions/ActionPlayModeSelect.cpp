@@ -17,6 +17,7 @@ void ActionPlayModeSelect::Execute() {
 				pManager->CalcMaxScore();
 				
 
+				pManager->Game->SelectedFillState = fig->IsFilled();
 			}
 			switch (pManager->Game->Mode) {
 			case ByType:
@@ -29,22 +30,45 @@ void ActionPlayModeSelect::Execute() {
 				break;
 
 			case ByColor:
-				if (fig->GetFillColor() == pManager->Game->SelectedColor)
-				{
-					pManager->Game->Valid++;
-					fig->HideMe();
+			{
+				if (pManager->Game->SelectedFillState) {
+					if (fig->GetFillColor() == pManager->Game->SelectedColor && fig->IsFilled())
+					{
+						pManager->Game->Valid++;
+						fig->HideMe();
+					}
+					else pManager->Game->InValid++;
 				}
-				else pManager->Game->InValid++;
+				else {
+					if (!fig->IsFilled())
+					{
+						pManager->Game->Valid++;
+						fig->HideMe();
+					}
+					else pManager->Game->InValid++;
+				}
 				break;
+			}
 
 			case ByTypeAndColor:
-				if (fig->GetType() == pManager->Game->SelectedType
-					&& fig->GetFillColor() == pManager->Game->SelectedColor)
-				{
-					pManager->Game->Valid++;
-					fig->HideMe();
+				if (fig->GetType() == pManager->Game->SelectedType) {
+					if (pManager->Game->SelectedFillState) {
+						if (fig->GetFillColor() == pManager->Game->SelectedColor && fig->IsFilled())
+						{
+							pManager->Game->Valid++;
+							fig->HideMe();
+						}
+						else pManager->Game->InValid++;
+					}
+					else {
+						if (!fig->IsFilled())
+						{
+							pManager->Game->Valid++;
+							fig->HideMe();
+						}
+						else pManager->Game->InValid++;
+					}
 				}
-				else pManager->Game->InValid++;
 				break;
 			}
 			if (pManager->Game->Valid == pManager->Game->MaxScore && pManager->Game->MaxScore) {

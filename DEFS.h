@@ -107,6 +107,7 @@ public:
 	int MaxScore;
 	figure SelectedType;
 	color SelectedColor;
+	bool SelectedFillState;
 	Game() {
 		Mode = None;
 		Valid = 0;
