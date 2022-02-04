@@ -38,58 +38,6 @@ ApplicationManager::ApplicationManager()
 		FigList[i] = NULL;	
 }
 
-void ApplicationManager::CalcMaxScore() {
-	switch (Game->Mode) {
-	case ByType:
-		for (int i =0 ;i<FigCount;i++){
-			if (FigList[i]->GetType() == Game->SelectedType)
-			{
-				Game->MaxScore++;
-			}
-		}
-		break;
-		
-
-	case ByColor:
-		for (int i = 0; i < FigCount; i++) {
-			if (Game->SelectedFillState) {
-				if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
-				{
-					Game->MaxScore++;
-				}
-			}
-			else if (!FigList[i]->IsFilled())
-				{
-					Game->MaxScore++;
-				}
-			
-		}
-		break;
-	case ByTypeAndColor:
-		for (int i = 0; i < FigCount; i++) {
-			if (FigList[i]->GetType() == Game->SelectedType) {
-				if (Game->SelectedFillState) {
-					if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
-					{
-						Game->MaxScore++;
-					}
-				}
-				else if (!FigList[i]->IsFilled())
-				{
-						Game->MaxScore++;
-				}
-				
-			}
-			
-		}
-		break;
-	}
-
-}
-int ApplicationManager::getFigCount() {
-	return FigCount;
-}
-
 void ApplicationManager::Run()
 {
 	int x, y;
@@ -112,7 +60,6 @@ void ApplicationManager::Run()
 	}while(ActType != EXIT);
 	
 }
-
 
 //==================================================================================//
 //								Actions Related Functions							//
@@ -300,7 +247,6 @@ ApplicationManager::~ApplicationManager()
 	
 }
 /////////////////////////////////////////////////////////////////////////////////////////
-
 string ApplicationManager::ConvertToString(color _color)
 {
 	
@@ -382,11 +328,8 @@ void ApplicationManager::BringSelectedFigFront() {
 		int Index = Selected->ID - 1;
 
 		for (int i = Index; i < FigCount - 1; i++) {
-			//cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
 			FigList[i]->ID = i + 1;
-
-			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = FigCount;
 		FigList[FigCount - 1] = Selected;
@@ -410,8 +353,6 @@ void ApplicationManager::SendSelectedFigBack() {
 
 			FigList[i] = FigList[i - 1];
 			FigList[i]->ID = i + 1;
-
-			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = 1;
 		FigList[0] = Selected;
@@ -437,11 +378,8 @@ void ApplicationManager::DeleteSelectedFig() {
 		while (Selected != NULL) {
 			int Index = Selected->ID - 1;
 			for (int i = Index; i < FigCount - 1; i++) {
-				//cout << "\n fig count is =" << FigCount - 1;
 				FigList[i] = FigList[i + 1];
 				FigList[i]->ID = i + 1;
-
-				//cout << "\n id of fig is :" << FigList[i]->ID;
 			}
 
 			FigCount--;
@@ -466,4 +404,56 @@ void ApplicationManager::UnSelectAllFig()
 		}
 	}
 }
+/////////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::CalcMaxScore() {
+	switch (Game->Mode) {
+	case ByType:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->GetType() == Game->SelectedType)
+			{
+				Game->MaxScore++;
+			}
+		}
+		break;
 
+
+	case ByColor:
+		for (int i = 0; i < FigCount; i++) {
+			if (Game->SelectedFillState) {
+				if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
+				{
+					Game->MaxScore++;
+				}
+			}
+			else if (!FigList[i]->IsFilled())
+			{
+				Game->MaxScore++;
+			}
+
+		}
+		break;
+	case ByTypeAndColor:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->GetType() == Game->SelectedType) {
+				if (Game->SelectedFillState) {
+					if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
+					{
+						Game->MaxScore++;
+					}
+				}
+				else if (!FigList[i]->IsFilled())
+				{
+					Game->MaxScore++;
+				}
+
+			}
+
+		}
+		break;
+	}
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+int ApplicationManager::getFigCount() {
+	return FigCount;
+}

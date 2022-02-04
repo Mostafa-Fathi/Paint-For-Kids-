@@ -15,6 +15,7 @@ void ActionExit::Execute() {
 		{
 			ActionSave* save = new ActionSave(pManager);
 			save->Execute();
+			delete save;
 		}
 	}
 	pManager->ClearFigList();

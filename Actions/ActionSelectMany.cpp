@@ -10,14 +10,12 @@ ActionSelectMany::ActionSelectMany(ApplicationManager* pApp) :Action(pApp) {}
 //Execute the action
 void ActionSelectMany::Execute() {
 	bool continu = true;
-	GUI* pOut = pManager->GetGUI();
-	pOut->PrintMessage("Select Muliple then press Delete to Delete Muliple Shapes ");
+	GUI* pGUI = pManager->GetGUI();
+	pGUI->PrintMessage("Select Muliple then press Delete to Delete Muliple Shapes ");
 
 	while (continu)
 	{
 		int x, y;
-
-		GUI* pGUI = pManager->GetGUI();
 
 		pGUI->GetPointClicked(x, y);
 		CFigure* fig = pManager->GetFigure(x, y);
