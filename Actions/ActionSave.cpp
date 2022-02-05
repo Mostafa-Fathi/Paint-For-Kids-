@@ -29,6 +29,7 @@ void ActionSave::Execute() {
 			OutFile.close();
 		}
 	}
-	pGUI->PrintMessage("Add Shapes First");
-
+	else {
+		pGUI->PrintMessage("Add Shapes First");
+	}
 }
