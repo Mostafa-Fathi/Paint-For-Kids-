@@ -255,7 +255,7 @@ void ApplicationManager::UpdateInterface() const
 		break;
 	}
 
-	pGUI->PrintMessage(pGUI->GetMessage());
+	//pGUI->PrintMessage(pGUI->GetMessage());
 	
 	pGUI->ClearDrawArea();
 	for(int i=0; i<FigCount; i++)
