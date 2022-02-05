@@ -18,7 +18,7 @@ This file was last modified on 05.16.1999
 #include "image.h"
 #include "colors.h"
 #include "version.h"
-
+class ApplicationManager;
 // Aproximate value of Pi, used in some calculations
 const double cdPi = 3.141592653589793238462643383279;
 
@@ -71,7 +71,7 @@ enum angletype {
 class window {
 
   private:
-  
+     
     // Various Win32 Data structures
 	const HINSTANCE hInstance;
     WNDCLASS wndcWindow;
@@ -139,7 +139,9 @@ class window {
     
   public:
  
-    // Create a new window! iWindWidth and iWindHeight will change the size of 
+      void UseUpdateInterface(ApplicationManager*);
+
+      // Create a new window! iWindWidth and iWindHeight will change the size of 
     // the window created. iWindXPos and iWindYPos is the position the window
     // will appear on the screen
     window(const int iWindWidth = ciDefWindWidth, const int iWindHeight = ciDefWindHeight, const int iWindXPos = ciDefWindXPos, const int iWindYPos = ciDefWindYPos);

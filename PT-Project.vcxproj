@@ -246,6 +246,7 @@
     <ClInclude Include="ApplicationManager.h" />
     <ClInclude Include="DEFS.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="UpdateInterfaceHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PT Project.rc" />

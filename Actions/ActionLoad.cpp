@@ -49,13 +49,16 @@ void ActionLoad::Execute()
 		{
 			pGUI->PrintMessage("not loaded");
 		}
-		pGUI->PrintMessage("loaded");
+		else {
+			pGUI->PrintMessage("loaded");
 
-		file >> draw >> fill >> bg;
-		pGUI->setCrntDrawColor(pManager->ConvertToColor(draw));
-		pGUI->setCrntFillColor(pManager->ConvertToColor(fill));
-		pGUI->setBkGrndColor(pManager->ConvertToColor(bg));
-		pManager->LoadSteps(file);
+			file >> draw >> fill >> bg;
+			pGUI->setCrntDrawColor(pManager->ConvertToColor(draw));
+			pGUI->setCrntFillColor(pManager->ConvertToColor(fill));
+			pGUI->setBkGrndColor(pManager->ConvertToColor(bg));
+			pManager->LoadSteps(file);
+		}
+		
 	}
 }
 

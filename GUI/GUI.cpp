@@ -316,6 +316,10 @@ window* GUI::CreateWind(int w, int h, int x, int y) const
 	pW->DrawRectangle(0, UI.ToolBarHeight, w, h);	
 	return pW;
 }
+void GUI::UseUpdateInterface(ApplicationManager * pManger) {
+
+	pWind->UseUpdateInterface(pManger);
+}
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateStatusBar() const
 {
@@ -383,7 +387,6 @@ void GUI::CreateDrawToolBar() const
 void GUI::CreateSizeBar() const
 {
 	CreateToolBar();
-	CreateStatusBar(); // clear the prev tool bar
 	UI.InterfaceMode = MODE_RESIZE;
 
 	string MenuItemImages[SIZE_ITM_COUNT];
@@ -407,7 +410,6 @@ void GUI::CreateSizeBar() const
 void GUI::CreateDrawColorBar() const
 {
 	CreateToolBar();
-	CreateStatusBar(); // clear the prev tool bar
 	UI.InterfaceMode = MODE_DRAWCOLOR;
 
 	string MenuItemImages[Draw_Color_ITM_COUNT];
@@ -431,7 +433,6 @@ void GUI::CreateDrawColorBar() const
 void GUI::CreateFillColorBar() const
 {
 	CreateToolBar();
-	CreateStatusBar(); // clear the prev tool bar
 	UI.InterfaceMode = MODE_FILLCOLOR;
 
 	string MenuFillItemImages[Fill_Color_ITM_COUNT];
@@ -461,7 +462,6 @@ void GUI::CreateFillColorBar() const
 void GUI::CreatebackgroundBar() const
 {
 	CreateToolBar();
-	CreateStatusBar(); // clear the prev tool bar
 	UI.InterfaceMode = MODE_BACKGROUND;
 
 	string MenuItemImages[BACKGROUND_COLOR_ITM_COUNT];
@@ -483,8 +483,6 @@ void GUI::CreatebackgroundBar() const
 void GUI::CreatePlayToolBar() const
 {
 	CreateToolBar();
-	
-
 	UI.InterfaceMode = MODE_PLAY;
 	///TODO: write code to create Play mode menu
 
@@ -515,10 +513,18 @@ void GUI::ClearDrawArea() const
 void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
-	
+
 	pWind->SetPen(UI.MsgColor, 50);
 	pWind->SetFont(20, BOLD , BY_NAME, "Arial");   
 	pWind->DrawString(10, UI.height - (int)(UI.StatusBarHeight/1.5), msg);
+}
+void GUI::SaveMessage(string msg){
+
+	Message = msg;
+	std::cout << Message;
+}
+string GUI::GetMessage() {
+	return Message;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::setCrntDrawColor(color Draw) const	//get current drwawing color

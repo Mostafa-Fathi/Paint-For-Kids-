@@ -5,12 +5,16 @@
 #include "UI_Info.h" 
 #include "..\CMUgraphicsLib\CMUgraphics.h"
 
+class ApplicationManager;
+
 
 //This class is responsible for Grphical User Interface handling
 //All user input and program outputs MUST be done through this class
 //No other class is allowed to perform direct i/o
 class GUI	
 {
+private :
+	string Message;
 public:	
 	window* pWind;	//Pointer to the Graphics Window
 public:
@@ -36,6 +40,7 @@ public:
 	void CreateFillColorBar() const; // toolbar for fill colors 
 	void CreatebackgroundBar() const;
 	void CreateToolBar() const;
+	void UseUpdateInterface(ApplicationManager * );
 	
 	// -- Figures Drawing functions
 	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected=false) const;  //Draw a Square
@@ -44,6 +49,14 @@ public:
 	///TODO: Make similar functions for drawing all other figures.
 	
 	void PrintMessage(string msg) const;	//Print a message on Status bar
+
+	void SaveMessage(string msg);
+
+	string GetMessage();
+
+
+
+
 
 	void setCrntDrawColor(color Draw) const;  //set current drwawing color
 	void setCrntFillColor(color Fill) const;  //set current drwawing color

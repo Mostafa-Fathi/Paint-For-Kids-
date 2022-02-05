@@ -360,7 +360,10 @@
       <Filter>Action Classes</Filter>
     </ClInclude>
     <ClInclude Include="Actions\ActionSelectMany.h">
-      <Filter>Action Classes</Filter>
+      <Filter>GUI Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="UpdateInterfaceHandler.h">
+      <Filter>GUI Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

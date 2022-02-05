@@ -7,18 +7,29 @@ This file was last modified on 05.16.1999
 #include <iostream>
 #include <cstdio>
 #include <cmath>
+#include <future>
 
 #include "CMUgraphics.h"
 #include "error.h"
 #include "windowinput.h"
-
+#include "../UpdateInterfaceHandler.h"
 // Keeps track of key and mouse input and redirects it to the
 // appropriate window object
 windowinput* wipInput = NULL;
-
+ApplicationManager * gHandler=0 ;
 static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	
 	switch(msg) {
+	case WM_SIZE:
+	case WM_PAINT:
+		UpdateInerfaceHandler handler;
+		if (gHandler!=0){ 
+			std::async(std::launch::async, [&handler] () {
+				handler.callback(gHandler);
+				});
+				}
+		break;
+
 	  case WM_LBUTTONDOWN:
         if(wipInput != NULL) {
             wipInput->SetMouseState(hwnd, LEFT_BUTTON, BUTTON_DOWN, LOWORD(lParam), HIWORD(lParam));
@@ -200,13 +211,16 @@ static LRESULT CALLBACK WindowProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 	
     return DefWindowProc(hwnd, msg, wParam, lParam);
 }
+void window::UseUpdateInterface(ApplicationManager * pManger){
+	gHandler = pManger;
+}
 
 window::window(const int iWindWidth, const int iWindHeight, const int iWindXPos, const int iWindYPos) :
 hInstance(GetModuleHandle(0)), iWindowWidth(iWindWidth), iWindowHeight(iWindHeight) {
 
 	iMouseX = -1;
 	iMouseY = -1;
-
+	
 	wndcWindow.style = 0;
 	wndcWindow.lpfnWndProc = WindowProc;
 	wndcWindow.cbClsExtra = 0;

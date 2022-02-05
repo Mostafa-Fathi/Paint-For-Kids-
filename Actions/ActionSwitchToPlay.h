@@ -9,4 +9,5 @@ class ActionSwitchToPlay : public Action {
 		ActionSwitchToPlay(ApplicationManager* pApp);
 
 		virtual void Execute();
+		
 };

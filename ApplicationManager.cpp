@@ -43,6 +43,7 @@ ApplicationManager::ApplicationManager()
 
 void ApplicationManager::Run()
 {
+	pGUI->UseUpdateInterface(this);
 	int x, y;
 	ActionType ActType;
 	do
@@ -232,6 +233,29 @@ CFigure* ApplicationManager::GetSelectedFigure( )
 //Draw all figures on the user interface
 void ApplicationManager::UpdateInterface() const
 {	
+
+	switch (UI.InterfaceMode) {
+	case MODE_DRAW:
+		pGUI->CreateDrawToolBar();
+		break;
+	case MODE_PLAY:
+		pGUI->CreatePlayToolBar();
+		break;
+	case MODE_RESIZE:
+		pGUI->CreateSizeBar();
+		break;
+	case MODE_BACKGROUND:
+		pGUI->CreatebackgroundBar();
+		break;
+	case MODE_DRAWCOLOR:
+		pGUI->CreateDrawColorBar();
+		break;
+	case MODE_FILLCOLOR:
+		pGUI->CreateFillColorBar();
+		break;
+	}
+
+	pGUI->PrintMessage(pGUI->GetMessage());
 	pGUI->ClearDrawArea();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)

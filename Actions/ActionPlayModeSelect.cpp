@@ -73,6 +73,8 @@ void ActionPlayModeSelect::Execute() {
 			if (pManager->Game->Valid == pManager->Game->MaxScore && pManager->Game->MaxScore!=0) {
 				pManager->UpdateInterface();
 				pGUI->PrintMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid));
+				pGUI->SaveMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid));
+
 				string message = "\tYou reached to Max Score ="+ to_string(pManager->Game->MaxScore)+" \n\twith clicks  =" + to_string(pManager->Game->InValid + pManager->Game->Valid);
 				int n = message.length();
 
@@ -91,9 +93,13 @@ void ActionPlayModeSelect::Execute() {
 
 			pManager->UpdateInterface();
 			pGUI->PrintMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid)+ ", Max Score = " + to_string(pManager->Game->MaxScore));
+			pGUI->SaveMessage("valid = " + to_string(pManager->Game->Valid) + ", invalid = " + to_string(pManager->Game->InValid) + ", Max Score = " + to_string(pManager->Game->MaxScore));
+
 		}
 	}
 	else {
 		pGUI->PrintMessage("Please Select Mode First To Start The Game");
+		pGUI->SaveMessage("Please Select Mode First To Start The Game");
+
 	}
 }
