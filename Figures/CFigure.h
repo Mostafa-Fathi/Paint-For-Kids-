@@ -19,7 +19,7 @@ public:
 	CFigure();
 	void SetSelected(bool);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
-
+	void fillShape(bool style) ;		//determine if shape is filled or not
 	virtual void DrawMe(GUI*) const = 0;		//Draw the figure
 
 	//changes the figure's drawing color

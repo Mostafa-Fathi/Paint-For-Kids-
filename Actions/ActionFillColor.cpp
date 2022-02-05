@@ -19,8 +19,8 @@ void ActionFillColor::Execute()
 	{ 
 		pGUI->PrintMessage("empty clicked"); 
 		
-		if (Selected != NULL) {
-			Selected->ChngFillClr(EMPTYFILL);
+		if (Selected != NULL) {	 
+			Selected->fillShape(false);
 		}
 		else UI.ShapeIsFilled = false;
 	}
@@ -28,8 +28,10 @@ void ActionFillColor::Execute()
 	{
 		pGUI->PrintMessage("red clicked"); 
 
-		if (Selected != NULL) 
+		if (Selected != NULL) {
+			Selected->fillShape(true);
 			Selected->ChngFillClr(RED);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = RED; 
@@ -40,8 +42,10 @@ void ActionFillColor::Execute()
 	{
 		pGUI->PrintMessage("blue clicked"); 
 
-		if (Selected != NULL)
+		if (Selected != NULL) {
+			Selected->fillShape(true);
 			Selected->ChngFillClr(BLUE);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = BLUE;
@@ -52,8 +56,10 @@ void ActionFillColor::Execute()
 	{
 		pGUI->PrintMessage("green clicked");
 
-		if (Selected != NULL)
+		if (Selected != NULL) {
+			Selected->fillShape(true);
 			Selected->ChngFillClr(GREEN);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = GREEN;
@@ -64,8 +70,10 @@ void ActionFillColor::Execute()
 	{
 		pGUI->PrintMessage("WHITE clicked");
 
-		if (Selected != NULL)
+		if (Selected != NULL) {
+			Selected->fillShape(true);
 			Selected->ChngFillClr(WHITE);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = WHITE;
@@ -76,7 +84,10 @@ void ActionFillColor::Execute()
 		pGUI->PrintMessage("black clicked");
 
 		if (Selected != NULL)
+		{
+			Selected->fillShape(true);
 			Selected->ChngFillClr(BLACK);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = BLACK;
@@ -86,8 +97,10 @@ void ActionFillColor::Execute()
 	{
 		pGUI->PrintMessage("brown clicked");
 
-		if (Selected != NULL)
+		if (Selected != NULL) {
+			Selected->fillShape(true);
 			Selected->ChngFillClr(BURLYWOOD);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = BURLYWOOD;
@@ -98,7 +111,10 @@ void ActionFillColor::Execute()
 		pGUI->PrintMessage("orange clicked");
 
 		if (Selected != NULL)
+		{
+			Selected->fillShape(true);
 			Selected->ChngFillClr(ORANGE);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = ORANGE;
@@ -108,8 +124,10 @@ void ActionFillColor::Execute()
 	{
 		pGUI->PrintMessage("YELLOW clicked");
 
-		if (Selected != NULL)
+		if (Selected != NULL) {
+			Selected->fillShape(true);
 			Selected->ChngFillClr(YELLOW);
+		}
 		else {
 			UI.ShapeIsFilled = true;
 			UI.FillColor = YELLOW;

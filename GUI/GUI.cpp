@@ -247,7 +247,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			switch (ClickedItemOrder)
 			{
 
-			case ITM_EMPTY: return EMPTYFILL;
+			case ITM_EMPTY:return EMPTYFILL;
 			case ITM_RED: return REDFILL;
 			case ITM_BLUE: return BLUEFILL;
 			case ITM_GREEN: return GREENFILL;
