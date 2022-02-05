@@ -34,12 +34,9 @@ bool CFigure::IsFilled() const {
 	return FigGfxInfo.isFilled;
 }
 
-void CFigure::fillShape(bool style)
+void CFigure::fillShape(bool s)
 {
-	if (style == true)
-		FigGfxInfo.isFilled = true;
-	else
-		FigGfxInfo.isFilled = false;
+	FigGfxInfo.isFilled = s;
 }
 void CFigure::ChngDrawClr(color Dclr)
 {
