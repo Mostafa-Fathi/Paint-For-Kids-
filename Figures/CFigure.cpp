@@ -1,4 +1,5 @@
 #include "CFigure.h"
+#include "../GUI/GUI.h"
 
 CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
@@ -33,6 +34,13 @@ bool CFigure::IsFilled() const {
 	return FigGfxInfo.isFilled;
 }
 
+void CFigure::fillShape(bool style)
+{
+	if (style == true)
+		FigGfxInfo.isFilled = true;
+	else
+		FigGfxInfo.isFilled = false;
+}
 void CFigure::ChngDrawClr(color Dclr)
 {
 	if (Selected) {
@@ -51,14 +59,8 @@ color CFigure::GetFillColor() {
 }
 
 void CFigure::ChngFillClr(color Fclr)
-{
-	if (Fclr == EMPTYFILL)
-		FigGfxInfo.isFilled = false;
-	else
-	{
-		FigGfxInfo.isFilled = true;
-		FigGfxInfo.FillClr = Fclr;
-	}
+{ 
+		FigGfxInfo.FillClr = Fclr; 
 }
 color CFigure::GetPreviousDrawColor() {
 	return FigGfxInfo.PrevDrawClr;
