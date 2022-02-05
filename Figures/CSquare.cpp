@@ -16,14 +16,20 @@ CSquare::CSquare()
 void CSquare::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawRect to draw a Square on the screen	
-	pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
+	if (Hidden==false)
+	{
+		pGUI->DrawSquare(TopLeftCorner, length, FigGfxInfo, Selected);
+	}
+	
 }
 
 
 bool CSquare::HasPoint(int x, int y) const {
-	if (x >= TopLeftCorner.x && x <= TopLeftCorner.x + length &&
-		y >= TopLeftCorner.y && y <= TopLeftCorner.y + length)
-		return true;
+	if (Hidden == false) {
+		if (x >= TopLeftCorner.x && x <= TopLeftCorner.x + length &&
+			y >= TopLeftCorner.y && y <= TopLeftCorner.y + length)
+			return true;
+	}
 
 	return false;
 }
@@ -83,16 +89,24 @@ void CSquare::Load(ifstream & fin)
 	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
 		>> length >> draw >> fill;
 
-	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	if (fill != "NO_FILL")
 	{
 		is_fill = true;
 		FigGfxInfo.FillClr = ConvertToColor(fill);
 	}
-
+	else {
+		is_fill = false;
+		FigGfxInfo.FillClr = BLACK;
+	
+	}
 	FigGfxInfo.DrawClr = ConvertToColor(draw);
 	FigGfxInfo.isFilled = is_fill;
 	FigGfxInfo.BorderWdth = 3;
 	Selected = false;
+	Hidden = false;
 	
 }
 
+figure CSquare::GetType() const {
+	return Squr;
+}

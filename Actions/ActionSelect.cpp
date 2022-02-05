@@ -9,8 +9,6 @@ void ActionSelect::Execute() {
 
 	GUI* pGUI = pManager->GetGUI();
 	
-
-
 	CFigure* fig = pManager->GetFigure(pManager->X, pManager->Y);
 	if (fig != NULL) {
 		if (fig->IsSelected())
@@ -25,7 +23,7 @@ void ActionSelect::Execute() {
 			if (selectedFigure != NULL) {
 				selectedFigure->SetSelected(false);
 				selectedFigure->ChngDrawClr(selectedFigure->GetPreviousDrawColor());
-				
+
 			}
 			pGUI->PrintMessage(fig->GetDetails());
 			fig->SetPreviousDrawColor(fig->GetDrawColor());

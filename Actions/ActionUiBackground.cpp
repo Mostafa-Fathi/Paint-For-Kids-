@@ -11,7 +11,6 @@ void ActionUiBackground::Execute()
 
 	int x, y;
 
-	GUI* pGUI = pManager->GetGUI();
 	ActionType pAct = pOut->MapInputToActionType(x, y);
 	  
 	if (pAct == BACKG_BURLYWOOD)

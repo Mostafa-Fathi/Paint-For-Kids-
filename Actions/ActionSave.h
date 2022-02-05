@@ -5,9 +5,8 @@ class ActionSave : public Action
 {
 private:
 	string FileName;
-	/*int FiguresCount;*/
 public:
-	ActionSave(ApplicationManager* pApp/*,int Figures_Count*/);
+	ActionSave(ApplicationManager* pApp);
 	virtual void Execute();
 };
 

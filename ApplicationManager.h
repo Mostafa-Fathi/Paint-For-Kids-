@@ -22,8 +22,8 @@ private:
 
 public:	
 	int X, Y;
+	Game* Game;
 	ApplicationManager();
-	GUI* getGUI();
 
 	~ApplicationManager();
 
@@ -46,18 +46,27 @@ public:
 	CFigure* GetSelectedFigure();
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
-	void UpdateInterface() const;	//Redraws all the drawing window	
+	void UpdateInterface() const;
+	void CalcMaxScore();
+	//Redraws all the drawing window	
 	int getFigCount();
 	//int getFigMaxCount();
 	//CFigure** getFigList();
-	virtual void LoadTest();
+    void LoadTest();
+
+	void LoadSteps(ifstream &file);
+
 	void ClearFigList();
 
 	void BringSelectedFigFront();
 
 	void SendSelectedFigBack();
 
+	void ShowAllFig();
+
 	void DeleteSelectedFig();
+
+	void UnSelectAllFig();
 
 	// -- Convert Colors to string and string to colors
 	static string ConvertToString(color _color);   //Convert from Color Type to String Type

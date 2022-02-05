@@ -19,6 +19,7 @@ public:
 	bool Resize(float, const GUI*);
 	virtual void Save(ofstream& OutFile);
 	virtual void Load(ifstream& fin);
+	figure GetType() const;
 };
 
 #endif

@@ -5,10 +5,19 @@ CFigure::CFigure(GfxInfo FigureGfxInfo)
 { 
 	FigGfxInfo = FigureGfxInfo;	//Default status is non-filled.
 	Selected = false;
+	Hidden = false;
 }
 
 CFigure::CFigure()
 {
+
+}
+void CFigure::HideMe() {
+
+	Hidden = true;
+}
+void CFigure::ShowMe() {
+	Hidden = false;
 
 }
 
@@ -20,6 +29,9 @@ void CFigure::SetSelected(bool s)
 bool CFigure::IsSelected() const
 {
 	return Selected;
+}
+bool CFigure::IsFilled() const {
+	return FigGfxInfo.isFilled;
 }
 
 void CFigure::fillShape(bool style)
@@ -41,6 +53,11 @@ void CFigure::ChngDrawClr(color Dclr)
 color CFigure::GetDrawColor() {
 	return FigGfxInfo.DrawClr;
 }
+
+color CFigure::GetFillColor() {
+	return FigGfxInfo.FillClr;
+}
+
 void CFigure::ChngFillClr(color Fclr)
 { 
 		FigGfxInfo.FillClr = Fclr; 
@@ -101,4 +118,5 @@ color CFigure::ConvertToColor(string color_as_string)
 		return BLANCHEDALMOND;
 	else
 		return BLACK;
+	
 }

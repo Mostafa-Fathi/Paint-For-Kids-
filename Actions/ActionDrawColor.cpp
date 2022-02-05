@@ -45,11 +45,6 @@ void ActionDrawColor::Execute()
 		else UI.DrawColor = GREEN;
 
 	}
-	else
-		pGUI->PrintMessage("error");
-
-	//pOut->ClearDrawArea();
-
 	pOut->CreateDrawToolBar();
 
 	return;

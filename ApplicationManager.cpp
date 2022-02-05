@@ -1,8 +1,9 @@
+#include <iostream>
 #include "ApplicationManager.h"
-#include "Actions\ActionAddSquare.h"
-#include "Actions\ActionAddEllipse.h"
-#include "Actions\ActionAddPolygon.h"
-#include "Actions\ActionSelect.h"
+#include "Actions/ActionAddSquare.h"
+#include "Actions/ActionAddEllipse.h"
+#include "Actions/ActionAddPolygon.h"
+#include "Actions/ActionSelect.h"
 #include "Actions/ActionResize.h"
 #include "Actions/ActionSendToBack.h"
 #include "Actions/ActionBringFront.h"
@@ -10,12 +11,20 @@
 #include "Actions/ActionSave.h"
 #include "Actions/ActionDelete.h"
 #include "Actions/ActionExit.h"
-#include <iostream>
+#include "Actions/ActionSelectMany.h"
 #include "Actions/ActionFillColor.h"
 #include "Actions/ActionDrawColor.h"
 #include "Actions/ActionSwitchToPlay.h"
 #include "Actions/ActionSwitchToDraw.h"
 #include "Actions/ActionUiBackground.h"
+#include "Actions/ActionPickByType.h"
+#include "Actions/ActionPickByColor.h"
+#include "Actions/ActionPickByTypeColor.h"
+#include "Actions/ActionPlayModeSelect.h"
+#include "Figures/CEllipse.h"
+#include "Figures\CPolygon.h"
+#include "Figures\CSquare.h"
+#include <fstream>
 
 
  
@@ -30,10 +39,6 @@ ApplicationManager::ApplicationManager()
 	//Create an array of figure pointers and set them to NULL		
 	for(int i=0; i<MaxFigCount; i++)
 		FigList[i] = NULL;	
-}
-
-int ApplicationManager::getFigCount() {
-	return FigCount;
 }
 
 void ApplicationManager::Run()
@@ -59,7 +64,6 @@ void ApplicationManager::Run()
 	
 }
 
-
 //==================================================================================//
 //								Actions Related Functions							//
 //==================================================================================//
@@ -84,9 +88,11 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 			break;
 
 		case DRAWING_AREA:
-			newAct = new ActionSelect(this);
+		{
+			if (UI.InterfaceMode == MODE_DRAW) newAct = new ActionSelect(this);
+			else if (UI.InterfaceMode == MODE_PLAY) newAct = new ActionPlayModeSelect(this);
 			break;
-
+		}
 		case RESIZE:
 			newAct = new ActionResize(this);
 			break;
@@ -98,9 +104,11 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case FILL_COLOR:
 			newAct = new ActionFillColor(this); 
 			break;
+
 		case BACKGROUND_COLOR:
 			newAct = new ActionUiBackground(this);
 			break;
+
 		case SEND_BACK:
 			newAct = new ActionSendToBack(this);
 			break;
@@ -108,32 +116,55 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 		case BRING_FRONT:
 			newAct = new ActionBringFront(this);
 			break;
+
 		case TO_PLAY:
 			newAct = new ActionSwitchToPlay(this);
 			break;
+
 		case TO_DRAW:
 			newAct = new ActionSwitchToDraw(this);
 			break;
+
 		case SAVE:
-			newAct = new ActionSave(this/*, FigCount*/);
+			newAct = new ActionSave(this);
 			break;
+
 		case LOAD:
 			newAct = new ActionLoad(this);
 			break;
-		case DEL:
 
+		case DEL:
 			newAct= new ActionDelete(this);
 			break;
+
+		case MULTI_SELECT:
+			newAct = new ActionSelectMany(this);
+			break;
+
 		case EXIT:
 			newAct = new ActionExit(this);
 			break;
-		
+
+		case PICK_BY_TYPE:
+			newAct = new ActionPickByType(this);
+			break;
+
+		case PICK_BY_COLOR:
+			newAct = new ActionPickByColor(this);
+			break;
+
+		case PICK_BY_TYPE_COLOR:
+			newAct = new ActionPickByTypeColor(this);
+			break;
+
 		case STATUS:	//a click on the status bar ==> no action
 			return NULL;
 			break;
 	}	
 	return newAct;
 }
+
+
 //////////////////////////////////////////////////////////////////////
 //Executes the created Action
 void ApplicationManager::ExecuteAction(Action* &pAct) 
@@ -219,7 +250,6 @@ ApplicationManager::~ApplicationManager()
 	
 }
 /////////////////////////////////////////////////////////////////////////////////////////
-
 string ApplicationManager::ConvertToString(color _color)
 {
 	
@@ -239,7 +269,7 @@ string ApplicationManager::ConvertToString(color _color)
 	else if (_color == BLANCHEDALMOND) return "BLANCHEDALMOND";
 	
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 color ApplicationManager::ConvertToColor(string color_as_string)
 {
 	if (color_as_string == "BLUE")
@@ -269,7 +299,7 @@ color ApplicationManager::ConvertToColor(string color_as_string)
 	else
 		return BLACK;
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::LoadTest()
 {
 	if (FigCount > 0)
@@ -280,10 +310,37 @@ void ApplicationManager::LoadTest()
 			ActionSave ActionS(this/*, getFigCount()*/);
 			ActionS.Execute();
 		}
-		ClearFigList();
-		pGUI->ClearDrawArea();
+
 	}
 }
+void ApplicationManager::LoadSteps(ifstream &file)
+{
+	int numberOfsapes;
+	file >> numberOfsapes;
+	string figType;
+	CFigure* Figure;
+
+	for (int x = 0; x < numberOfsapes; x++)
+	{
+		file >> figType;
+		if (figType == "SQR")
+		{
+			Figure = new CSquare;
+		}
+		else if (figType == "POLY")
+		{
+			Figure = new CPolygon;
+		}
+		else if (figType == "ELPS")
+		{
+			Figure = new CEllipse;
+		}
+
+		Figure->Load(file);
+		AddFigure(Figure);
+	}
+}
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::ClearFigList()
 {
 	for (int i = 0; i < FigCount; i++)
@@ -292,6 +349,7 @@ void ApplicationManager::ClearFigList()
 	}
 	FigCount = 0;
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::BringSelectedFigFront() {
 	CFigure* Selected = GetSelectedFigure();
 	if (Selected != NULL)
@@ -299,11 +357,8 @@ void ApplicationManager::BringSelectedFigFront() {
 		int Index = Selected->ID - 1;
 
 		for (int i = Index; i < FigCount - 1; i++) {
-			//cout << "\n fig count is =" << FigCount - 1;
 			FigList[i] = FigList[i + 1];
 			FigList[i]->ID = i + 1;
-
-			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = FigCount;
 		FigList[FigCount - 1] = Selected;
@@ -314,6 +369,7 @@ void ApplicationManager::BringSelectedFigFront() {
 		pGUI->PrintMessage("Firstly, Select a fig");
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::SendSelectedFigBack() {
 
 	CFigure* Selected = GetSelectedFigure();
@@ -326,8 +382,6 @@ void ApplicationManager::SendSelectedFigBack() {
 
 			FigList[i] = FigList[i - 1];
 			FigList[i]->ID = i + 1;
-
-			//cout << "\n id of fig is :" << FigList[i]->ID;
 		}
 		Selected->ID = 1;
 		FigList[0] = Selected;
@@ -338,27 +392,97 @@ void ApplicationManager::SendSelectedFigBack() {
 		pGUI->PrintMessage("Firstly, Select a fig");
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::ShowAllFig() {
+	for (int i = 0; i < FigCount; i++)
+	{
+		FigList[i]->ShowMe();
+	}
+}
+/////////////////////////////////////////////////////////////////////////////////////////
 void ApplicationManager::DeleteSelectedFig() {
 	CFigure* Selected = GetSelectedFigure();
-
 	if (Selected != NULL)
 	{
-		int Index = Selected->ID - 1;
-		for (int i = Index; i < FigCount - 1; i++) {
-			//cout << "\n fig count is =" << FigCount - 1;
-			FigList[i] = FigList[i + 1];
-			FigList[i]->ID = i + 1;
+		while (Selected != NULL) {
+			int Index = Selected->ID - 1;
+			for (int i = Index; i < FigCount - 1; i++) {
+				FigList[i] = FigList[i + 1];
+				FigList[i]->ID = i + 1;
+			}
 
-			//cout << "\n id of fig is :" << FigList[i]->ID;
+			FigCount--;
+			FigList[FigCount] = NULL;
+
+			delete Selected;
+			Selected = GetSelectedFigure();
 		}
-		
-		FigCount--;
-		FigList[FigCount] = NULL;
-		
-		delete Selected;
 		pGUI->ClearStatusBar();
 	}
 	else
 		pGUI->PrintMessage("Firstly, Select a Figure");
 
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::UnSelectAllFig()
+{
+	for (int i = (FigCount - 1); i >= 0; i--) {
+		if (FigList[i]->IsSelected()) {
+			FigList[i]->SetSelected(false);
+			FigList[i]->ChngDrawClr(FigList[i]->GetPreviousDrawColor());
+		}
+	}
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+void ApplicationManager::CalcMaxScore() {
+	switch (Game->Mode) {
+	case ByType:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->GetType() == Game->SelectedType)
+			{
+				Game->MaxScore++;
+			}
+		}
+		break;
+
+
+	case ByColor:
+		for (int i = 0; i < FigCount; i++) {
+			if (Game->SelectedFillState) {
+				if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
+				{
+					Game->MaxScore++;
+				}
+			}
+			else if (!FigList[i]->IsFilled())
+			{
+				Game->MaxScore++;
+			}
+
+		}
+		break;
+	case ByTypeAndColor:
+		for (int i = 0; i < FigCount; i++) {
+			if (FigList[i]->GetType() == Game->SelectedType) {
+				if (Game->SelectedFillState) {
+					if (FigList[i]->GetFillColor() == Game->SelectedColor && FigList[i]->IsFilled())
+					{
+						Game->MaxScore++;
+					}
+				}
+				else if (!FigList[i]->IsFilled())
+				{
+					Game->MaxScore++;
+				}
+
+			}
+
+		}
+		break;
+	}
+
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+int ApplicationManager::getFigCount() {
+	return FigCount;
 }

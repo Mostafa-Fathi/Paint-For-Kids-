@@ -24,7 +24,7 @@ void ActionLoad::Execute()
 {
 	GUI* pGUI = pManager->GetGUI();
 	pManager->LoadTest();
-	 
+
 	//load file 
 	OPENFILENAME ofn;
 	char file_name[100];
@@ -39,8 +39,10 @@ void ActionLoad::Execute()
 
 	if (GetOpenFileName(&ofn))
 	{
-		string draw, fill, bg, figType;
-		int numberOfsapes;
+		pManager->ClearFigList();
+		pGUI->ClearDrawArea();
+
+		string draw, fill, bg;
 		ifstream file = openFile(ofn.lpstrFile);
 
 		if (file.is_open()== false)
@@ -53,30 +55,7 @@ void ActionLoad::Execute()
 		pGUI->setCrntDrawColor(pManager->ConvertToColor(draw));
 		pGUI->setCrntFillColor(pManager->ConvertToColor(fill));
 		pGUI->setBkGrndColor(pManager->ConvertToColor(bg));
-
-		file >> numberOfsapes;
-		CFigure* Figure;
-
-		for (int x = 0; x < numberOfsapes; x++)
-		{
-			file >> figType;
-			const char* figTypeC = figType.c_str();
-			if (strcmp(figTypeC, "SQR") == 0)
-			{
-				Figure = new CSquare;
-			}
-			else if (strcmp(figTypeC, "POLY") == 0)
-			{
-				Figure = new CPolygon;
-			}
-			else if (strcmp(figTypeC, "ELPS") == 0)
-			{
-				Figure = new CEllipse;
-			}
-
-			Figure->Load(file);
-			pManager->AddFigure(Figure);
-		}
+		pManager->LoadSteps(file);
 	}
 }
 

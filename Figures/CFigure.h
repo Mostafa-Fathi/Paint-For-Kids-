@@ -10,6 +10,7 @@ class CFigure
 protected:
 	bool Selected;	//true if the figure is selected.
 	GfxInfo FigGfxInfo;	//Figure graphis info
+	bool Hidden;
 
 	/// Add more parameters if needed.
 
@@ -17,11 +18,13 @@ public:
 	int ID;		//Each figure has an ID
 	CFigure(GfxInfo FigureGfxInfo);
 	CFigure();
+	void HideMe();
+	void ShowMe();
 	void SetSelected(bool);	//select/unselect the figure
 	bool IsSelected() const;	//check whether fig is selected
 	void fillShape(bool style) ;		//determine if shape is filled or not
 	virtual void DrawMe(GUI*) const = 0;		//Draw the figure
-
+	bool IsFilled() const; //checks if figure has fill color or not
 	//changes the figure's drawing color
 	void ChngDrawClr(color Dclr);
 
@@ -30,6 +33,9 @@ public:
 
 	//changes the figure's filling color
 	void ChngFillClr(color Fclr);
+
+	//gets the current drawing color
+	color GetFillColor();
 
 	//gets the previous drawing color of the figure
 	color GetPreviousDrawColor();
@@ -46,6 +52,8 @@ public:
 	//Resize the figure
 	virtual bool Resize(float, const GUI*)  = 0;
 
+	//gets figure type
+	virtual figure GetType() const=0;
 
 	///The following functions should be supported by the figure class
 	///It should be overridden by each inherited figure

@@ -37,22 +37,22 @@ GUI::GUI()
 	
 }
 
-
 //======================================================================================//
 //								Input Functions										    //
 //======================================================================================//
+/////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateToolBar() const
 {
 	pWind->SetPen(WHITE, 1);
 	pWind->SetBrush(WHITE);
 	pWind->DrawRectangle(0, 0, UI.width, UI.ToolBarHeight);
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 void GUI::GetPointClicked(int &x, int &y) const
 {
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -76,16 +76,19 @@ string GUI::GetSrting() const
 		PrintMessage(Label);
 	}
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 bool GUI::IsValueInDrawArea(int y) const {
 	if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) 
 		return true;
 	return false;
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 bool GUI::IsValueInDrawArea(Point p) const {
 	if ((p.y >= UI.ToolBarHeight && p.y < UI.height - UI.StatusBarHeight)&&(p.x>=0 && p.x <= UI.width))
 		return true;
 	return false;
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 //This function reads the position where the user clicks to determine the desired action
 ActionType GUI::MapInputToActionType(int& x, int& y) const
 {	
@@ -123,6 +126,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_SAVE: return SAVE;
 			case ITM_DEL:return DEL;
 			case ITM_LOAD: return LOAD;
+			case ITM_MULSEL: return MULTI_SELECT;
 
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -220,7 +224,7 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			case ITM_DBLUE: return DRAW_BLUE;
 			case ITM_DGREEN: return DRAW_GREEN;
 
-			default: return DRAW_RED;//  EMPTY;	//A click on empty place in desgin toolbar
+			default: return EMPTY; //DRAW_RED;// 	//A click on empty place in desgin toolbar
 			}
 		}
 
@@ -291,18 +295,19 @@ ActionType GUI::MapInputToActionType(int& x, int& y) const
 			default: return EMPTY;
 			}
 
-			if (y >= UI.ToolBarHeight && y < UI.height - UI.StatusBarHeight) {
-				return DRAWING_AREA;
-			}
-			return STATUS;
 		}
+		else if (IsValueInDrawArea(y)) {
+			return DRAWING_AREA;
+		}
+		else
+			return STATUS;
 	}	
 
 }
 //======================================================================================//
 //								Output Functions										//
 //======================================================================================//
-
+/////////////////////////////////////////////////////////////////////////////////////////
 window* GUI::CreateWind(int w, int h, int x, int y) const
 { 
 	window* pW = new window(w, h, x, y);
@@ -343,10 +348,10 @@ void GUI::CreateDrawToolBar() const
 	string MenuItemImages[DRAW_ITM_COUNT];
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
 	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
-	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpg";
+	MenuItemImages[ITM_HEX] = "images\\MenuItems\\Menu_Poly.jpeg";
 	MenuItemImages[ITM_FILL_COLOR] = "images\\MenuItems\\fill.JPG";
 	MenuItemImages[ITM_DRAW_COLOR] = "images\\MenuItems\\brush.JPG";
-	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\MenuItems\\ui2.JPG";
+	MenuItemImages[ITM_BACKGROUND_COLOR] = "images\\MenuItems\\ui2.jpg";
 
 	 
 	MenuItemImages[ITM_RESIZE] = "images\\MenuItems\\Resize.jpg";
@@ -355,6 +360,7 @@ void GUI::CreateDrawToolBar() const
 	MenuItemImages[ITM_SAVE] = "images\\MenuItems\\Menu_Save.jpg";
 	MenuItemImages[ITM_LOAD] = "images\\MenuItems\\Menu_Load.jpg";
 	MenuItemImages[ITM_DEL] = "images\\MenuItems\\delete_icon.jpg";
+	MenuItemImages[ITM_MULSEL] = "images\\MenuItems\\SelectMany.jpeg";
 	MenuItemImages[ITM_SWITCH_PLAY_MODE] = "images\\MenuItems\\playMode.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
 
@@ -373,7 +379,6 @@ void GUI::CreateDrawToolBar() const
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);	
 
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateSizeBar() const
 {
@@ -398,6 +403,7 @@ void GUI::CreateSizeBar() const
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreateDrawColorBar() const
 {
 	CreateToolBar();
@@ -420,6 +426,7 @@ void GUI::CreateDrawColorBar() const
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 //mb+
 void GUI::CreateFillColorBar() const
 {
@@ -450,6 +457,7 @@ void GUI::CreateFillColorBar() const
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 void GUI::CreatebackgroundBar() const
 {
 	CreateToolBar();
@@ -470,6 +478,7 @@ void GUI::CreatebackgroundBar() const
 	pWind->SetPen(RED, 3);
 	pWind->DrawLine(0, UI.ToolBarHeight, UI.width, UI.ToolBarHeight);
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 //mb-
 void GUI::CreatePlayToolBar() const
 {
@@ -484,7 +493,7 @@ void GUI::CreatePlayToolBar() const
 	MenuItemImages[ITM_TYPE] = "images\\MenuItems\\byShapes.jpg";
 	MenuItemImages[ITM_COLOR] = "images\\MenuItems\\byColors.jpg";
 	MenuItemImages[ITM_TYPE_COLOR] = "images\\MenuItems\\byShapesAndColors.jpg";
-	MenuItemImages[ITM_SWITCH_DRAW_MODE] = "images\\MenuItems\\drawRed.JPG";
+	MenuItemImages[ITM_SWITCH_DRAW_MODE] = "images\\MenuItems\\Draw.jpg";
 
 
 	for (int i = 0; i < PLAY_ITM_COUNT; i++)
@@ -495,7 +504,6 @@ void GUI::CreatePlayToolBar() const
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
 void GUI::ClearDrawArea() const
 {
 	pWind->SetPen(UI.BkGrndColor, 1);
@@ -504,7 +512,6 @@ void GUI::ClearDrawArea() const
 	
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
 void GUI::PrintMessage(string msg) const	//Prints a message on status bar
 {
 	ClearStatusBar();	//First clear the status bar
@@ -519,13 +526,11 @@ void GUI::setCrntDrawColor(color Draw) const	//get current drwawing color
 	UI.DrawColor = Draw;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
 void GUI::setCrntFillColor(color Fill) const	//get current filling color
 {
 	UI.FillColor = Fill;
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-
 void GUI::setBkGrndColor(color BKColor) const		//get current pen width
 {
 	UI.BkGrndColor = BKColor;
@@ -541,19 +546,20 @@ color GUI::getCrntFillColor() const	//get current filling color
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////
-	
 int GUI::getCrntPenWidth() const		//get current pen width
 {	return UI.PenWidth;	
 
 }
-
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////
+GUI_MODE GUI::getCrntMode() const
+{
+	return UI.InterfaceMode;
+}
 //======================================================================================//
 //								Figures Drawing Functions								//
 //======================================================================================//
-
+/////////////////////////////////////////////////////////////////////////////////////////
+//Draw Square
 void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
@@ -577,6 +583,7 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
 
 }
+/////////////////////////////////////////////////////////////////////////////////////////
 //Draw ellipse  
 void GUI::DrawEllipse(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
@@ -599,7 +606,7 @@ void GUI::DrawEllipse(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) co
 
 	pWind->DrawEllipse(P1.x, P1.y, P2.x, P2.y, style);
 }
-
+/////////////////////////////////////////////////////////////////////////////////////////
 //Draw polygon
 void GUI::DrawPolygon(Point P1, int length, GfxInfo RectGfxInfo, bool selected) const
 {
@@ -660,7 +667,6 @@ void GUI::DrawPolygon(Point P1, int length, GfxInfo RectGfxInfo, bool selected) 
 	pWind->DrawPolygon(xs, ys, nOfSides, style);
 
 }
-
 //////////////////////////////////////////////////////////////////////////////////////////
 GUI::~GUI()
 {

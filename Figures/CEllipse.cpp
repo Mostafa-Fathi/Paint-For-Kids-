@@ -19,14 +19,20 @@ CEllipse::CEllipse()
 void CEllipse::DrawMe(GUI* pGUI) const
 {
 	//Call Output::DrawEllipse to draw an Ellipse on the screen	
-	pGUI->DrawEllipse(TopLeftCorner, BottomRightCorner, FigGfxInfo, Selected);
+	if (Hidden == false)
+	{
+		pGUI->DrawEllipse(TopLeftCorner, BottomRightCorner, FigGfxInfo, Selected);
+	}
+
 }
 
 
 
 
 bool CEllipse::HasPoint(int x, int y) const {
-	if (pow(x - Center.x, 2) / pow(radiusX, 2) + pow(y - Center.y, 2) / pow(radiusY, 2) <= 1) return true;
+	if (Hidden == false) {
+		if (pow(x - Center.x, 2) / pow(radiusX, 2) + pow(y - Center.y, 2) / pow(radiusY, 2) <= 1) return true;
+	}
 
 	return false;
 }
@@ -85,7 +91,7 @@ void CEllipse::Load(ifstream& fin)
 	fin >> ID >> TopLeftCorner.x >> TopLeftCorner.y
 		>> BottomRightCorner.x >> BottomRightCorner.y >> draw >> fill;
 
-	if (strcmp(fill.c_str(), "NO_FILL") != 0)
+	if (fill != "NO_FILL")
 	{
 		is_fill = true;
 		FigGfxInfo.FillClr = ConvertToColor(fill);
@@ -95,9 +101,15 @@ void CEllipse::Load(ifstream& fin)
 	FigGfxInfo.isFilled = is_fill;
 	FigGfxInfo.BorderWdth = 3;
 	Selected = false;
+	Hidden = false;
+
 
 	Center.x = (TopLeftCorner.x + BottomRightCorner.x) / 2;
 	Center.y = (TopLeftCorner.y + BottomRightCorner.y) / 2;
 	radiusX = abs(TopLeftCorner.x - Center.x);
 	radiusY = abs(TopLeftCorner.y - Center.y);
+}
+
+figure CEllipse::GetType() const {
+	return Elps;
 }
