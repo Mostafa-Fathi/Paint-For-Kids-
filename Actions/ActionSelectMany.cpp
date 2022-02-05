@@ -32,6 +32,7 @@ void ActionSelectMany::Execute() {
 			{
 				CFigure* selectedFigure = pManager->GetSelectedFigure();
 				pGUI->PrintMessage(fig->GetDetails());
+				pGUI->SaveMessage(fig->GetDetails());
 				fig->SetPreviousDrawColor(fig->GetDrawColor());
 				fig->ChngDrawClr(MAGENTA);
 				fig->SetSelected(true);

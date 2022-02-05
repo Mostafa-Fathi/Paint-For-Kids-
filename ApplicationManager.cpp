@@ -256,6 +256,7 @@ void ApplicationManager::UpdateInterface() const
 	}
 
 	pGUI->PrintMessage(pGUI->GetMessage());
+	
 	pGUI->ClearDrawArea();
 	for(int i=0; i<FigCount; i++)
 		FigList[i]->DrawMe(pGUI);		//Call Draw function (virtual member fn)
@@ -387,6 +388,8 @@ void ApplicationManager::BringSelectedFigFront() {
 		Selected->ID = FigCount;
 		FigList[FigCount - 1] = Selected;
 		pGUI->PrintMessage(Selected->GetDetails());
+		pGUI->SaveMessage(Selected->GetDetails());
+
 
 	}	
 	else
@@ -410,6 +413,7 @@ void ApplicationManager::SendSelectedFigBack() {
 		Selected->ID = 1;
 		FigList[0] = Selected;
 		pGUI->PrintMessage(Selected->GetDetails());
+		pGUI->SaveMessage(Selected->GetDetails());
 
 	}
 	else

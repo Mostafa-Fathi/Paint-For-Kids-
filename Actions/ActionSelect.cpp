@@ -26,6 +26,7 @@ void ActionSelect::Execute() {
 
 			}
 			pGUI->PrintMessage(fig->GetDetails());
+			pGUI->SaveMessage(fig->GetDetails());
 			fig->SetPreviousDrawColor(fig->GetDrawColor());
 			fig->ChngDrawClr(MAGENTA);
 			fig->SetSelected(true);
