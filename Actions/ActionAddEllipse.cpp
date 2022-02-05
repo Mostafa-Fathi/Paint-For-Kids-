@@ -29,14 +29,14 @@ void ActionAddEllipse::Execute()
 
 	//Read 1st point and store in point P1 while pointes is not in the draw area
 	do {
-		pGUI->PrintMessage("New Square: Click at first point (in draw area)");
+		pGUI->PrintMessage("New Ellipse: Click at first point (in draw area)");
 		pGUI->GetPointClicked(P1.x, P1.y);
 	} while (!pGUI->IsValueInDrawArea(P1.y));
 
 
 	//Read 2nd point and store in point P2 while pointes is not in the draw area
 	do {
-		pGUI->PrintMessage("New Square: Click at second point (in draw area)");
+		pGUI->PrintMessage("New Ellipse: Click at second point (in draw area)");
 		pGUI->GetPointClicked(P2.x, P2.y);
 	} while (!pGUI->IsValueInDrawArea(P2.y));
 
